@@ -99,10 +99,11 @@ function BiltuCatSvg({
   );
 }
 
-// Dedicated Vector SVG Ninja Cat (লাথি মারু) - Custom designed karate martial artist!
+// Dedicated Vector SVG Ninja Cat (লাথি মারু)
+// Features an unmistakable extended karate leg with white cat paw, pink toe beans, claws, and motion whoosh!
 function NinjaCatSvg({ isKicking }: { isKicking: boolean }) {
   return (
-    <svg viewBox="0 0 120 120" className="w-full h-full drop-shadow-2xl">
+    <svg viewBox="-40 0 165 125" className="w-full h-full drop-shadow-2xl overflow-visible">
       {/* Fluttering Headband Ribbon */}
       <path
         d="M20 40 Q8 32 4 45 Q12 48 22 46"
@@ -127,10 +128,37 @@ function NinjaCatSvg({ isKicking }: { isKicking: boolean }) {
 
       {/* Karate Kick Extended Leg or Fighting Stance */}
       {isKicking ? (
-        // Extended high side-kick leg kicking towards left!
-        <g className="animate-pulse">
-          <path d="M40 85 Q15 75 2 65" stroke="#d97706" strokeWidth="14" strokeLinecap="round" />
-          <ellipse cx="2" cy="65" rx="8" ry="6" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+        // Super clear, unmistakable Karate Kick with Cat Paw, Pink Toe Beans, Claws, and Motion Whoosh!
+        <g>
+          {/* Whoosh / Wind Motion Arcs */}
+          <path d="M35 98 Q0 90 -25 78" fill="none" stroke="#38bdf8" strokeWidth="3" strokeLinecap="round" opacity="0.8" />
+          <path d="M40 106 Q10 98 -18 88" fill="none" stroke="#f1f5f9" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="4 4" opacity="0.9" />
+
+          {/* Extended Leg (Orange fur) */}
+          <path d="M45 88 Q15 76 -10 65" stroke="#f59e0b" strokeWidth="15" strokeLinecap="round" />
+          <path d="M45 88 Q15 76 -10 65" fill="none" stroke="#d97706" strokeWidth="2" />
+
+          {/* Black Ninja Ankle Wrap */}
+          <rect x="-14" y="55" width="8" height="18" rx="2" fill="#0f172a" stroke="#dc2626" strokeWidth="1" transform="rotate(22 -10 64)" />
+
+          {/* Main White Cat Foot / Paw */}
+          <ellipse cx="-22" cy="65" rx="14" ry="11" fill="#ffffff" stroke="#d97706" strokeWidth="2.5" transform="rotate(-15 -22 65)" />
+
+          {/* 4 Pink Paw Toe Beans (Clearly indicates a cat's foot!) */}
+          <circle cx="-30" cy="58" r="3.2" fill="#f472b6" stroke="#db2777" strokeWidth="0.8" />
+          <circle cx="-29" cy="68" r="3.2" fill="#f472b6" stroke="#db2777" strokeWidth="0.8" />
+          <circle cx="-22" cy="74" r="3" fill="#f472b6" stroke="#db2777" strokeWidth="0.8" />
+          <circle cx="-15" cy="74" r="2.8" fill="#f472b6" stroke="#db2777" strokeWidth="0.8" />
+          {/* Central large main pad */}
+          <ellipse cx="-20" cy="64" rx="5" ry="4" fill="#f472b6" opacity="0.9" />
+
+          {/* Sharp White Claws protruding on kick impact! */}
+          <path d="M-33 56 L-39 53" stroke="#f8fafc" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M-33 67 L-39 68" stroke="#f8fafc" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M-24 76 L-27 82" stroke="#f8fafc" strokeWidth="2.5" strokeLinecap="round" />
+
+          {/* Ground supporting foot */}
+          <ellipse cx="66" cy="104" rx="9" ry="7" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
         </g>
       ) : (
         // Low crouching martial arts stance
@@ -196,6 +224,16 @@ function MetallicDustbin({ binCount }: { binCount: number }) {
   );
 }
 
+// 4 distinct trajectory directions for the kicked seconds
+const KICK_ANIMATIONS = [
+  "animate-[kickedFlyFarTopLeft_0.9s_cubic-bezier(0.1,0.8,0.2,1)_forwards]",
+  "animate-[kickedFlyFarStraightLeft_0.9s_cubic-bezier(0.1,0.8,0.2,1)_forwards]",
+  "animate-[kickedFlyFarHighSky_0.9s_cubic-bezier(0.1,0.8,0.2,1)_forwards]",
+  "animate-[kickedFlyFarTopRight_0.9s_cubic-bezier(0.1,0.8,0.2,1)_forwards]",
+];
+
+const COMIC_WORDS = ["💥 POW!", "💥 HII-YAH!", "💥 WHAM!", "💥 KICK!"];
+
 export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProps) {
   const prevSecRef = useRef<number>(seconds);
   const [activeNum, setActiveNum] = useState<number>(seconds);
@@ -206,6 +244,7 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
   const [binCount, setBinCount] = useState<number>(0);
   const [erasingNumbers, setErasingNumbers] = useState<number[]>([]);
   const [ninjaKickNum, setNinjaKickNum] = useState<number | null>(null);
+  const [kickDirIndex, setKickDirIndex] = useState<number>(0);
 
   // 16-Second Grand Roam:
   // Goes UPWARDS first -> Circles across top -> Comes DOWNWARDS -> Dumps waste downwards from mouth!
@@ -256,13 +295,14 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
     }
 
     // While Biltu is on his roaming journey:
-    // Ninja Cat kicks incoming seconds visibly flying out of the website!
+    // Ninja Cat kicks incoming seconds visibly flying out in DIFFERENT DIRECTIONS!
     if (isRoaming) {
       setNinjaKickNum(oldSec);
+      setKickDirIndex((prev) => (prev + 1) % 4);
       soundEffects.playKick();
       const kickTimer = setTimeout(() => {
         setNinjaKickNum(null);
-      }, 750);
+      }, 850);
       return () => clearTimeout(kickTimer);
     }
 
@@ -392,29 +432,31 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
       )}
 
       {/* ========================================================================= */}
-      {/* 🥷 NINJA CAT (লাথি মারু): KICKING SECONDS VISIBLY OUT OF THE WEBSITE */}
+      {/* 🥷 NINJA CAT (লাথি মারু): KICKING SECONDS IN DIFFERENT DIRECTIONS! */}
       {/* ========================================================================= */}
       {isRoaming && (
         <div className="absolute -bottom-7 sm:-bottom-8 right-2 sm:right-6 flex flex-col items-center z-30 select-none">
-          <div className="w-20 h-24 sm:w-24 sm:h-28 relative">
+          <div className="w-24 h-22 sm:w-28 sm:h-26 relative">
             <NinjaCatSvg isKicking={ninjaKickNum !== null} />
 
-            {/* Comic Impact Burst */}
+            {/* Comic Impact Burst right at foot impact point */}
             {ninjaKickNum !== null && (
-              <div className="absolute top-4 -left-6 text-sm sm:text-base font-black text-amber-300 animate-ping z-40">
-                💥 POW!
+              <div className="absolute top-2 -left-10 text-xs sm:text-sm font-black text-amber-300 animate-ping z-40 whitespace-nowrap drop-shadow-md">
+                {COMIC_WORDS[kickDirIndex % COMIC_WORDS.length]}
               </div>
             )}
           </div>
 
-          {/* Kicked Number Badge: VISIBLY FLIES SPINNING WAY OUT OF THE WEBSITE! */}
+          {/* Kicked Number Badge: FLIES IN DIFFERENT DIRECTIONS! */}
           {ninjaKickNum !== null && (
             <div
-              key={`ninja-kick-${ninjaKickNum}-${seconds}`}
-              className="absolute top-2 right-12 animate-[kickedFlyFarOutOfScreen_0.8s_cubic-bezier(0.1,0.8,0.2,1)_forwards] z-50 pointer-events-none"
+              key={`ninja-kick-${ninjaKickNum}-${seconds}-${kickDirIndex}`}
+              className={`absolute top-2 -left-8 z-50 pointer-events-none ${
+                KICK_ANIMATIONS[kickDirIndex % KICK_ANIMATIONS.length]
+              }`}
             >
-              <div className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-red-600 via-orange-500 to-amber-400 text-white font-black font-mono text-base shadow-2xl border-2 border-yellow-200 flex items-center gap-1">
-                <span>🦵</span>
+              <div className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-red-600 via-orange-500 to-amber-400 text-white font-black font-mono text-sm sm:text-base shadow-2xl border-2 border-yellow-200 flex items-center gap-1.5 whitespace-nowrap">
+                <span className="text-base sm:text-lg">🐾</span>
                 <span>{String(ninjaKickNum).padStart(2, "0")}s</span>
                 <span>💨</span>
               </div>
@@ -574,24 +616,94 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
           }
         }
 
-        /* Ninja kick: Second visibly flies spinning UP and FAR OUT of the website! */
-        @keyframes kickedFlyFarOutOfScreen {
+        /* ========================================================================= */
+        /* MULTIPLE DISTINCT TRAJECTORIES FOR KICKED SECONDS */
+        /* ========================================================================= */
+
+        /* Direction 1: High Top-Left Arc */
+        @keyframes kickedFlyFarTopLeft {
           0% {
             opacity: 1;
             transform: translate(0, 0) scale(1) rotate(0deg);
           }
           20% {
-            transform: translate(-40px, -30px) scale(1.25) rotate(-45deg);
+            transform: translate(-50px, -40px) scale(1.3) rotate(-60deg);
           }
           50% {
-            transform: translate(-160px, -120px) scale(1) rotate(-220deg);
+            transform: translate(-200px, -160px) scale(1.1) rotate(-280deg);
           }
           80% {
-            transform: translate(-340px, -240px) scale(0.7) rotate(-520deg);
-            opacity: 0.8;
+            transform: translate(-380px, -290px) scale(0.7) rotate(-560deg);
+            opacity: 0.85;
           }
           100% {
-            transform: translate(-520px, -360px) scale(0.2) rotate(-720deg);
+            transform: translate(-560px, -420px) scale(0.2) rotate(-780deg);
+            opacity: 0;
+          }
+        }
+
+        /* Direction 2: Bullet Straight Left Across Cards */
+        @keyframes kickedFlyFarStraightLeft {
+          0% {
+            opacity: 1;
+            transform: translate(0, 0) scale(1) rotate(0deg);
+          }
+          20% {
+            transform: translate(-70px, -15px) scale(1.3) rotate(-45deg);
+          }
+          50% {
+            transform: translate(-280px, -30px) scale(1.05) rotate(-360deg);
+          }
+          80% {
+            transform: translate(-520px, -50px) scale(0.7) rotate(-720deg);
+            opacity: 0.85;
+          }
+          100% {
+            transform: translate(-750px, -70px) scale(0.2) rotate(-1080deg);
+            opacity: 0;
+          }
+        }
+
+        /* Direction 3: High Sky Launch Vertically Up */
+        @keyframes kickedFlyFarHighSky {
+          0% {
+            opacity: 1;
+            transform: translate(0, 0) scale(1) rotate(0deg);
+          }
+          20% {
+            transform: translate(-30px, -80px) scale(1.3) rotate(45deg);
+          }
+          50% {
+            transform: translate(-70px, -240px) scale(1.1) rotate(240deg);
+          }
+          80% {
+            transform: translate(-110px, -400px) scale(0.65) rotate(520deg);
+            opacity: 0.85;
+          }
+          100% {
+            transform: translate(-140px, -550px) scale(0.2) rotate(760deg);
+            opacity: 0;
+          }
+        }
+
+        /* Direction 4: Diagonally Up-Right Off Screen */
+        @keyframes kickedFlyFarTopRight {
+          0% {
+            opacity: 1;
+            transform: translate(0, 0) scale(1) rotate(0deg);
+          }
+          20% {
+            transform: translate(30px, -50px) scale(1.3) rotate(60deg);
+          }
+          50% {
+            transform: translate(140px, -180px) scale(1.1) rotate(320deg);
+          }
+          80% {
+            transform: translate(280px, -320px) scale(0.7) rotate(620deg);
+            opacity: 0.85;
+          }
+          100% {
+            transform: translate(420px, -460px) scale(0.2) rotate(880deg);
             opacity: 0;
           }
         }
