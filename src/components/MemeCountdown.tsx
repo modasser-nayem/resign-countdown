@@ -149,33 +149,33 @@ export default function MemeCountdown() {
   // Funny excuses without any "standup" jargon
   const EXCUSES = [
     {
-      label: "Bhai eta fix kore den 🐞",
+      label: "ভাই এটা ফিক্স করে দেন 🐞",
       title: "পরবর্তী ডেভেলপারের ওয়েলকাম গিফট!",
-      text: "Eta bug na bhai, eta new backend engineer er jonno joining bonus! Ticket pending thakuk! 😂",
+      text: "এটা কোনো বাগ না ভাই, নতুন ব্যাকএন্ড ইঞ্জিনিয়ারের জন্য ওয়েলকাম গিফট! টিকিট পেন্ডিং থাকুক! 😂",
       action: () => soundEffects.playSiren(),
     },
     {
-      label: "Prod e deploy dibo? 🚀",
+      label: "প্রোডাকশনে ডেপ্লয় দিব? 🚀",
       title: "নোটিশ পিরিয়ডের ১ নম্বর নিয়ম:",
-      text: "Notice period e `git push origin main` deoa haraam! Kisu crash korle ami 404 Not Found! 💀",
+      text: "নোটিশ পিরিয়ডে `git push origin main` দেওয়া সম্পূর্ণ হারাম! কিছু ক্র্যাশ করলে আমি 404 Not Found! 💀",
       action: () => soundEffects.playSiren(),
     },
     {
-      label: "Documentation koi? 📜",
+      label: "ডকুমেন্টেশন কই? 📜",
       title: "The Code IS the Documentation!",
-      text: "If it was hard to write, it should be hard to read! Postman collection dekhlei bujhe jaben 🫡",
+      text: "কোড লিখতে যখন এত কষ্ট হয়েছে, বুঝতেও একটু কষ্ট হোক! পোস্টম্যান কালেকশন দেখলেই বুঝে যাবেন 🫡",
       action: () => soundEffects.playKaChing(),
     },
     {
-      label: "Treat kobe diben? 🍕",
+      label: "ট্রিট কবে দিবেন? 🍕",
       title: "ট্রিট প্রোটোকল: 404 Not Found",
-      text: "21 October 4:59 PM e bkash check koiren! Banasree tong er cha is unlimited though! ☕",
+      text: "২১ অক্টোবর বিকেল ৪:৫৯ মিনিটে বিকাশ চেক কইরেন! আর বনশ্রীর টংয়ের চা তো অলওয়েজ আনলিমিটেড! ☕",
       action: () => soundEffects.playFanfare(),
     },
     {
       label: "মিটিংয়ে কী বলব? ☕",
       title: "মিটিংয়ের সর্বজনীন স্ক্রিপ্ট:",
-      text: "'ডকুমেন্টেশন আর হ্যান্ডওভার গোছাচ্ছি।' (এই একই কথা বলে ৩ সপ্তাহ পার!) 🤝",
+      text: "মুখে একটাই কথা: 'ডকুমেন্টেশন আর হ্যান্ডওভার গোছাচ্ছি।' (এই একই ডায়লগ বলে পুরো ৩ সপ্তাহ পার!) 🤝",
       action: () => soundEffects.playPop(),
     },
   ];
@@ -262,8 +262,8 @@ export default function MemeCountdown() {
       <div className="w-full bg-slate-900/90 border border-amber-500/40 rounded-3xl p-5 sm:p-7 shadow-2xl mb-5 relative overflow-hidden backdrop-blur-md">
         <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
 
-        <div className="text-sm sm:text-base font-bold text-slate-200 mb-3">
-          &ldquo;Bhai tumi r koydin aso?&rdquo; ➔ Live Freedom Ticker ⏳
+        <div className="text-base sm:text-lg font-extrabold text-amber-300 mb-3 tracking-wide">
+          &ldquo;ভাই তুমি আর কয়দিন আছো?&rdquo; ➔ Live Freedom Ticker ⏳
         </div>
 
         {/* Dynamic Reaction Speech Bubble */}
@@ -381,7 +381,7 @@ export default function MemeCountdown() {
       {/* Instant Colleague Response Buttons (Super Funny) */}
       <div className="w-full bg-slate-900/60 border border-slate-800 rounded-3xl p-5 mb-5">
         <h3 className="text-sm font-bold text-white mb-1 flex items-center justify-center gap-1.5">
-          <Sparkles className="w-4 h-4 text-amber-400" /> Colleague Instant Jiggasha Buttons
+          <Sparkles className="w-4 h-4 text-amber-400" /> ডেস্কে কলিগদের ইনস্ট্যান্ট জিজ্ঞাসা 💬
         </h3>
         <p className="text-[11px] text-slate-400 mb-3.5">
           ডেস্কে এসে কোনো কোলিগ বা বস কিছু জিজ্ঞেস করলে বোতামে চাপুন:
