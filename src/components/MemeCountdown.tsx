@@ -187,7 +187,7 @@ export default function MemeCountdown() {
       </div>
 
       {/* THE MAIN COUNTDOWN CARD */}
-      <div className="w-full bg-slate-900/90 border border-amber-500/40 rounded-3xl p-5 sm:p-7 pb-8 sm:pb-10 shadow-2xl mb-5 relative backdrop-blur-md">
+      <div className="w-full bg-slate-900/90 border border-amber-500/40 rounded-3xl p-5 sm:p-7 pb-12 sm:pb-14 shadow-2xl mb-5 relative backdrop-blur-md">
         <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
 
         <div className="text-base sm:text-lg font-extrabold text-amber-300 mb-2 tracking-wide">
