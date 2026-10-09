@@ -202,53 +202,41 @@ export default function MemeCountdown() {
         {/* Core 4-Card Countdown Grid with Animated Action Seconds Card */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3.5">
           {/* Days */}
-          <div className="bg-slate-950/80 rounded-2xl p-3 sm:p-4 border border-slate-800 flex flex-col items-center justify-between min-h-[140px] sm:min-h-[160px] shadow-md">
-            <span className="text-[10px] font-bold text-amber-400/80 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
-              📆 দিন বাকি
-            </span>
+          <div className="bg-slate-950/80 rounded-2xl p-4 sm:p-5 border border-slate-800 flex flex-col items-center justify-center min-h-[130px] sm:min-h-[150px] shadow-md">
             <span className="text-4xl sm:text-6xl font-black font-mono text-amber-400 tracking-tight my-auto">
               {String(timeLeft.days).padStart(2, "0")}
             </span>
-            <span className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider">
+            <span className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mt-1">
               Days (দিন)
             </span>
           </div>
 
           {/* Hours */}
-          <div className="bg-slate-950/80 rounded-2xl p-3 sm:p-4 border border-slate-800 flex flex-col items-center justify-between min-h-[140px] sm:min-h-[160px] shadow-md">
-            <span className="text-[10px] font-bold text-orange-400/80 bg-orange-500/10 px-2 py-0.5 rounded border border-orange-500/20">
-              ⏰ ঘণ্টা বাকি
-            </span>
+          <div className="bg-slate-950/80 rounded-2xl p-4 sm:p-5 border border-slate-800 flex flex-col items-center justify-center min-h-[130px] sm:min-h-[150px] shadow-md">
             <span className="text-4xl sm:text-6xl font-black font-mono text-orange-400 tracking-tight my-auto">
               {String(timeLeft.hours).padStart(2, "0")}
             </span>
-            <span className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider">
+            <span className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mt-1">
               Hours (ঘণ্টা)
             </span>
           </div>
 
           {/* Mins */}
-          <div className="bg-slate-950/80 rounded-2xl p-3 sm:p-4 border border-slate-800 flex flex-col items-center justify-between min-h-[140px] sm:min-h-[160px] shadow-md">
-            <span className="text-[10px] font-bold text-cyan-400/80 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
-              ⏳ মিনিট বাকি
-            </span>
+          <div className="bg-slate-950/80 rounded-2xl p-4 sm:p-5 border border-slate-800 flex flex-col items-center justify-center min-h-[130px] sm:min-h-[150px] shadow-md">
             <span className="text-4xl sm:text-6xl font-black font-mono text-cyan-400 tracking-tight my-auto">
               {String(timeLeft.minutes).padStart(2, "0")}
             </span>
-            <span className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider">
+            <span className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mt-1">
               Mins (মিনিট)
             </span>
           </div>
 
           {/* Secs */}
-          <div className="bg-slate-950/80 rounded-2xl p-3 sm:p-4 border border-slate-800 flex flex-col items-center justify-between min-h-[140px] sm:min-h-[160px] shadow-md relative">
-            <span className="text-[10px] font-bold text-emerald-400/80 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-              ⚡ সেকেন্ড বাকি
-            </span>
+          <div className="bg-slate-950/80 rounded-2xl p-4 sm:p-5 border border-slate-800 flex flex-col items-center justify-center min-h-[130px] sm:min-h-[150px] shadow-md relative">
             <span className="text-4xl sm:text-6xl font-black font-mono text-emerald-400 tracking-tight my-auto">
               {String(timeLeft.seconds).padStart(2, "0")}
             </span>
-            <span className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider">
+            <span className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mt-1">
               Secs (সেকেন্ড)
             </span>
           </div>
