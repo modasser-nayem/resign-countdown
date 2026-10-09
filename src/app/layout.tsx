@@ -17,6 +17,13 @@ export const metadata: Metadata = {
   title: "Ali Modasser Nayem | Resignation Countdown 🚀",
   description:
     "Official Resignation Countdown for Ali Modasser Nayem (Executive, Backend @ SM Technology). Last working day: 21 October 2026, 5:00 PM!",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: "/icon.svg",
+  },
   openGraph: {
     title: "Nayem Bhai R Koydin Ache? Live Freedom Countdown! ⏳",
     description:
