@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Share2, Copy, Check, MessageCircle, Send, Heart } from "lucide-react";
+import { Share2, Copy, Check, MessageCircle, Send } from "lucide-react";
 import { soundEffects } from "@/lib/audio";
 import confetti from "canvas-confetti";
 

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { User, Building2, BadgeCheck, Phone, Mail, Sparkles, Coffee, Briefcase, Smile, ShieldAlert } from "lucide-react";
+import { Building2, BadgeCheck, Phone, Mail, Sparkles, Briefcase } from "lucide-react";
 import { RESIGNATION_DETAILS, FUNNY_MOODS } from "@/lib/constants";
 import { soundEffects } from "@/lib/audio";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Heart, Terminal, Coffee } from "lucide-react";
+import { Terminal, Coffee } from "lucide-react";
 import { RESIGNATION_DETAILS } from "@/lib/constants";
 
 export default function Footer() {

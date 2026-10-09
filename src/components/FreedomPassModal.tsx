@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Award, CheckCircle, ShieldCheck, Printer, X, Download } from "lucide-react";
+import { Award, CheckCircle, ShieldCheck, Printer, X } from "lucide-react";
 import { RESIGNATION_DETAILS } from "@/lib/constants";
 import { soundEffects } from "@/lib/audio";
 import confetti from "canvas-confetti";
