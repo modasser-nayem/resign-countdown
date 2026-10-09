@@ -76,9 +76,9 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
       return () => clearTimeout(kickTimer);
     }
 
-    // NORMAL OPERATION: Exactly every 4 seconds (seconds % 4 === 0)
-    // Biltu reaches over, grabs the second, and drops it into the dustbin!
-    if (seconds % 4 === 0 && !isRoaming) {
+    // NORMAL OPERATION: Exactly every 3 seconds (seconds % 3 === 0)
+    // Biltu reaches two hands UP to the number and pulls it down into the dustbin!
+    if (seconds % 3 === 0 && !isRoaming) {
       setPhase("grabbing");
       soundEffects.playTrashDrop();
       setBinCount((prev) => Math.min(prev + 1, 50));
@@ -108,7 +108,7 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
             {/* Dustbin Lid - Bounces when trash enters */}
             <div
               className={`w-13 sm:w-15 h-3 bg-gradient-to-r from-slate-400 via-slate-200 to-slate-400 rounded-t-md border border-slate-300 shadow transition-transform duration-200 origin-bottom-right ${
-                phase === "grabbing" ? "-translate-y-3 -rotate-30 scale-105" : "translate-y-0"
+                phase === "grabbing" ? "-translate-y-4 -rotate-35 scale-110" : "translate-y-0"
               }`}
             >
               <div className="w-3 h-1 bg-slate-700 mx-auto -mt-1 rounded-t" />
@@ -136,7 +136,7 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
           <div className="flex flex-col items-center">
             <div
               className={`w-16 h-20 sm:w-20 sm:h-24 transition-transform duration-200 ${
-                phase === "grabbing" ? "-translate-x-3 -translate-y-2 rotate-6 scale-105" : "translate-y-0"
+                phase === "grabbing" ? "-translate-y-3 scale-105" : "translate-y-0"
               }`}
             >
               <svg viewBox="0 0 100 120" className="w-full h-full drop-shadow-2xl">
@@ -179,10 +179,10 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
                 <line x1="78" y1="48" x2="92" y2="45" stroke="#b45309" strokeWidth="1.5" />
                 <line x1="78" y1="52" x2="92" y2="54" stroke="#b45309" strokeWidth="1.5" />
 
-                {/* Paws */}
+                {/* Two Hands Reaching UP high towards the number when grabbing */}
                 <ellipse
-                  cx={phase === "grabbing" ? "28" : "38"}
-                  cy={phase === "grabbing" ? "68" : "78"}
+                  cx={phase === "grabbing" ? "32" : "38"}
+                  cy={phase === "grabbing" ? "48" : "78"}
                   rx="7"
                   ry="9"
                   fill="#ffffff"
@@ -190,8 +190,8 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
                   strokeWidth="2"
                 />
                 <ellipse
-                  cx={phase === "grabbing" ? "40" : "62"}
-                  cy={phase === "grabbing" ? "68" : "78"}
+                  cx={phase === "grabbing" ? "48" : "62"}
+                  cy={phase === "grabbing" ? "48" : "78"}
                   rx="7"
                   ry="9"
                   fill="#ffffff"
@@ -210,17 +210,18 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
       )}
 
       {/* ========================================================================= */}
-      {/* 🫲 [NUM] 🫱 THE 4-SECOND GRAB ARC: NUMBER FLIES FROM SECS CARD TO DUSTBIN */}
-      {/* NO TEXT BUBBLE! Visual number badge smoothly arcs into the bin */}
+      {/* 🫲 [NUM] 🫱 TWO HANDS PULLING THE NUMBER DOWN FROM TOP INTO DUSTBIN */}
+      {/* Starts up at the SECS digit, two hands pull it straight down into dustbin! */}
       {/* ========================================================================= */}
       {!isRoaming && phase === "grabbing" && (
         <div
           key={`grab-${activeNum}-${seconds}`}
-          className="absolute right-10 sm:right-16 bottom-12 sm:bottom-14 animate-[grabArcIntoBinClean_0.9s_cubic-bezier(0.2,0.8,0.2,1)_forwards] z-30"
+          className="absolute right-8 sm:right-14 bottom-22 sm:bottom-26 animate-[pullDownFromTopIntoDustbin_0.9s_cubic-bezier(0.25,0.8,0.25,1)_forwards] z-30 pointer-events-none"
         >
           <div className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 text-slate-950 font-black font-mono text-sm sm:text-base shadow-2xl border-2 border-white">
-            <span>🐾</span>
+            <span className="text-base sm:text-lg animate-pulse">🫲</span>
             <span>{String(activeNum).padStart(2, "0")}s</span>
+            <span className="text-base sm:text-lg animate-pulse">🫱</span>
           </div>
         </div>
       )}
@@ -319,21 +320,21 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
       {/* CSS KEYFRAMES: CLEAN, REALISTIC, AND DISSOLVING/ERASING ANIMATION */}
       {/* ========================================================================= */}
       <style jsx>{`
-        /* 4-second grab arc from SECS card into Dustbin */
-        @keyframes grabArcIntoBinClean {
+        /* 3-second pull down from top (SECS number) down into the Dustbin opening */
+        @keyframes pullDownFromTopIntoDustbin {
           0% {
             opacity: 1;
-            transform: translate(0, 0) scale(1) rotate(0deg);
+            transform: translate(0, 0) scale(1.1);
           }
-          40% {
-            transform: translate(30px, -40px) scale(1.15) rotate(45deg);
+          35% {
+            transform: translate(-10px, 35px) scale(0.95);
           }
-          75% {
-            transform: translate(55px, 8px) scale(0.7) rotate(180deg);
+          70% {
+            transform: translate(-18px, 75px) scale(0.7) rotate(10deg);
           }
           100% {
             opacity: 0;
-            transform: translate(65px, 30px) scale(0.2) rotate(270deg);
+            transform: translate(-22px, 98px) scale(0.2) rotate(25deg);
           }
         }
 
