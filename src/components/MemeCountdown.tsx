@@ -18,6 +18,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { soundEffects } from "@/lib/audio";
+import SecondDestroyer from "./SecondDestroyer";
 
 interface TimeLeft {
   days: number;
@@ -318,6 +319,14 @@ export default function MemeCountdown() {
             </span>
           </div>
         </div>
+
+        {/* ========================================================= */}
+        {/* 🎬 ANIMATED SECOND DESTROYER (Trash 🗑️ / Kick 👟 / Cannon 💣) */}
+        {/* ========================================================= */}
+        <SecondDestroyer
+          seconds={timeLeft.seconds}
+          minutes={timeLeft.minutes}
+        />
 
         {/* ========================================================= */}
         {/* 🔥 TENE TENE SOMOY KOMANOR SECTION (THE MAIN FUN FEATURE) */}
