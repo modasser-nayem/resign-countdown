@@ -90,30 +90,30 @@ export default function Soundboard() {
       <section className="w-full max-w-5xl mx-auto px-4 py-8">
          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Soundboard Column */}
-            <div className="glass-card rounded-3xl p-6 border border-slate-700/60 flex flex-col justify-between">
+            <div className="glass-card rounded-3xl p-4 sm:p-6 border border-slate-700/60 flex flex-col justify-between">
                <div>
                   <div className="flex items-center gap-2 mb-2">
                      <Volume2 className="w-5 h-5 text-amber-400" />
-                     <h3 className="text-xl font-bold text-white">
+                     <h3 className="text-lg sm:text-xl font-bold text-white">
                         Office Soundboard 🔊
                      </h3>
                   </div>
-                  <p className="text-xs text-slate-400 mb-5">
+                  <p className="text-xs text-slate-400 mb-4 sm:mb-5">
                      Click to trigger instant sound effects during your office
                      meetings!
                   </p>
 
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                      {sounds.map((snd, idx) => (
                         <button
                            key={idx}
                            onClick={snd.action}
-                           className={`p-3.5 rounded-2xl bg-gradient-to-br ${snd.color} border text-left transition-all transform hover:scale-[1.02] active:scale-95 cursor-pointer flex flex-col justify-between h-28`}
+                           className={`p-3 sm:p-3.5 rounded-2xl bg-gradient-to-br ${snd.color} border text-left transition-all transform hover:scale-[1.02] active:scale-95 cursor-pointer flex flex-col justify-between min-h-[5rem] sm:min-h-[6.5rem]`}
                         >
-                           <span className="font-bold text-sm text-slate-100">
+                           <span className="font-bold text-xs sm:text-sm text-slate-100">
                               {snd.name}
                            </span>
-                           <span className="text-[11px] text-slate-400 line-clamp-2 leading-tight">
+                           <span className="text-[10px] sm:text-[11px] text-slate-400 leading-tight mt-1">
                               {snd.desc}
                            </span>
                         </button>
@@ -130,7 +130,7 @@ export default function Soundboard() {
             </div>
 
             {/* Treat Claimer Column */}
-            <div className="glass-card rounded-3xl p-6 border border-slate-700/60 flex flex-col justify-between relative overflow-hidden">
+            <div className="glass-card rounded-3xl p-4 sm:p-6 border border-slate-700/60 flex flex-col justify-between relative overflow-hidden">
                <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full blur-2xl pointer-events-none" />
 
                <div>

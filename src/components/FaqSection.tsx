@@ -70,15 +70,15 @@ export default function FaqSection() {
               </button>
 
               {isOpen && (
-                <div className="px-5 pb-5 pt-1 text-slate-300 border-t border-slate-800/80 bg-slate-950/40">
-                  <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 mb-3 flex items-start justify-between gap-2">
-                    <p className="text-sm sm:text-base font-bold text-amber-300">
+                <div className="px-4 sm:px-5 pb-4 sm:pb-5 pt-1 text-slate-300 border-t border-slate-800/80 bg-slate-950/40">
+                  <div className="p-3 sm:p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 mb-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
+                    <p className="text-xs sm:text-sm md:text-base font-bold text-amber-300 leading-snug">
                       🎯 &ldquo;{faq.punchline}&rdquo;
                     </p>
                     <button
                       onClick={(e) => handleCopy(faq.punchline, idx, e)}
                       title="Copy reply to Slack/WhatsApp"
-                      className="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-xs font-medium flex items-center gap-1 shrink-0 transition-colors cursor-pointer"
+                      className="self-start sm:self-auto px-2.5 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-xs font-medium flex items-center gap-1 shrink-0 transition-colors cursor-pointer"
                     >
                       {isCopied ? (
                         <>

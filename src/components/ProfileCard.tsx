@@ -92,8 +92,8 @@ export default function ProfileCard() {
             </p>
 
             {/* Mode Toggle Switch */}
-            <div className="bg-slate-900/90 rounded-2xl p-4 border border-slate-800 mb-4">
-              <div className="flex items-center justify-between mb-2">
+            <div className="bg-slate-900/90 rounded-2xl p-3.5 sm:p-4 border border-slate-800 mb-4">
+              <div className="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-2.5 mb-2.5">
                 <span className="text-xs uppercase font-bold tracking-wider text-slate-400 flex items-center gap-1.5">
                   {isHonestMode ? (
                     <Sparkles className="w-4 h-4 text-orange-400" />
@@ -105,7 +105,7 @@ export default function ProfileCard() {
 
                 <button
                   onClick={toggleMood}
-                  className={`text-xs font-bold px-3 py-1 rounded-full transition-all cursor-pointer flex items-center gap-1 border ${
+                  className={`text-xs font-bold px-3 py-1.5 rounded-full transition-all cursor-pointer flex items-center gap-1 border ${
                     isHonestMode
                       ? "bg-orange-500 text-slate-950 border-orange-400 shadow-md shadow-orange-500/30"
                       : "bg-slate-800 text-slate-300 border-slate-700 hover:text-white"
@@ -123,16 +123,16 @@ export default function ProfileCard() {
                 &ldquo;{moodData.description}&rdquo;
               </p>
 
-              <div className="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-slate-800/80 text-xs text-slate-400">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3 pt-3 border-t border-slate-800/80 text-xs text-slate-400">
                 <div>
                   <span className="text-slate-500">Commit Style:</span>{" "}
-                  <span className="text-slate-300 font-mono text-[11px]">
+                  <span className="text-slate-300 font-mono text-[11px] block sm:inline">
                     {moodData.commitStatus}
                   </span>
                 </div>
                 <div>
                   <span className="text-slate-500">Chai Consumption:</span>{" "}
-                  <span className="text-amber-400 font-medium">
+                  <span className="text-amber-400 font-medium block sm:inline">
                     {moodData.coffeeCount}
                   </span>
                 </div>

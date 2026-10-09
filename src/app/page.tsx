@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-black">
+    <main className="min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-black overflow-x-hidden">
       {/* Decorative ambient glowing orbs in the background */}
       <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-amber-500/10 via-orange-500/5 to-transparent blur-3xl pointer-events-none -z-10" />
 

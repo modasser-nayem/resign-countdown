@@ -42,34 +42,34 @@ export default function FreedomPassModal() {
 
       {/* Modal Popup */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="relative w-full max-w-2xl bg-slate-950 border-2 border-amber-500/60 rounded-3xl p-6 sm:p-8 shadow-2xl text-left overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto">
+          <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-slate-950 border-2 border-amber-500/60 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-2xl text-left my-auto">
             {/* Background Stamp Watermark */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-12 border-8 border-red-500/20 text-red-500/20 font-black text-6xl sm:text-7xl uppercase tracking-widest px-8 py-4 pointer-events-none rounded-2xl select-none">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-12 border-4 sm:border-8 border-red-500/20 text-red-500/20 font-black text-4xl sm:text-6xl md:text-7xl uppercase tracking-widest px-4 sm:px-8 py-2 sm:py-4 pointer-events-none rounded-xl sm:rounded-2xl select-none">
               APPROVED
             </div>
 
             {/* Close Button */}
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute top-4 right-4 p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white cursor-pointer"
+              className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white cursor-pointer z-10"
             >
               <X className="w-5 h-5" />
             </button>
 
             {/* Header */}
-            <div className="border-b border-amber-500/30 pb-4 mb-5 flex items-center justify-between">
-              <div>
-                <span className="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold">
-                  GOVERNMENT OF RESIGNED DEVELOPERS
-                </span>
-                <h4 className="text-lg sm:text-xl font-black text-white">
+            <div className="border-b border-amber-500/30 pb-3 sm:pb-4 mb-4 sm:mb-5 pr-8">
+              <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold block">
+                GOVERNMENT OF RESIGNED DEVELOPERS
+              </span>
+              <div className="flex flex-wrap items-center justify-between gap-1.5 mt-0.5">
+                <h4 className="text-base sm:text-xl font-black text-white">
                   CERTIFICATE OF FREEDOM & LIBERATION
                 </h4>
+                <span className="text-[10px] sm:text-xs font-mono text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">
+                  NOC-2026-11752
+                </span>
               </div>
-              <span className="text-xs font-mono text-slate-500 bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">
-                NOC-2026-11752
-              </span>
             </div>
 
             {/* Body */}

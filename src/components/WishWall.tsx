@@ -113,8 +113,8 @@ export default function WishWall() {
 
          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Form Column */}
-            <div className="lg:col-span-1 glass-card rounded-3xl p-6 border border-slate-700/60 h-fit">
-               <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+            <div className="lg:col-span-1 glass-card rounded-3xl p-4 sm:p-6 border border-slate-700/60 h-fit">
+               <h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4 flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-amber-400" /> Drop Your Note
                </h3>
 
@@ -132,7 +132,7 @@ export default function WishWall() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="e.g. Tanvir / Sadia / Asif"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 text-base sm:text-sm transition-colors"
                      />
                   </div>
 
@@ -145,7 +145,7 @@ export default function WishWall() {
                         value={role}
                         onChange={(e) => setRole(e.target.value)}
                         placeholder="e.g. Frontend Dev, QA, Friend"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 text-base sm:text-sm transition-colors"
                      />
                   </div>
 
@@ -159,14 +159,14 @@ export default function WishWall() {
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder="Nayem bhai, apnar banano API er response ekhono amar swapne ashe... Good luck!"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 transition-colors resize-none"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 text-base sm:text-sm transition-colors resize-none"
                      />
                   </div>
 
                   <button
                      type="submit"
                      disabled={submitting}
-                     className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 text-white font-bold text-xs shadow-lg shadow-pink-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                     className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 text-white font-bold text-xs sm:text-sm shadow-lg shadow-pink-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                      <Send className="w-3.5 h-3.5" />
                      <span>Post on Wall</span>
