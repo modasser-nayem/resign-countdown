@@ -23,16 +23,16 @@ export default function FaqSection() {
   };
 
   return (
-    <section id="faq" className="w-full max-w-4xl mx-auto px-4 py-8">
+    <section id="faq" className="w-full max-w-4xl mx-auto px-4 py-6">
       <div className="text-center mb-6">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold mb-2">
-          <MessageSquareQuote className="w-3.5 h-3.5" /> Colleague Conversation Protocol
+          <MessageSquareQuote className="w-3.5 h-3.5" /> সহকর্মীদের প্রশ্নোত্তর
         </div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-          💬 Frequently Asked Jiggasha (FAQ)
+        <h2 className="text-xl sm:text-3xl font-bold text-white tracking-tight">
+          💬 সচরাচর জিজ্ঞাসিত হাসিমুখের উত্তর (FAQ)
         </h2>
         <p className="text-slate-400 text-xs sm:text-sm mt-1">
-          Colleague-ra jokhon jiggnesh korbe, tokhon shorashori ei ready-made uttor gulo pathiye din!
+          অফিসের প্রিয় সহকর্মীরা যখনই কোনো প্রশ্ন করবেন, হাসিমুখে এই উত্তরগুলো উপহার দিন!
         </p>
       </div>
 
@@ -53,8 +53,8 @@ export default function FaqSection() {
                 className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 cursor-pointer"
               >
                 <div className="flex items-center gap-3">
-                  <span className="w-6 h-6 rounded-lg bg-amber-500/10 text-amber-400 text-xs font-bold flex items-center justify-center shrink-0">
-                    Q{idx + 1}
+                  <span className="w-7 h-7 rounded-lg bg-amber-500/10 text-amber-400 text-xs font-bold flex items-center justify-center shrink-0">
+                    প্রশ্ন {idx + 1}
                   </span>
                   <span className="text-sm sm:text-base font-semibold text-slate-100">
                     {faq.question}
@@ -77,24 +77,24 @@ export default function FaqSection() {
                     </p>
                     <button
                       onClick={(e) => handleCopy(faq.punchline, idx, e)}
-                      title="Copy reply to Slack/WhatsApp"
+                      title="উত্তর কপি করুন"
                       className="self-start sm:self-auto px-2.5 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-xs font-medium flex items-center gap-1 shrink-0 transition-colors cursor-pointer"
                     >
                       {isCopied ? (
                         <>
                           <Check className="w-3.5 h-3.5 text-emerald-400" />
-                          <span className="text-emerald-400 font-bold">Copied!</span>
+                          <span className="text-emerald-400 font-bold">কপি হয়েছে!</span>
                         </>
                       ) : (
                         <>
                           <Copy className="w-3.5 h-3.5" />
-                          <span>Copy Reply</span>
+                          <span>উত্তর কপি করুন</span>
                         </>
                       )}
                     </button>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-400 italic">
-                    💡 Context: {faq.detail}
+                  <p className="text-xs sm:text-sm text-slate-400">
+                    💡 প্রসঙ্গ: {faq.detail}
                   </p>
                 </div>
               )}

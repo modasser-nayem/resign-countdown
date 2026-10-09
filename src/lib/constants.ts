@@ -1,98 +1,95 @@
 export const RESIGNATION_DETAILS = {
-  name: "Ali Modasser Nayem",
-  role: "Executive, Backend",
-  company: "SM Technology",
-  officeLocation: "Avenue 03, Road 10, Block D, Banasree, Rampura, Dhaka",
-  employeeId: "11752",
-  phone: "01816090766",
+  name: "আলী মোদাচ্ছের নায়েম",
+  nameEn: "Ali Modasser Nayem",
+  role: "এক্সিকিউটিভ, ব্যাকএন্ড ইঞ্জিনিয়ার",
+  roleEn: "Executive, Backend",
+  company: "এসএম টেকনোলজি (SM Technology)",
+  officeLocation: "এভিনিউ ০৩, রোড ১০, ব্লক ডি, বনশ্রী, রামপুরা, ঢাকা",
+  employeeId: "১১৭৫২",
+  phone: "০১৮১৬০৯০৭৬৬",
   email: "modassernayem@gmail.com",
   submissionDate: "2026-09-21T09:00:00+06:00",
   // 21 October 2026 at 5:00 PM BST (UTC+6)
   targetDate: "2026-10-21T17:00:00+06:00",
-  officeEndTime: "5:00 PM",
+  officeEndTime: "বিকাল ৫:০০ টা",
   profilePhoto: "/profile-5.1.jpg",
   fullPhoto: "/profile.jpg",
 };
 
 export const FUNNY_FAQS = [
   {
-    question: "Bhai apnar por backend k dekhbe?",
-    punchline: "Allah bhorosha, ChatGPT r StackOverflow! 🤲",
-    detail: "Main logic toh mathay silo, commit message e silo na bhai! Je ashbe take all the best."
+    question: "নায়েম ভাই, আপনার পর ব্যাকএন্ড কে সামলাবে?",
+    punchline: "ইনশাআল্লাহ যিনি আসবেন তিনি দারুণ কাজ করবেন! আর কোডে সুন্দর কমেন্ট রেখে যাচ্ছি! 💻✨",
+    detail: "সব এপিআই এবং আর্কিটেকচার পরবর্তী ইঞ্জিনিয়ারের জন্য সুন্দরভাবে সাজিয়ে বুঝিয়ে দেওয়া হয়েছে।"
   },
   {
-    question: "Bhai ekta critical bug ase, fix kore jaben na?",
-    punchline: "Eta bug na bhai, eta new feature for the next backend engineer! 🐞✨",
-    detail: "Post-October 21 ticket create koren, JIRA te pending thakuk."
+    question: "হ্যান্ডওভার ডকুমেন্টেশন রেডি হয়েছে তো?",
+    punchline: "হ্যাঁ ভাই, পোস্টম্যান কালেকশন আর সিস্টেম ডক একদম গোছানো! 📚",
+    detail: "যাতে টিমের কারও কোনো কাজে বিন্দুমাত্র বিঘ্ন না ঘটে, সব বিস্তারিত লিখে রাখা হয়েছে।"
   },
   {
-    question: "Documentation koi? API docs ta ektu bujhaiya den...",
-    punchline: "The Code IS the Documentation! 📜",
-    detail: "Postman collection e kisu draft ase... bakita intuition diya bujhe nite hobe."
+    question: "নায়েম ভাই, ফেয়ারওয়েল ট্রিট কবে দিচ্ছেন?",
+    punchline: "২১ অক্টোবর অফিস শেষ হলেই চা, কফি আর মিষ্টি মুখের চমৎকার আয়োজন! ☕🍰",
+    detail: "বিদায়বেলায় সহকর্মীদের সাথে আনন্দমুখর এক কাপ চা ও ভালোবাসার আড্ডা হবে।"
   },
   {
-    question: "Treat kobe diben Nayem Bhai?",
-    punchline: "21 October 4:59 PM e bkash check koiren! 🏃💨",
-    detail: "5:00 PM baje maane door er lock khule jaoa and ami incognito mode e escape!"
+    question: "একটি ছোট বিষয় বুঝতে পারছি না, একটু হেল্প করে যাবেন?",
+    punchline: "অবশ্যই ভাই! সমাধানের সহজ উপায় নোট করে বুঝিয়ে দিয়ে যাচ্ছি! 📝🔍",
+    detail: "নোটিশ পিরিয়ডেও টিমের পাশে থাকা সবসময়ই আনন্দের।"
   },
   {
-    question: "Production server ta ki ektu redeploy diben?",
-    punchline: "Notice period e `git push origin main` deoa haraam! ⛔",
-    detail: "Risk nite chaina bhai, last din er aage kono migration run hobe na."
-  },
-  {
-    question: "Abar kobe dekha hobe?",
-    punchline: "LinkedIn er 'Open to Work' e na hole Banasree er tong er dokane! ☕",
-    detail: "Shob smriti bhalobashay thakbe, kintu JIRA ticket r na!"
+    question: "অফিসের কোন জিনিসটা সবচেয়ে বেশি মিস করবেন?",
+    punchline: "টিমের আন্তরিক পরিবেশ, বনশ্রীর টংয়ের গরম চা আর আপনাদের মিষ্টি আড্ডা! ❤️",
+    detail: "এসএম টেকনোলজির প্রতিটি স্মৃতি ও সহকর্মীদের ভালোবাসা চিরকাল মনে থাকবে।"
   }
 ];
 
 export const FUNNY_MOODS = {
   work: {
-    status: "Professional Transition Lead 👔",
-    badge: "Official Mode",
-    description: "Fully dedicated to smooth knowledge transfer, documentation, and stakeholder alignment.",
-    energyLevel: "12%",
-    commitStatus: "Polite & proper commit messages",
-    coffeeCount: "3 cups / day"
+    status: "দায়িত্বশীল ব্যাকএন্ড ইঞ্জিনিয়ার 💼",
+    badge: "অফিসিয়াল মোড",
+    description: "প্রতিটি প্রজেক্টের এপিআই ডকুমেন্টেশন ও দায়িত্ব হস্তান্তরে পূর্ণ মনোযোগ।",
+    energyLevel: "১০০% দায়িত্ববোধ",
+    commitStatus: "সুস্পষ্ট ও পরিচ্ছন্ন গিট কমিট",
+    coffeeCount: "কাজের ফাঁকে ২-৩ কাপ চা"
   },
-  freedom: {
-    status: "Notice Period King 👑 (Zero F*cks Mode)",
-    badge: "Azadi Mode 🔥",
-    description: "Listening to standup on mute, counting seconds till 5:00 PM, and eating biscuit.",
-    energyLevel: "99% (Post 5 PM)",
-    commitStatus: "git commit -m 'fixed stuff, bye'",
-    coffeeCount: "Unlimited Chai with Tong Mama"
+  celebration: {
+    status: "বিদায়বেলায় কৃতজ্ঞ ও আনন্দমুখর 🎊",
+    badge: "আনন্দ মোড",
+    description: "সব দায়িত্ব সফলভাবে সম্পন্ন করে নতুন ঠিকানায় যাত্রার প্রস্তুতি ও সবার দোয়া গ্রহণ।",
+    energyLevel: "১০০% ইতিবাচক আনন্দ",
+    commitStatus: "বিদায়ী শুভকামনা ও কৃতজ্ঞতা",
+    coffeeCount: "টিমের সাথে বিদায়ী চায়ের আড্ডা"
   }
 };
 
 export const INITIAL_WISHES = [
   {
     id: "1",
-    author: "Frontend Lead",
-    role: "UI / UX Wizard",
-    message: "Bhai apnar API r response format bujhte bujhte 2 bochor gelo, ekhon chole jacchen? 😭 All the best Nayem bhai!",
-    time: "2 hours ago"
+    author: "ফ্রন্টএন্ড টিম",
+    role: "সহকর্মী",
+    message: "নায়েম ভাই, আপনার নিখুঁত ব্যাকএন্ড এপিআই পেয়ে ফ্রন্টএন্ডের কাজ সবসময় সহজ হয়েছে। নতুন যাত্রায় শুভকামনা!",
+    time: "২ ঘণ্টা আগে"
   },
   {
     id: "2",
-    author: "QA Tester",
-    role: "Bug Hunter",
-    message: "Nayem bhai: 'It works on my local'. Amader heart breaks everytime! Miss korbo apnar witty replies. Happy Freedom!",
-    time: "5 hours ago"
+    author: "কিউএ (QA) টিম",
+    role: "সহকর্মী",
+    message: "বাগ খুঁজে পেলে আপনি যেভাবে হাসিমুখে সমাধান করতেন, তা মনে থাকবে। অনেক অনেক শুভকামনা ভাই!",
+    time: "৫ ঘণ্টা আগে"
   },
   {
     id: "3",
-    author: "Project Manager",
-    role: "Deadline Chaser",
-    message: "Handover ta complete koresen toh? Joking, thank you for all your backend magic. Keep rocking!",
-    time: "Yesterday"
+    author: "প্রজেক্ট ম্যানেজার",
+    role: "টিম লিড",
+    message: "চমৎকার টিমওয়ার্ক ও দায়িত্বশীলতার জন্য ধন্যবাদ নায়েম। আপনার ভবিষ্যৎ কর্মজীবন আরও সফল হোক!",
+    time: "গতকাল"
   },
   {
     id: "4",
-    author: "Chaiwala Mama",
-    role: "Chief Energy Officer",
-    message: "Nayem bhaier shokal-shondhar doodh-cha er bill sesh din clear koira jaben mama! Shubheccha roilo!",
-    time: "2 days ago"
+    author: "বনশ্রীর টংয়ের মামা",
+    role: "চা স্পন্সর",
+    message: "নায়েম ভাইদের সান্ধ্যকালীন চায়ের আড্ডা মিস করব! মামার দোয়া সবসময় আপনার সাথে রইল।",
+    time: "২ দিন আগে"
   }
 ];

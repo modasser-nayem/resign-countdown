@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nayem-resignation.vercel.app"),
-  title: "Ali Modasser Nayem | Resignation Countdown 🚀",
+  title: "আলী মোদাচ্ছের নায়েম | বিদায়ী লাইভ কাউন্টডাউন 🚀",
   description:
-    "Official Resignation Countdown for Ali Modasser Nayem (Executive, Backend @ SM Technology). Last working day: 21 October 2026, 5:00 PM!",
+    "এসএম টেকনোলজি (SM Technology) থেকে আলী মোদাচ্ছের নায়েম ভাইয়ের বিদায়ী লাইভ কাউন্টডাউন। শেষ কর্মদিবস: ২১ অক্টোবর ২০২৬, বিকাল ৫:০০ টা!",
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     apple: "/icon.svg",
   },
   openGraph: {
-    title: "Nayem Bhai R Koydin Ache? Live Freedom Countdown! ⏳",
+    title: "নায়েম ভাইয়ের অফিসে আর বাকি মাত্র... লাইভ কাউন্টডাউন! ⏳🎉",
     description:
-      "21 October 2026, 5:00 PM sharp! Live countdown, office soundboard, treat meter, and farewell wall.",
+      "আগামী ২১ অক্টোবর ২০২৬, বিকাল ৫:০০ টা পর্যন্ত লাইভ বিদায়ী কাউন্টডাউন ও শুভকামনা ওয়াল।",
     images: ["/profile-5.1.jpg"],
   },
 };

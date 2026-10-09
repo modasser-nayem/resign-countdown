@@ -72,9 +72,9 @@ export default function WishWall() {
       const newWish: Wish = {
          id: Date.now().toString(),
          author: name.trim(),
-         role: role.trim() || "Colleague & Well Wisher",
+         role: role.trim() || "শুভাকাঙ্ক্ষী সহকর্মী",
          message: message.trim(),
-         time: "Just now",
+         time: "এইমাত্র",
       };
 
       const current = getWishesSnapshot();
@@ -96,18 +96,16 @@ export default function WishWall() {
    }, [name, role, message]);
 
    return (
-      <section className="w-full max-w-5xl mx-auto px-4 py-8">
+      <section className="w-full max-w-5xl mx-auto px-4 py-6">
          <div className="text-center mb-8">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-400 text-xs font-semibold mb-2">
-               <Heart className="w-3.5 h-3.5 fill-pink-500/20" /> Farewell
-               Message Wall
+               <Heart className="w-3.5 h-3.5 fill-pink-500/20" /> বিদায়ী শুভকামনা বার্তা
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-               📝 Leave a Funny Memory / Farewell Wish for Nayem
+            <h2 className="text-xl sm:text-3xl font-bold text-white tracking-tight">
+               📝 নায়েম ভাইয়ের জন্য একটি স্মৃতি বা শুভেচ্ছা বার্তা লিখুন
             </h2>
             <p className="text-slate-400 text-xs sm:text-sm mt-1">
-               Bhai-er shate kono funny smriti, bug-fixing er kosto, ba
-               shubheccha thakle likhe janan!
+               একসাথে কাজ করার সুন্দর কোনো অনুভূতি বা ভবিষ্যৎ জীবনের জন্য দোয়া ও শুভাশীষ এখানে শেয়ার করুন!
             </p>
          </div>
 
@@ -115,7 +113,7 @@ export default function WishWall() {
             {/* Form Column */}
             <div className="lg:col-span-1 glass-card rounded-3xl p-4 sm:p-6 border border-slate-700/60 h-fit">
                <h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4 flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-amber-400" /> Drop Your Note
+                  <Sparkles className="w-4 h-4 text-amber-400" /> আপনার বার্তা লিখুন
                </h3>
 
                <form
@@ -124,41 +122,41 @@ export default function WishWall() {
                >
                   <div>
                      <label className="block text-slate-300 font-medium mb-1">
-                        Your Name *
+                        আপনার নাম *
                      </label>
                      <input
                         type="text"
                         required
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        placeholder="e.g. Tanvir / Sadia / Asif"
+                        placeholder="যেমন: তানভীর / সাদিয়া / আসিফ"
                         className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 text-base sm:text-sm transition-colors"
                      />
                   </div>
 
                   <div>
                      <label className="block text-slate-300 font-medium mb-1">
-                        Your Role / Team (Optional)
+                        আপনার ভূমিকা / পদবী (ঐচ্ছিক)
                      </label>
                      <input
                         type="text"
                         value={role}
                         onChange={(e) => setRole(e.target.value)}
-                        placeholder="e.g. Frontend Dev, QA, Friend"
+                        placeholder="যেমন: সহকর্মী, ফ্রন্টএন্ড ডেভেলপার, বন্ধু"
                         className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 text-base sm:text-sm transition-colors"
                      />
                   </div>
 
                   <div>
                      <label className="block text-slate-300 font-medium mb-1">
-                        Your Message / Funny Memory *
+                        আপনার বার্তা বা স্মৃতি *
                      </label>
                      <textarea
                         required
                         rows={4}
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
-                        placeholder="Nayem bhai, apnar banano API er response ekhono amar swapne ashe... Good luck!"
+                        placeholder="নায়েম ভাই, একসাথে কাজ করার চমৎকার দিনগুলোর জন্য ধন্যবাদ। নতুন কর্মক্ষেত্রে অনেক শুভকামনা!"
                         className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 text-base sm:text-sm transition-colors resize-none"
                      />
                   </div>
@@ -169,7 +167,7 @@ export default function WishWall() {
                      className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 text-white font-bold text-xs sm:text-sm shadow-lg shadow-pink-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                      <Send className="w-3.5 h-3.5" />
-                     <span>Post on Wall</span>
+                     <span>শুভেচ্ছা বার্তা পোস্ট করুন</span>
                   </button>
                </form>
             </div>
@@ -184,7 +182,7 @@ export default function WishWall() {
                      <div className="flex items-start justify-between mb-2">
                         <div className="flex items-center gap-2">
                            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 to-pink-500 text-slate-950 font-black text-xs flex items-center justify-center shrink-0">
-                              {item.author.charAt(0).toUpperCase()}
+                              {item.author.charAt(0)}
                            </div>
                            <div>
                               <h4 className="text-sm font-bold text-white leading-tight">
@@ -196,12 +194,12 @@ export default function WishWall() {
                            </div>
                         </div>
 
-                        <span className="text-[10px] text-slate-500 bg-slate-900 px-2 py-0.5 rounded-full border border-slate-800">
+                        <span className="text-[10px] text-slate-400 bg-slate-900 px-2.5 py-0.5 rounded-full border border-slate-800">
                            {item.time}
                         </span>
                      </div>
 
-                     <p className="text-xs sm:text-sm text-slate-300 leading-relaxed italic pl-10 border-l-2 border-amber-500/30">
+                     <p className="text-xs sm:text-sm text-slate-300 leading-relaxed italic pl-10 border-l-2 border-amber-500/40">
                         &ldquo;{item.message}&rdquo;
                      </p>
                   </div>

@@ -4,7 +4,7 @@ import React, { useState, useSyncExternalStore, useCallback } from "react";
 import confetti from "canvas-confetti";
 import {
    Volume2,
-   Pizza,
+   Coffee,
    HeartHandshake,
 } from "lucide-react";
 import { soundEffects } from "@/lib/audio";
@@ -52,42 +52,45 @@ export default function Soundboard() {
          particleCount: 50,
          spread: 60,
          origin: { y: 0.7 },
-         colors: ["#f59e0b", "#ef4444", "#10b981"],
+         colors: ["#f59e0b", "#10b981", "#3b82f6"],
       });
    }, []);
 
    const sounds = [
       {
-         name: "Freedom Fanfare 🎺",
+         name: "বিদায়ী ফ্যানফেয়ার 🎺",
          action: () => {
             soundEffects.playFanfare();
             confetti({ particleCount: 30, spread: 50 });
          },
-         desc: "Celebration sound when 5:00 PM hits",
+         desc: "নতুন সম্ভাবনা ও সফল সমাপনীর সুর",
          color: "from-amber-500/20 to-orange-500/20 border-amber-500/30 hover:border-amber-400",
       },
       {
-         name: "Emergency Siren 🚨",
-         action: () => soundEffects.playSiren(),
-         desc: "When someone says 'Eta emergency deploy'",
-         color: "from-red-500/20 to-pink-500/20 border-red-500/30 hover:border-red-400",
+         name: "অফিস বেল 🔔",
+         action: () => soundEffects.playKaChing(),
+         desc: "চা-কফি ও আড্ডার আনন্দ সংকেত",
+         color: "from-emerald-500/20 to-teal-500/20 border-emerald-500/30 hover:border-emerald-400",
       },
       {
-         name: "Sad Violin 🎻",
+         name: "স্মৃতির সুর 🎻",
          action: () => soundEffects.playSadViolin(),
-         desc: "For the junior dev left behind with the legacy code",
+         desc: "একসাথে কাটানো সুন্দর দিনগুলোর স্মৃতি",
          color: "from-blue-500/20 to-indigo-500/20 border-blue-500/30 hover:border-blue-400",
       },
       {
-         name: "Ka-Ching 💰",
-         action: () => soundEffects.playKaChing(),
-         desc: "Sound of final settlement / Provident Fund",
-         color: "from-emerald-500/20 to-teal-500/20 border-emerald-500/30 hover:border-emerald-400",
+         name: "উৎসবের ধ্বনি 🎉",
+         action: () => {
+            soundEffects.playFanfare();
+            confetti({ particleCount: 60, spread: 70 });
+         },
+         desc: "উজ্জ্বল ভবিষ্যৎ ও নতুন ক্যারিয়ারের জয়গান",
+         color: "from-purple-500/20 to-pink-500/20 border-purple-500/30 hover:border-purple-400",
       },
    ];
 
    return (
-      <section className="w-full max-w-5xl mx-auto px-4 py-8">
+      <section className="w-full max-w-5xl mx-auto px-4 py-6">
          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Soundboard Column */}
             <div className="glass-card rounded-3xl p-4 sm:p-6 border border-slate-700/60 flex flex-col justify-between">
@@ -95,12 +98,11 @@ export default function Soundboard() {
                   <div className="flex items-center gap-2 mb-2">
                      <Volume2 className="w-5 h-5 text-amber-400" />
                      <h3 className="text-lg sm:text-xl font-bold text-white">
-                        Office Soundboard 🔊
+                        আনন্দময় সাউন্ডবোর্ড 🔊
                      </h3>
                   </div>
                   <p className="text-xs text-slate-400 mb-4 sm:mb-5">
-                     Click to trigger instant sound effects during your office
-                     meetings!
+                     সহকর্মীদের সাথে উপভোগ করার জন্য আনন্দ ও স্মৃতির সুর শুনুন!
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
@@ -122,10 +124,8 @@ export default function Soundboard() {
                </div>
 
                <div className="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-500">
-                  <span>Powered by Web Audio API</span>
-                  <span className="text-amber-400/80">
-                     100% Client-side synth
-                  </span>
+                  <span>ওয়েব অডিও সিন্থেসাইজার</span>
+                  <span className="text-amber-400/80">১০০% ব্রাউজার অডিও</span>
                </div>
             </div>
 
@@ -135,41 +135,40 @@ export default function Soundboard() {
 
                <div>
                   <div className="flex items-center gap-2 mb-2">
-                     <Pizza className="w-5 h-5 text-orange-400" />
-                     <h3 className="text-xl font-bold text-white">
-                        Treat Dabi Meter 🍕
+                     <Coffee className="w-5 h-5 text-orange-400" />
+                     <h3 className="text-lg sm:text-xl font-bold text-white">
+                        বিদায়ী মিষ্টি ও ট্রিট কাউন্টার 🍰☕
                      </h3>
                   </div>
-                  <p className="text-xs text-slate-400 mb-5">
-                     Colleagues claiming their farewell feast from Nayem Bhai!
+                  <p className="text-xs text-slate-400 mb-4 sm:mb-5">
+                     নায়েম ভাইয়ের ফেয়ারওয়েল মিষ্টিমুখ ও চায়ের আয়োজনের দাবিদার তালিকা!
                   </p>
 
-                  <div className="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 text-center mb-4">
+                  <div className="bg-slate-900/90 rounded-2xl p-4 sm:p-5 border border-slate-800 text-center mb-4">
                      <div className="text-4xl sm:text-5xl font-black font-mono text-orange-400 mb-1">
                         {treatClaims}
                      </div>
-                     <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                        People demanding Kacchi / Pizza
+                     <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+                        জন সহকর্মী মিষ্টি ও চায়ের অপেক্ষায়
                      </div>
                      {lastClaimTime && (
                         <div className="text-[11px] text-emerald-400 mt-2">
-                           ✅ Last claimed today at {lastClaimTime}
+                           ✅ সর্বশেষ যুক্ত হয়েছেন আজ {lastClaimTime}-এ
                         </div>
                      )}
                   </div>
 
                   <button
                      onClick={handleClaimTreat}
-                     className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 font-black text-sm shadow-lg shadow-orange-500/25 transition-all transform hover:scale-[1.02] active:scale-98 flex items-center justify-center gap-2 cursor-pointer"
+                     className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-orange-500/25 transition-all transform hover:scale-[1.02] active:scale-98 flex items-center justify-center gap-2 cursor-pointer"
                   >
                      <HeartHandshake className="w-4 h-4" />
-                     <span>Nayem Bhai, Treat Chai! (+1 Dabi)</span>
+                     <span>নায়েম ভাই, মিষ্টিমুখ চাই! (+১ যোগ করুন)</span>
                   </button>
                </div>
 
                <div className="mt-4 pt-3 border-t border-slate-800/80 text-[11px] text-slate-500 text-center">
-                  *Treat condition: Must be present on or before 21 Oct 2026,
-                  4:59 PM!
+                  *ট্রিট পর্ব: ২১ অক্টোবর ২০২৬, বিকাল ৫:০০ টায় অফিসের সবাইকে নিয়ে!
                </div>
             </div>
          </div>

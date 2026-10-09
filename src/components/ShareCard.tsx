@@ -19,22 +19,22 @@ export default function ShareCard() {
   };
 
   const shareText = encodeURIComponent(
-    "Ali Modasser Nayem bhai r koydin ache office e? Live Resignation Countdown dekhe nin! ⏳😂 21 Oct 5:00 PM Freedom:"
+    "আলী মোদাচ্ছের নায়েম ভাইয়ের এসএম টেকনোলজির বিদায়ী লাইভ কাউন্টডাউন! আগামী ২১ অক্টোবর ২০২৬, বিকাল ৫:০০ টা:"
   );
 
   const getUrl = () => (typeof window !== "undefined" ? window.location.href : "");
 
   return (
-    <section className="w-full max-w-4xl mx-auto px-4 py-8 text-center">
-      <div className="glass-card rounded-3xl p-4 sm:p-8 border border-slate-700/60 shadow-xl">
+    <section className="w-full max-w-4xl mx-auto px-4 py-6 text-center">
+      <div className="glass-card rounded-3xl p-5 sm:p-8 border border-slate-700/60 shadow-xl">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-3">
-          <Share2 className="w-3.5 h-3.5" /> Viral Share Protocol
+          <Share2 className="w-3.5 h-3.5" /> শেয়ার করুন
         </div>
         <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
-          📢 Share This With Colleagues
+          📢 সহকর্মী ও বন্ধুদের সাথে শেয়ার করুন
         </h3>
-        <p className="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto mb-6">
-          Office group ba Slack-e share korun jokhon-i keu jiggnesh korbe &ldquo;Bhai tumi r kobe jaba?&rdquo;
+        <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto mb-6 leading-relaxed">
+          অফিসিয়াল গ্রুপ, স্ল্যাক বা বন্ধুদের ইনবক্সে এক ক্লিকে আনন্দের এই বিদায়ী কাউন্টডাউন শেয়ার করুন!
         </p>
 
         <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-2.5 sm:gap-3">
@@ -46,12 +46,12 @@ export default function ShareCard() {
             {copied ? (
               <>
                 <Check className="w-4 h-4 text-emerald-950" />
-                <span>Link Copied to Clipboard!</span>
+                <span>লিংক কপি করা হয়েছে!</span>
               </>
             ) : (
               <>
                 <Copy className="w-4 h-4" />
-                <span>Copy Website Link</span>
+                <span>ওয়েবসাইট লিংক কপি করুন</span>
               </>
             )}
           </button>
@@ -64,7 +64,7 @@ export default function ShareCard() {
             className="w-full sm:w-auto px-5 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 transition-all"
           >
             <MessageCircle className="w-4 h-4" />
-            <span>Share on WhatsApp</span>
+            <span>হোয়াটসঅ্যাপে শেয়ার করুন</span>
           </a>
 
           {/* Telegram Button */}
@@ -75,7 +75,7 @@ export default function ShareCard() {
             className="w-full sm:w-auto px-5 py-3 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-sky-600/20 transition-all"
           >
             <Send className="w-4 h-4" />
-            <span>Share on Telegram</span>
+            <span>টেলিগ্রামে শেয়ার করুন</span>
           </a>
         </div>
       </div>

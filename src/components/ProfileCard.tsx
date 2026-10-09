@@ -7,19 +7,19 @@ import { RESIGNATION_DETAILS, FUNNY_MOODS } from "@/lib/constants";
 import { soundEffects } from "@/lib/audio";
 
 export default function ProfileCard() {
-  const [isHonestMode, setIsHonestMode] = useState(false);
+  const [isCelebrationMode, setIsCelebrationMode] = useState(false);
   const [photoSelected, setPhotoSelected] = useState<"square" | "full">("square");
 
   const toggleMood = () => {
     soundEffects.playPop();
-    setIsHonestMode(!isHonestMode);
+    setIsCelebrationMode(!isCelebrationMode);
   };
 
-  const moodData = isHonestMode ? FUNNY_MOODS.freedom : FUNNY_MOODS.work;
+  const moodData = isCelebrationMode ? FUNNY_MOODS.celebration : FUNNY_MOODS.work;
 
   return (
-    <section className="w-full max-w-4xl mx-auto px-4 py-8">
-      <div className="glass-card rounded-3xl p-6 sm:p-8 border border-slate-700/60 shadow-2xl relative overflow-hidden">
+    <section className="w-full max-w-4xl mx-auto px-4 py-6">
+      <div className="glass-card rounded-3xl p-5 sm:p-8 border border-slate-700/60 shadow-2xl relative overflow-hidden">
         {/* Glow accent */}
         <div className="absolute -top-24 -right-24 w-60 h-60 bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-24 w-60 h-60 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
@@ -41,7 +41,7 @@ export default function ProfileCard() {
               {/* Status Indicator badge */}
               <div className="absolute -bottom-2 -right-2 bg-emerald-500 text-slate-950 text-xs font-black px-2.5 py-1 rounded-full border-2 border-slate-900 shadow-md flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-slate-950 animate-ping inline-block" />
-                <span>Notice Period</span>
+                <span>বিদায়ী পর্ব</span>
               </div>
             </div>
 
@@ -49,23 +49,23 @@ export default function ProfileCard() {
             <div className="flex gap-2 mt-4 text-xs font-medium text-slate-400">
               <button
                 onClick={() => setPhotoSelected("square")}
-                className={`px-2.5 py-1 rounded-lg border transition-all ${
+                className={`px-2.5 py-1 rounded-lg border transition-all cursor-pointer ${
                   photoSelected === "square"
-                    ? "bg-amber-500/20 text-amber-300 border-amber-500/40"
+                    ? "bg-amber-500/20 text-amber-300 border-amber-500/40 font-semibold"
                     : "bg-slate-800/80 hover:bg-slate-700 border-slate-700"
                 }`}
               >
-                Avatar View
+                প্রোফাইল ভিউ
               </button>
               <button
                 onClick={() => setPhotoSelected("full")}
-                className={`px-2.5 py-1 rounded-lg border transition-all ${
+                className={`px-2.5 py-1 rounded-lg border transition-all cursor-pointer ${
                   photoSelected === "full"
-                    ? "bg-amber-500/20 text-amber-300 border-amber-500/40"
+                    ? "bg-amber-500/20 text-amber-300 border-amber-500/40 font-semibold"
                     : "bg-slate-800/80 hover:bg-slate-700 border-slate-700"
                 }`}
               >
-                Full Photo
+                সম্পূর্ণ ছবি
               </button>
             </div>
           </div>
@@ -77,10 +77,10 @@ export default function ProfileCard() {
                 <Building2 className="w-3.5 h-3.5" /> {RESIGNATION_DETAILS.company}
               </span>
               <span className="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center gap-1.5">
-                <BadgeCheck className="w-3.5 h-3.5" /> ID: {RESIGNATION_DETAILS.employeeId}
+                <BadgeCheck className="w-3.5 h-3.5" /> আইডি: {RESIGNATION_DETAILS.employeeId}
               </span>
               <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1.5">
-                📍 Banasree, Rampura
+                📍 বনশ্রী, রামপুরা
               </span>
             </div>
 
@@ -88,31 +88,31 @@ export default function ProfileCard() {
               {RESIGNATION_DETAILS.name}
             </h2>
             <p className="text-amber-400 font-semibold text-sm sm:text-base mb-4">
-              {RESIGNATION_DETAILS.role} (The Backend Architect)
+              {RESIGNATION_DETAILS.role}
             </p>
 
             {/* Mode Toggle Switch */}
-            <div className="bg-slate-900/90 rounded-2xl p-3.5 sm:p-4 border border-slate-800 mb-4">
-              <div className="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-2.5 mb-2.5">
+            <div className="bg-slate-900/90 rounded-2xl p-3.5 sm:p-4 border border-slate-800 mb-4 text-left">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 mb-2.5">
                 <span className="text-xs uppercase font-bold tracking-wider text-slate-400 flex items-center gap-1.5">
-                  {isHonestMode ? (
+                  {isCelebrationMode ? (
                     <Sparkles className="w-4 h-4 text-orange-400" />
                   ) : (
                     <Briefcase className="w-4 h-4 text-blue-400" />
                   )}
-                  Current Mindset Mode:
+                  বর্তমান মানসিকতা:
                 </span>
 
                 <button
                   onClick={toggleMood}
-                  className={`text-xs font-bold px-3 py-1.5 rounded-full transition-all cursor-pointer flex items-center gap-1 border ${
-                    isHonestMode
-                      ? "bg-orange-500 text-slate-950 border-orange-400 shadow-md shadow-orange-500/30"
+                  className={`text-xs font-bold px-3 py-1.5 rounded-full transition-all cursor-pointer flex items-center gap-1.5 border ${
+                    isCelebrationMode
+                      ? "bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 border-orange-400 shadow-md shadow-orange-500/20"
                       : "bg-slate-800 text-slate-300 border-slate-700 hover:text-white"
                   }`}
                 >
-                  <span>{isHonestMode ? "🔥 Azadi Mode Active" : "👔 Official Mode"}</span>
-                  <span className="text-[10px] opacity-80">(Click to Switch)</span>
+                  <span>{isCelebrationMode ? "🎊 আনন্দ মোড সক্রিয়" : "💼 দায়িত্বশীল মোড"}</span>
+                  <span className="text-[10px] opacity-80">(টগল করুন)</span>
                 </button>
               </div>
 
@@ -125,13 +125,13 @@ export default function ProfileCard() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3 pt-3 border-t border-slate-800/80 text-xs text-slate-400">
                 <div>
-                  <span className="text-slate-500">Commit Style:</span>{" "}
-                  <span className="text-slate-300 font-mono text-[11px] block sm:inline">
+                  <span className="text-slate-500">কমিট স্টাইল:</span>{" "}
+                  <span className="text-slate-300 font-medium block sm:inline">
                     {moodData.commitStatus}
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-500">Chai Consumption:</span>{" "}
+                  <span className="text-slate-500">চা-কফি বিরতি:</span>{" "}
                   <span className="text-amber-400 font-medium block sm:inline">
                     {moodData.coffeeCount}
                   </span>
