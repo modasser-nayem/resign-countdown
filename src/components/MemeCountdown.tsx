@@ -19,13 +19,13 @@ import {
 import { soundEffects } from "@/lib/audio";
 import CatCountdownOverlay from "./CatCountdownOverlay";
 
-// 🐱 Prying Cartoon Cat (পিন্টু ⛏️) trying to tear/pry the minute digits off the card!
-function PryingCatSvg() {
+// 🐱 Hammer Cat (হাতুড়ে পিন্টু 🔨) pokes, nudges (guta-guti) & smashes with a hammer to crack the minute!
+function HammerCatSvg({ isHammering }: { isHammering: boolean }) {
   return (
-    <svg viewBox="0 0 100 110" className="w-full h-full drop-shadow-xl overflow-visible">
-      {/* Wagging/Straining Tail */}
+    <svg viewBox="-10 0 120 120" className="w-full h-full drop-shadow-xl overflow-visible">
+      {/* Wagging Tail */}
       <path
-        d="M78 85 Q95 75 90 60 Q85 50 78 58"
+        d="M80 90 Q98 75 92 60 Q85 50 78 60"
         fill="none"
         stroke="#f59e0b"
         strokeWidth="6"
@@ -33,64 +33,76 @@ function PryingCatSvg() {
         className="animate-pulse"
       />
 
-      {/* Body leaning backward in heavy strain */}
-      <ellipse cx="50" cy="72" rx="26" ry="22" fill="#fef3c7" stroke="#d97706" strokeWidth="2.5" />
-      <ellipse cx="48" cy="74" rx="16" ry="14" fill="#ffffff" />
+      {/* Body & Belly */}
+      <ellipse cx="50" cy="74" rx="26" ry="22" fill="#fef3c7" stroke="#d97706" strokeWidth="2.5" />
+      <ellipse cx="48" cy="76" rx="16" ry="14" fill="#ffffff" />
 
-      {/* Construction Belt with mini tools */}
-      <rect x="26" y="70" width="46" height="6" rx="2" fill="#78350f" />
-      <rect x="44" y="69" width="8" height="8" rx="1" fill="#f59e0b" />
-
-      {/* Braced Back Foot */}
-      <ellipse cx="68" cy="92" rx="9" ry="6" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
-      {/* Front Foot braced against card */}
-      <ellipse cx="34" cy="92" rx="9" ry="6" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+      {/* Feet perched on card ledge */}
+      <ellipse cx="36" cy="94" rx="8" ry="6" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+      <ellipse cx="68" cy="94" rx="8" ry="6" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
 
       {/* Head */}
-      <circle cx="45" cy="38" r="22" fill="#fef3c7" stroke="#d97706" strokeWidth="2.5" />
+      <circle cx="48" cy="42" r="22" fill="#fef3c7" stroke="#d97706" strokeWidth="2.5" />
 
-      {/* Cat Ears */}
-      <polygon points="26,24 30,8 40,20" fill="#f59e0b" stroke="#d97706" strokeWidth="1.5" />
-      <polygon points="62,24 58,8 48,20" fill="#f59e0b" stroke="#d97706" strokeWidth="1.5" />
+      {/* Ears */}
+      <polygon points="30,28 34,10 44,22" fill="#f59e0b" stroke="#d97706" strokeWidth="1.5" />
+      <polygon points="66,28 62,10 52,22" fill="#f59e0b" stroke="#d97706" strokeWidth="1.5" />
 
-      {/* Yellow Safety Hardhat / Construction Helmet */}
-      <ellipse cx="45" cy="22" rx="18" ry="10" fill="#eab308" stroke="#ca8a04" strokeWidth="2" />
-      <rect x="25" y="24" width="40" height="4" rx="2" fill="#ca8a04" />
-      <circle cx="45" cy="18" r="3" fill="#ffffff" />
+      {/* Yellow Safety Hardhat */}
+      <ellipse cx="48" cy="24" rx="18" ry="10" fill="#eab308" stroke="#ca8a04" strokeWidth="2" />
+      <rect x="28" y="26" width="40" height="4" rx="2" fill="#ca8a04" />
+      <circle cx="48" cy="20" r="3" fill="#ffffff" />
 
-      {/* Strained Face: Scrunched Eyes > < */}
-      <path d="M33 36 L39 40 L33 44" stroke="#0f172a" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M57 36 L51 40 L57 44" stroke="#0f172a" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-
-      {/* Gritted Clenched Teeth in determination */}
-      <rect x="39" y="47" width="12" height="6" rx="1.5" fill="#ffffff" stroke="#78350f" strokeWidth="1.2" />
-      <line x1="45" y1="47" x2="45" y2="53" stroke="#78350f" strokeWidth="1" />
-      <line x1="42" y1="50" x2="48" y2="50" stroke="#78350f" strokeWidth="0.8" />
+      {/* Eyes & Face */}
+      {isHammering ? (
+        // Determined squinting face when swinging hammer: > <
+        <>
+          <path d="M36 40 L42 44 L36 48" stroke="#0f172a" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M60 40 L54 44 L60 48" stroke="#0f172a" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+          {/* Gritted teeth */}
+          <rect x="42" y="52" width="12" height="6" rx="1.5" fill="#ffffff" stroke="#78350f" strokeWidth="1.2" />
+          <line x1="48" y1="52" x2="48" y2="58" stroke="#78350f" strokeWidth="1" />
+        </>
+      ) : (
+        // Playful mischievous face when poking (guta-guti)
+        <>
+          <ellipse cx="40" cy="42" rx="4" ry="5" fill="#0f172a" />
+          <circle cx="39" cy="40" r="1.5" fill="#ffffff" />
+          <ellipse cx="58" cy="42" rx="4" ry="5" fill="#0f172a" />
+          <circle cx="57" cy="40" r="1.5" fill="#ffffff" />
+          {/* W-smile */}
+          <path d="M44 52 Q48 55 52 52" fill="none" stroke="#78350f" strokeWidth="1.5" />
+        </>
+      )}
 
       {/* Whiskers */}
-      <line x1="26" y1="44" x2="16" y2="42" stroke="#b45309" strokeWidth="1.2" />
-      <line x1="26" y1="48" x2="16" y2="50" stroke="#b45309" strokeWidth="1.2" />
+      <line x1="28" y1="46" x2="16" y2="44" stroke="#b45309" strokeWidth="1.2" />
+      <line x1="28" y1="50" x2="16" y2="52" stroke="#b45309" strokeWidth="1.2" />
 
-      {/* Animated Popping Sweat Drops */}
-      <g className="animate-bounce">
-        <path d="M22 28 Q18 22 22 18 Q26 22 22 28" fill="#38bdf8" />
-        <circle cx="16" cy="34" r="2" fill="#38bdf8" />
-      </g>
-
-      {/* Red Heavy-Duty Crowbar wedged under the digit */}
-      <path
-        d="M2 68 L18 56 L38 68"
-        stroke="#ef4444"
-        strokeWidth="5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      {/* Prying Chisel Tip wedged right under the minute digit */}
-      <path d="M-2 72 L6 64" stroke="#991b1b" strokeWidth="6" strokeLinecap="round" />
-
-      {/* Paws gripping the crowbar with maximum effort */}
-      <ellipse cx="20" cy="56" rx="5.5" ry="5.5" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
-      <ellipse cx="32" cy="65" rx="5.5" ry="5.5" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+      {/* TOOL: Heavy Hammer (হাতুড়ি 🔨) OR Pry Chisel (গুঁতাগুঁতি ⛏️) */}
+      {isHammering ? (
+        // HEAVY CARTOON HAMMER (হাতুড়ি) raised and swinging down!
+        <g className="origin-[35px_50px] animate-[hammerSwingDown_0.4s_cubic-bezier(0.2,0.9,0.3,1)_forwards]">
+          {/* Wooden Handle */}
+          <rect x="18" y="8" width="7" height="42" rx="2" fill="#92400e" stroke="#78350f" strokeWidth="1.5" transform="rotate(-35 20 30)" />
+          {/* Heavy Steel Hammer Head */}
+          <rect x="0" y="2" width="28" height="15" rx="3" fill="#64748b" stroke="#334155" strokeWidth="2" transform="rotate(-35 14 10)" />
+          <rect x="-2" y="4" width="6" height="11" rx="1" fill="#94a3b8" transform="rotate(-35 1 10)" />
+          {/* Paws gripping hammer shaft */}
+          <ellipse cx="26" cy="38" rx="6" ry="6" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+          <ellipse cx="36" cy="46" rx="6" ry="6" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+        </g>
+      ) : (
+        // PRY CHISEL / CROWBAR POKING & NUDGING (গুঁতাগুঁতি)
+        <g className="animate-[gutaGutiPoke_0.8s_ease-in-out_infinite] origin-[30px_60px]">
+          {/* Red pry rod pointing down towards digit */}
+          <path d="M12 75 L30 55" stroke="#ef4444" strokeWidth="5" strokeLinecap="round" />
+          <path d="M8 78 L16 70" stroke="#991b1b" strokeWidth="6" strokeLinecap="round" />
+          {/* Hands holding rod */}
+          <ellipse cx="28" cy="56" rx="5.5" ry="5.5" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+          <ellipse cx="36" cy="62" rx="5.5" ry="5.5" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+        </g>
+      )}
     </svg>
   );
 }
@@ -141,7 +153,8 @@ export default function MemeCountdown() {
   const isClient = useSyncExternalStore(subscribe, () => true, () => false);
   const [memeGlasses, setMemeGlasses] = useState(true);
   const [copied, setCopied] = useState(false);
-  const [isPryTug, setIsPryTug] = useState(false);
+  const [isHammering, setIsHammering] = useState(false);
+  const [isCracked, setIsCracked] = useState(false);
   const [dialogContent, setDialogContent] = useState<{ title: string; text: string; sound: () => void } | null>(null);
 
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => calculateTimeLeft());
@@ -151,6 +164,24 @@ export default function MemeCountdown() {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
     return () => clearInterval(timer);
+  }, []);
+
+  // Periodic comic action on the minute card:
+  // Pokes (guta-guti) for a few seconds, then pulls out a hammer, smashes down, and cracks the minute!
+  useEffect(() => {
+    const hammerInterval = setInterval(() => {
+      setIsHammering(true);
+      setTimeout(() => {
+        setIsCracked(true);
+        soundEffects.playHammerClang();
+        setTimeout(() => {
+          setIsCracked(false);
+          setIsHammering(false);
+        }, 1500);
+      }, 350);
+    }, 5500);
+
+    return () => clearInterval(hammerInterval);
   }, []);
 
   const triggerConfetti = () => {
@@ -298,41 +329,91 @@ export default function MemeCountdown() {
             </span>
           </div>
 
-          {/* Mins - Interactive Prying Scene with Pintu the Crowbar Cat */}
+          {/* Mins - Interactive Scene: Digits 100% visible, Pintu pokes (guta-guti) & smashes with hammer (patal/fattle dhoray)! */}
           <div
             onClick={() => {
-              soundEffects.playTrashDrop();
-              setIsPryTug(true);
-              setTimeout(() => setIsPryTug(false), 700);
+              setIsHammering(true);
+              setTimeout(() => {
+                setIsCracked(true);
+                soundEffects.playHammerClang();
+                setTimeout(() => {
+                  setIsCracked(false);
+                  setIsHammering(false);
+                }, 1500);
+              }, 250);
             }}
             className="bg-slate-950/80 rounded-2xl p-4 sm:p-5 border border-slate-800 flex flex-col items-center justify-center min-h-[130px] sm:min-h-[150px] shadow-md relative overflow-visible cursor-pointer select-none group"
-            title="পিন্টু ক্র্যাম্বার দিয়ে মিনিট খুলে ফেলতে চাচ্ছে! ক্লিক করে জোরে টান দিন!"
+            title="হাতুড়ে পিন্টু গুঁতাগুঁতি করে মাঝে মাঝে হাতুড়ি দিয়ে বাড়ি মেরে ফাটল ধরায়! ক্লিক করুন বাড়ি মারতে!"
           >
-            {/* Cyan Minute Number with prying strain */}
-            <div className="relative flex items-center justify-center my-auto">
-              {/* Minute digits: Tilts & lifts when pried */}
+            {/* Cartoon Cat (হাতুড়ে পিন্টু 🔨) perched on the TOP-RIGHT ledge - completely clear of the digits! */}
+            <div className="absolute -top-7 sm:-top-8 right-1 sm:right-2 w-16 sm:w-18 h-20 sm:h-22 pointer-events-none z-30">
+              <HammerCatSvg isHammering={isHammering} />
+            </div>
+
+            {/* Impact Spark Flash when hammer strikes */}
+            {isCracked && (
+              <div className="absolute top-2 right-6 sm:right-8 text-xs sm:text-sm font-black text-amber-300 animate-ping z-40 whitespace-nowrap pointer-events-none">
+                💥 CLANG!
+              </div>
+            )}
+
+            {/* Centered, completely unobstructed and crystal-clear Cyan Minute Number */}
+            <div className="relative flex items-center justify-center my-auto w-full px-2">
               <span
-                className={`text-4xl sm:text-6xl font-black font-mono text-cyan-400 tracking-tight transition-transform duration-300 ${
-                  isPryTug
-                    ? "-rotate-12 -translate-y-2 -translate-x-1"
-                    : "animate-[digitPryShake_3s_ease-in-out_infinite]"
+                className={`text-4xl sm:text-6xl font-black font-mono text-cyan-400 tracking-tight transition-transform duration-200 select-none ${
+                  isCracked
+                    ? "animate-[digitImpactShock_0.35s_ease-out]"
+                    : isHammering
+                    ? "scale-98"
+                    : "animate-[digitGutaTremor_1.6s_ease-in-out_infinite]"
                 }`}
               >
                 {String(timeLeft.minutes).padStart(2, "0")}
               </span>
 
-              {/* Loose Bolts rattling on the left edge */}
-              <span className="absolute -top-1 -left-2 text-[10px] animate-pulse opacity-60">🔩</span>
-              <span className="absolute -bottom-1 -left-2 text-[10px] animate-pulse opacity-60">🔩</span>
-
-              {/* Cartoon Cat (পিন্টু ⛏️) wedging crowbar under the right side of the minute */}
-              <div
-                className={`absolute -right-8 sm:-right-10 -bottom-3 sm:-bottom-4 w-16 sm:w-20 h-20 sm:h-24 pointer-events-none transition-transform duration-300 ${
-                  isPryTug ? "scale-115 -translate-x-1" : "animate-[catPryStrain_3s_ease-in-out_infinite]"
-                }`}
-              >
-                <PryingCatSvg />
-              </div>
+              {/* ⚡ Glowing Jagged Glass/Acrylic Crack lines across the digits when smashed! */}
+              {isCracked && (
+                <svg
+                  viewBox="0 0 100 80"
+                  className="absolute inset-0 w-full h-full pointer-events-none z-30 drop-shadow-[0_0_10px_rgba(34,211,238,0.95)] animate-in fade-in duration-75"
+                >
+                  <path
+                    d="M32 10 L44 26 L36 38 L56 48 L48 70"
+                    fill="none"
+                    stroke="#ffffff"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M32 10 L44 26 L36 38 L56 48 L48 70"
+                    fill="none"
+                    stroke="#22d3ee"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    opacity="0.8"
+                  />
+                  {/* Secondary branching crack veins */}
+                  <path
+                    d="M44 26 L64 22 M36 38 L22 44 M56 48 L72 56 M44 60 L60 68"
+                    fill="none"
+                    stroke="#ffffff"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M44 26 L64 22 M36 38 L22 44 M56 48 L72 56 M44 60 L60 68"
+                    fill="none"
+                    stroke="#38bdf8"
+                    strokeWidth="3.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    opacity="0.65"
+                  />
+                </svg>
+              )}
             </div>
 
             {/* Label and Character Badge */}
@@ -341,7 +422,7 @@ export default function MemeCountdown() {
                 Mins (মিনিট)
               </span>
               <span className="text-[8px] font-black text-cyan-300 bg-cyan-950/90 px-1 py-0.2 rounded border border-cyan-500/30">
-                পিন্টু ⛏️
+                হাতুড়ে পিন্টু 🔨
               </span>
             </div>
           </div>
@@ -483,41 +564,75 @@ export default function MemeCountdown() {
         Made with ☕ by Ali Modasser Nayem • SM Technology • Exit Code: 0
       </div>
 
-      {/* Keyframe animations for Minute Prying Cat & Shaking Digit */}
+      {/* Keyframe animations for Minute Poking (Guta-guti), Hammer Strike & Glass Cracks */}
       <style jsx>{`
-        @keyframes catPryStrain {
+        /* Guta-guti poking & nudging motion */
+        @keyframes gutaGutiPoke {
           0%, 100% {
             transform: translate(0, 0) rotate(0deg);
           }
-          20% {
-            transform: translate(2px, 1px) rotate(2deg);
+          30% {
+            transform: translate(-3px, 2px) rotate(-6deg);
           }
-          45% {
-            transform: translate(5px, 3px) rotate(8deg);
+          60% {
+            transform: translate(-1px, 1px) rotate(-2deg);
           }
-          65% {
-            transform: translate(7px, 5px) rotate(12deg);
-          }
-          85% {
-            transform: translate(2px, 1px) rotate(3deg);
+          80% {
+            transform: translate(-4px, 3px) rotate(-8deg);
           }
         }
 
-        @keyframes digitPryShake {
+        /* Subtle tremor on the digit when poked */
+        @keyframes digitGutaTremor {
           0%, 100% {
-            transform: rotate(0deg) translate(0, 0);
+            transform: translate(0, 0) rotate(0deg);
+          }
+          30% {
+            transform: translate(-1px, 0.5px) rotate(-0.8deg);
+          }
+          60% {
+            transform: translate(0.5px, -0.5px) rotate(0.4deg);
+          }
+          80% {
+            transform: translate(-1.5px, 0.8px) rotate(-1.2deg);
+          }
+        }
+
+        /* Hammer swing down strike */
+        @keyframes hammerSwingDown {
+          0% {
+            transform: translate(12px, -18px) rotate(-55deg) scale(0.9);
+          }
+          35% {
+            transform: translate(6px, -10px) rotate(-20deg) scale(1.1);
+          }
+          75% {
+            transform: translate(-10px, 14px) rotate(40deg) scale(1.25);
+          }
+          100% {
+            transform: translate(-5px, 9px) rotate(22deg) scale(1.05);
+          }
+        }
+
+        /* Violent shockwave vibration on the digit when smashed by hammer */
+        @keyframes digitImpactShock {
+          0% {
+            transform: scale(1) translate(0, 0);
           }
           20% {
-            transform: rotate(-2deg) translate(-1px, -1px);
+            transform: scale(1.08) translate(-3px, 4px) rotate(-3deg);
           }
-          45% {
-            transform: rotate(-5deg) translate(-2px, -3px);
+          40% {
+            transform: scale(0.96) translate(3px, -2px) rotate(2deg);
           }
-          65% {
-            transform: rotate(-9deg) translate(-4px, -5px);
+          60% {
+            transform: scale(1.04) translate(-2px, 2px) rotate(-1.5deg);
           }
-          85% {
-            transform: rotate(-2deg) translate(-1px, -1px);
+          80% {
+            transform: scale(0.98) translate(1px, -1px) rotate(0.5deg);
+          }
+          100% {
+            transform: scale(1) translate(0, 0) rotate(0deg);
           }
         }
       `}</style>
