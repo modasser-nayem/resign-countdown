@@ -4,7 +4,7 @@
 class SoundController {
   private ctx: AudioContext | null = null;
 
-  private getContext(): AudioContext | null {
+  private getContext = (): AudioContext | null => {
     if (typeof window === 'undefined') return null;
     if (!this.ctx) {
       const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
@@ -16,10 +16,10 @@ class SoundController {
       this.ctx.resume();
     }
     return this.ctx;
-  }
+  };
 
   // Freedom Airhorn / Fanfare
-  playFanfare() {
+  playFanfare = () => {
     const ctx = this.getContext();
     if (!ctx) return;
     const now = ctx.currentTime;
@@ -40,10 +40,10 @@ class SoundController {
       osc.start(now + idx * 0.08);
       osc.stop(now + idx * 0.08 + 0.6);
     });
-  }
+  };
 
   // Dramatic Buzzer / Siren
-  playSiren() {
+  playSiren = () => {
     const ctx = this.getContext();
     if (!ctx) return;
     const now = ctx.currentTime;
@@ -64,10 +64,10 @@ class SoundController {
 
     osc.start(now);
     osc.stop(now + 1.0);
-  }
+  };
 
   // Sad Violin Chime
-  playSadViolin() {
+  playSadViolin = () => {
     const ctx = this.getContext();
     if (!ctx) return;
     const now = ctx.currentTime;
@@ -88,10 +88,10 @@ class SoundController {
       osc.start(now + idx * 0.35);
       osc.stop(now + idx * 0.35 + 0.7);
     });
-  }
+  };
 
   // Cash Register / Ka-Ching (Salary / Freedom Bonus)
-  playKaChing() {
+  playKaChing = () => {
     const ctx = this.getContext();
     if (!ctx) return;
     const now = ctx.currentTime;
@@ -116,10 +116,10 @@ class SoundController {
     osc1.stop(now + 0.6);
     osc2.start(now + 0.08);
     osc2.stop(now + 0.6);
-  }
+  };
 
   // Chai Toast / Cheer Pop
-  playPop() {
+  playPop = () => {
     const ctx = this.getContext();
     if (!ctx) return;
     const now = ctx.currentTime;
@@ -138,10 +138,10 @@ class SoundController {
 
     osc.start(now);
     osc.stop(now + 0.15);
-  }
+  };
 
   // Trash Plop / Thud
-  playTrashDrop() {
+  playTrashDrop = () => {
     const ctx = this.getContext();
     if (!ctx) return;
     const now = ctx.currentTime;
@@ -156,10 +156,10 @@ class SoundController {
     gain.connect(ctx.destination);
     osc.start(now);
     osc.stop(now + 0.2);
-  }
+  };
 
   // Karate Kick / Whack
-  playKick() {
+  playKick = () => {
     const ctx = this.getContext();
     if (!ctx) return;
     const now = ctx.currentTime;
@@ -174,10 +174,10 @@ class SoundController {
     gain.connect(ctx.destination);
     osc.start(now);
     osc.stop(now + 0.16);
-  }
+  };
 
   // Cannon Blast / Boom
-  playCannon() {
+  playCannon = () => {
     const ctx = this.getContext();
     if (!ctx) return;
     const now = ctx.currentTime;
@@ -192,7 +192,7 @@ class SoundController {
     gain.connect(ctx.destination);
     osc.start(now);
     osc.stop(now + 0.32);
-  }
+  };
 }
 
 export const soundEffects = new SoundController();

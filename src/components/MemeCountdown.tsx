@@ -233,7 +233,6 @@ export default function MemeCountdown() {
               alt="Ali Modasser Nayem"
               fill
               sizes="(max-width: 640px) 144px, 176px"
-              quality={95}
               className="object-cover"
               priority
             />
