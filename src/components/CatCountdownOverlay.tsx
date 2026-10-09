@@ -100,10 +100,10 @@ function BiltuCatSvg({
 }
 
 // Dedicated Vector SVG Ninja Cat (লাথি মারু)
-// Features an unmistakable extended karate leg with white cat paw, pink toe beans, claws, and motion whoosh!
+// Real martial arts leg kick motion: Torso recoils, leg violently whips forward with paw & claws!
 function NinjaCatSvg({ isKicking }: { isKicking: boolean }) {
   return (
-    <svg viewBox="-40 0 165 125" className="w-full h-full drop-shadow-2xl overflow-visible">
+    <svg viewBox="-45 0 170 125" className="w-full h-full drop-shadow-2xl overflow-visible">
       {/* Fluttering Headband Ribbon */}
       <path
         d="M20 40 Q8 32 4 45 Q12 48 22 46"
@@ -119,43 +119,45 @@ function NinjaCatSvg({ isKicking }: { isKicking: boolean }) {
         strokeWidth="1.5"
       />
 
-      {/* Body & Karate Belt */}
-      <ellipse cx="60" cy="85" rx="30" ry="26" fill="#fef3c7" stroke="#d97706" strokeWidth="3" />
-      <ellipse cx="60" cy="88" rx="18" ry="16" fill="#ffffff" />
-      {/* Black Martial Arts Belt */}
-      <rect x="34" y="80" width="52" height="8" rx="2" fill="#0f172a" />
-      <path d="M56 88 L52 104 M62 88 L64 104" stroke="#0f172a" strokeWidth="4" strokeLinecap="round" />
+      {/* Body & Karate Belt - Recoils back when kicking */}
+      <g className={isKicking ? "animate-[karateTorsoRecoil_0.45s_ease-out]" : ""}>
+        <ellipse cx="60" cy="85" rx="30" ry="26" fill="#fef3c7" stroke="#d97706" strokeWidth="3" />
+        <ellipse cx="60" cy="88" rx="18" ry="16" fill="#ffffff" />
+        {/* Black Martial Arts Belt */}
+        <rect x="34" y="80" width="52" height="8" rx="2" fill="#0f172a" />
+        <path d="M56 88 L52 104 M62 88 L64 104" stroke="#0f172a" strokeWidth="4" strokeLinecap="round" />
+      </g>
 
-      {/* Karate Kick Extended Leg or Fighting Stance */}
+      {/* Karate Kick Dynamic Leg or Standing Stance */}
       {isKicking ? (
-        // Super clear, unmistakable Karate Kick with Cat Paw, Pink Toe Beans, Claws, and Motion Whoosh!
-        <g>
+        // Dynamic Karate Whip-Thrust Leg: Starts folded at hip, WHIPS out violently, striking with foot!
+        <g className="animate-[karateLegWhip_0.45s_cubic-bezier(0.1,0.9,0.2,1)_forwards]">
           {/* Whoosh / Wind Motion Arcs */}
-          <path d="M35 98 Q0 90 -25 78" fill="none" stroke="#38bdf8" strokeWidth="3" strokeLinecap="round" opacity="0.8" />
-          <path d="M40 106 Q10 98 -18 88" fill="none" stroke="#f1f5f9" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="4 4" opacity="0.9" />
+          <path d="M35 98 Q0 90 -28 75" fill="none" stroke="#38bdf8" strokeWidth="3.5" strokeLinecap="round" opacity="0.9" />
+          <path d="M40 106 Q10 98 -20 85" fill="none" stroke="#f1f5f9" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="4 4" opacity="0.9" />
 
           {/* Extended Leg (Orange fur) */}
-          <path d="M45 88 Q15 76 -10 65" stroke="#f59e0b" strokeWidth="15" strokeLinecap="round" />
-          <path d="M45 88 Q15 76 -10 65" fill="none" stroke="#d97706" strokeWidth="2" />
+          <path d="M45 88 Q15 76 -10 65" stroke="#f59e0b" strokeWidth="16" strokeLinecap="round" />
+          <path d="M45 88 Q15 76 -10 65" fill="none" stroke="#d97706" strokeWidth="2.5" />
 
           {/* Black Ninja Ankle Wrap */}
-          <rect x="-14" y="55" width="8" height="18" rx="2" fill="#0f172a" stroke="#dc2626" strokeWidth="1" transform="rotate(22 -10 64)" />
+          <rect x="-14" y="55" width="9" height="19" rx="2" fill="#0f172a" stroke="#dc2626" strokeWidth="1.2" transform="rotate(22 -10 64)" />
 
           {/* Main White Cat Foot / Paw */}
-          <ellipse cx="-22" cy="65" rx="14" ry="11" fill="#ffffff" stroke="#d97706" strokeWidth="2.5" transform="rotate(-15 -22 65)" />
+          <ellipse cx="-24" cy="65" rx="15" ry="12" fill="#ffffff" stroke="#d97706" strokeWidth="2.5" transform="rotate(-15 -24 65)" />
 
-          {/* 4 Pink Paw Toe Beans (Clearly indicates a cat's foot!) */}
-          <circle cx="-30" cy="58" r="3.2" fill="#f472b6" stroke="#db2777" strokeWidth="0.8" />
-          <circle cx="-29" cy="68" r="3.2" fill="#f472b6" stroke="#db2777" strokeWidth="0.8" />
-          <circle cx="-22" cy="74" r="3" fill="#f472b6" stroke="#db2777" strokeWidth="0.8" />
-          <circle cx="-15" cy="74" r="2.8" fill="#f472b6" stroke="#db2777" strokeWidth="0.8" />
-          {/* Central large main pad */}
-          <ellipse cx="-20" cy="64" rx="5" ry="4" fill="#f472b6" opacity="0.9" />
+          {/* 4 Pink Paw Toe Beans (Unmistakable cat paw pads!) */}
+          <circle cx="-33" cy="57" r="3.5" fill="#f472b6" stroke="#db2777" strokeWidth="1" />
+          <circle cx="-32" cy="68" r="3.5" fill="#f472b6" stroke="#db2777" strokeWidth="1" />
+          <circle cx="-24" cy="74" r="3.2" fill="#f472b6" stroke="#db2777" strokeWidth="1" />
+          <circle cx="-16" cy="74" r="3" fill="#f472b6" stroke="#db2777" strokeWidth="1" />
+          {/* Central large pad */}
+          <ellipse cx="-22" cy="64" rx="5.5" ry="4.5" fill="#f472b6" opacity="0.9" />
 
           {/* Sharp White Claws protruding on kick impact! */}
-          <path d="M-33 56 L-39 53" stroke="#f8fafc" strokeWidth="2.5" strokeLinecap="round" />
-          <path d="M-33 67 L-39 68" stroke="#f8fafc" strokeWidth="2.5" strokeLinecap="round" />
-          <path d="M-24 76 L-27 82" stroke="#f8fafc" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M-36 55 L-43 52" stroke="#f8fafc" strokeWidth="3" strokeLinecap="round" />
+          <path d="M-36 67 L-43 68" stroke="#f8fafc" strokeWidth="3" strokeLinecap="round" />
+          <path d="M-26 77 L-29 84" stroke="#f8fafc" strokeWidth="3" strokeLinecap="round" />
 
           {/* Ground supporting foot */}
           <ellipse cx="66" cy="104" rx="9" ry="7" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
@@ -224,12 +226,12 @@ function MetallicDustbin({ binCount }: { binCount: number }) {
   );
 }
 
-// 4 distinct trajectory directions for the kicked seconds with smooth, well-paced 1.3s flights
+// 4 distinct trajectory directions for the kicked seconds (1.0s fast, crisp flight)
 const KICK_ANIMATIONS = [
-  "animate-[kickedFlyFarTopLeft_1.3s_cubic-bezier(0.16,0.8,0.25,1)_forwards]",
-  "animate-[kickedFlyFarStraightLeft_1.3s_cubic-bezier(0.16,0.8,0.25,1)_forwards]",
-  "animate-[kickedFlyFarHighSky_1.3s_cubic-bezier(0.16,0.8,0.25,1)_forwards]",
-  "animate-[kickedFlyFarTopRight_1.3s_cubic-bezier(0.16,0.8,0.25,1)_forwards]",
+  "animate-[kickedFlyFarTopLeft_1s_cubic-bezier(0.15,0.85,0.25,1)_forwards]",
+  "animate-[kickedFlyFarStraightLeft_1s_cubic-bezier(0.15,0.85,0.25,1)_forwards]",
+  "animate-[kickedFlyFarHighSky_1s_cubic-bezier(0.15,0.85,0.25,1)_forwards]",
+  "animate-[kickedFlyFarTopRight_1s_cubic-bezier(0.15,0.85,0.25,1)_forwards]",
 ];
 
 const COMIC_WORDS = ["💥 POW!", "💥 HII-YAH!", "💥 WHAM!", "💥 KICK!"];
@@ -246,20 +248,20 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
   const [ninjaKickNum, setNinjaKickNum] = useState<number | null>(null);
   const [kickDirIndex, setKickDirIndex] = useState<number>(0);
 
-  // 20-Second Well-Paced Grand Roam:
-  // Smooth pace: Climbs UP (0s-3.8s) -> Strolls top (3.8s-7.5s) -> Descends (7.5s-10.2s) ->
-  // Holds dustbin below and pours waste steadily (10.2s-15.5s) -> Waddles back (15.5s-20s)
-  const start20SecRoamAndDump = () => {
+  // 12.5-Second Snappy Grand Roam:
+  // Walks UP (0s-2.8s) -> Strolls top (2.8s-5.5s) -> Descends (5.5s-7.5s) ->
+  // Snappy Dumping (7.5s-10.1s: 2.6s total!) -> Waddles back home (10.1s-12.5s)
+  const startSnappyRoamAndDump = () => {
     if (isRoaming) return;
     setIsRoaming(true);
     setPhase("walking");
 
-    // Phase 1: Walks UP along right edge, crosses top, comes DOWN to lower-left (0s - 10.2s)
+    // Phase 1: Walks UP, crosses top, comes DOWN to lower-left (0s - 7.5s)
     setTimeout(() => {
-      // Phase 2: At lower-left, holds dustbin BELOW him and dumps steadily from mouth downwards! (10.2s - 15.5s)
+      // Phase 2: Holds dustbin BELOW him and dumps quickly (7.5s - 10.1s: only 2.6s!)
       setPhase("dumping");
       soundEffects.playCannon();
-      // 5 collected seconds pour out of the dustbin mouth one by one with 450ms gap
+      // 5 collected seconds pour out rapidly with 180ms gap
       setErasingNumbers([
         (seconds + 19) % 60,
         (seconds + 14) % 60,
@@ -267,20 +269,20 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
         (seconds + 4) % 60,
         seconds,
       ]);
-    }, 10200);
+    }, 7500);
 
-    // Phase 3: Empty bin upright on head, waddles along bottom border back home (15.5s - 20s)
+    // Phase 3: Empty bin upright on head, waddles back home (10.1s - 12.5s)
     setTimeout(() => {
       setPhase("returning");
       setBinCount(0);
-    }, 15500);
+    }, 10100);
 
-    // Phase 4: Back at desk (20s)
+    // Phase 4: Back at desk (12.5s)
     setTimeout(() => {
       setIsRoaming(false);
       setPhase("idle");
       setErasingNumbers([]);
-    }, 20000);
+    }, 12500);
   };
 
   useEffect(() => {
@@ -289,26 +291,26 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
     prevSecRef.current = seconds;
     setActiveNum(oldSec);
 
-    // Collect for 20 seconds, then roam & dump!
+    // Collect for 20 seconds, then snappy roam & dump!
     if (seconds % 20 === 0 && !isRoaming) {
-      start20SecRoamAndDump();
+      startSnappyRoamAndDump();
       return;
     }
 
     // While Biltu is on his roaming journey:
-    // Ninja Cat kicks incoming seconds with a clear, comfortable 1.1s stance
+    // Ninja Cat KICKS with a clear 450ms leg thrust! Then leg retracts so user clearly sees the leg kick and move!
     if (isRoaming) {
       setNinjaKickNum(oldSec);
       setKickDirIndex((prev) => (prev + 1) % 4);
       soundEffects.playKick();
       const kickTimer = setTimeout(() => {
         setNinjaKickNum(null);
-      }, 1100);
+      }, 450); // 450ms kick duration! Leg shoots forward and snaps back so user clearly sees leg moving!
       return () => clearTimeout(kickTimer);
     }
 
     // Every 3 seconds (seconds % 3 === 0)
-    // Biltu pulls the second smoothly from top down into the dustbin with a comfortable 1.2s pace
+    // Biltu pulls the second from top down into the dustbin
     if (seconds % 3 === 0 && !isRoaming) {
       setPhase("grabbing");
       soundEffects.playTrashDrop();
@@ -316,7 +318,7 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
 
       const grabTimer = setTimeout(() => {
         setPhase("idle");
-      }, 1200);
+      }, 1000);
       return () => clearTimeout(grabTimer);
     }
   }, [seconds, isRoaming]);
@@ -329,7 +331,7 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
       {/* ========================================================================= */}
       {!isRoaming && (
         <div
-          onClick={start20SecRoamAndDump}
+          onClick={startSnappyRoamAndDump}
           className="absolute -bottom-7 sm:-bottom-8 right-0 sm:right-2 flex items-end gap-2.5 pointer-events-auto cursor-pointer group select-none transition-transform duration-300 hover:scale-105"
           title="বিল্টুতে ক্লিক করলেই উপরে গিয়ে ঘুরে নিচে এসে ডাস্টবিনের মুখ দিয়ে ময়লা ফেলবে!"
         >
@@ -354,12 +356,12 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
       )}
 
       {/* ========================================================================= */}
-      {/* 🫲 [NUM] 🫱 TWO HANDS PULLING THE NUMBER DOWN FROM TOP INTO DUSTBIN (1.2s) */}
+      {/* 🫲 [NUM] 🫱 TWO HANDS PULLING THE NUMBER DOWN FROM TOP INTO DUSTBIN */}
       {/* ========================================================================= */}
       {!isRoaming && phase === "grabbing" && (
         <div
           key={`grab-${activeNum}-${seconds}`}
-          className="absolute right-8 sm:right-14 bottom-22 sm:bottom-26 animate-[pullDownFromTopIntoDustbin_1.2s_cubic-bezier(0.2,0.8,0.2,1)_forwards] z-30 pointer-events-none"
+          className="absolute right-8 sm:right-14 bottom-22 sm:bottom-26 animate-[pullDownFromTopIntoDustbin_1s_cubic-bezier(0.2,0.8,0.2,1)_forwards] z-30 pointer-events-none"
         >
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 text-slate-950 font-black font-mono text-sm sm:text-base shadow-2xl border-2 border-white">
             <span className="text-base sm:text-lg animate-pulse">🫲</span>
@@ -370,8 +372,8 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
       )}
 
       {/* ========================================================================= */}
-      {/* 🚶‍♂️🐱 20-SECOND WELL-PACED GRAND ROAMING: */}
-      {/* GOES UPWARDS -> CIRCLES TOP -> COMES DOWNWARDS -> DUSTBIN BELOW CAT -> DUMPS FROM MOUTH! */}
+      {/* 🚶‍♂️🐱 12.5-SECOND SNAPPY GRAND ROAMING: */}
+      {/* GOES UPWARDS -> CIRCLES TOP -> COMES DOWNWARDS -> DUSTBIN BELOW CAT -> FAST DUMP (2.6s)! */}
       {/* ========================================================================= */}
       {isRoaming && (
         <div className="absolute inset-0">
@@ -396,13 +398,13 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
                     <MetallicDustbin binCount={0} />
                   </div>
 
-                  {/* 3. Borjo (waste numbers) pouring DOWNWARDS steadily from the mouth (4.5s dissolve)! */}
+                  {/* 3. Borjo pouring DOWNWARDS briskly from the mouth (2.2s quick dissolve)! */}
                   <div className="absolute top-16 left-1/2 -translate-x-1/2 w-48 flex items-center justify-center pointer-events-none z-50">
                     {erasingNumbers.map((num, i) => (
                       <div
                         key={i}
-                        className="absolute top-0 px-3 py-1 rounded-xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 text-slate-950 font-black font-mono text-xs sm:text-sm shadow-2xl border-2 border-white whitespace-nowrap opacity-0 animate-[pourDownAndSlowErase_4.5s_cubic-bezier(0.2,0.8,0.25,1)_forwards]"
-                        style={{ animationDelay: `${i * 450}ms` }}
+                        className="absolute top-0 px-3 py-1 rounded-xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 text-slate-950 font-black font-mono text-xs sm:text-sm shadow-2xl border-2 border-white whitespace-nowrap opacity-0 animate-[pourDownAndSlowErase_2.2s_cubic-bezier(0.2,0.8,0.2,1)_forwards]"
+                        style={{ animationDelay: `${i * 180}ms` }}
                       >
                         {String(num).padStart(2, "0")}s 💨
                       </div>
@@ -433,7 +435,7 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
       )}
 
       {/* ========================================================================= */}
-      {/* 🥷 NINJA CAT (লাথি মারু): WELL-PACED KICKING IN DIFFERENT DIRECTIONS */}
+      {/* 🥷 NINJA CAT (লাথি মারু): DYNAMIC LEG KICK WITH REAL PUNCH & RETRACTION */}
       {/* ========================================================================= */}
       {isRoaming && (
         <div className="absolute -bottom-7 sm:-bottom-8 right-2 sm:right-6 flex flex-col items-center z-30 select-none">
@@ -442,13 +444,13 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
 
             {/* Comic Impact Burst right at foot impact point */}
             {ninjaKickNum !== null && (
-              <div className="absolute top-2 -left-10 text-xs sm:text-sm font-black text-amber-300 animate-ping z-40 whitespace-nowrap drop-shadow-md">
+              <div className="absolute top-1 -left-12 text-xs sm:text-sm font-black text-amber-300 animate-ping z-40 whitespace-nowrap drop-shadow-md">
                 {COMIC_WORDS[kickDirIndex % COMIC_WORDS.length]}
               </div>
             )}
           </div>
 
-          {/* Kicked Number Badge: FLIES IN DIFFERENT DIRECTIONS AT A CLEAR 1.3s PACE */}
+          {/* Kicked Number Badge: FLIES IN DIFFERENT DIRECTIONS AT A CRISP 1s PACE */}
           {ninjaKickNum !== null && (
             <div
               key={`ninja-kick-${ninjaKickNum}-${seconds}-${kickDirIndex}`}
@@ -474,7 +476,7 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
       {/* CSS KEYFRAMES */}
       {/* ========================================================================= */}
       <style jsx>{`
-        /* 1.2-second smooth pull down from top (SECS number) down into the Dustbin */
+        /* 1-second pull down from top (SECS number) down into the Dustbin */
         @keyframes pullDownFromTopIntoDustbin {
           0% {
             opacity: 1;
@@ -498,48 +500,48 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
           }
         }
 
-        /* Responsive roaming animation container (20 seconds smooth pace) */
+        /* Responsive roaming animation container (12.5 seconds total) */
         .roam-container {
-          animation: catRoamUpAcrossDownAndDump 20s ease-in-out forwards;
+          animation: catRoamUpAcrossDownAndDump 12.5s ease-in-out forwards;
         }
 
-        /* 20-second comfortably paced roaming:
-           Upwards (0-3.8s) -> Top stroll (3.8-7.4s) -> Descend (7.4-10.2s) ->
-           Steady Dumping (10.2-15.5s) -> Return stroll (15.5-20s) */
+        /* 12.5-second brisk and snappy roaming:
+           Upwards (0-2.8s) -> Top stroll (2.8-5.5s) -> Descend (5.5-7.5s) ->
+           Snappy Dumping (7.5-10.1s: 2.6s total!) -> Return stroll (10.1-12.5s) */
         @keyframes catRoamUpAcrossDownAndDump {
           0% {
             /* Start: Bottom-Right desk */
             transform: translate(0, 0) scale(1);
           }
-          19% {
+          22% {
             /* UPWARDS along right edge to Top-Right */
             transform: translate(0, -185px) scale(1.05);
           }
-          28% {
+          34% {
             /* Roams across top edge to Top-Center */
             transform: translate(-200px, -200px) scale(1.1);
           }
-          37% {
+          46% {
             /* Roams across top edge to Top-Left */
             transform: translate(-380px, -185px) scale(1.1);
           }
-          51% {
+          60% {
             /* Comes DOWNWARDS to Lower-Left */
             transform: translate(-380px, -35px) scale(1.2);
           }
-          52% {
+          61% {
             /* DUMPING: Tilted dustbin held BELOW cat, mouth facing DOWN */
             transform: translate(-380px, -35px) scale(1.25);
           }
-          77% {
+          80% {
             /* Finishes dumping waste */
             transform: translate(-380px, -35px) scale(1.25);
           }
-          78% {
+          81% {
             /* Empty dustbin placed back upright on head */
             transform: translate(-380px, -30px) scale(1.15);
           }
-          90% {
+          91% {
             /* Waddles along bottom edge back towards desk */
             transform: translate(-160px, 0px) scale(1.05);
           }
@@ -549,34 +551,34 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
           }
         }
 
-        /* Mobile adaptation for narrower screens (20s) */
+        /* Mobile adaptation for narrower screens (12.5s) */
         @media (max-width: 639px) {
           @keyframes catRoamUpAcrossDownAndDump {
             0% {
               transform: translate(0, 0) scale(0.95);
             }
-            19% {
+            22% {
               transform: translate(0, -165px) scale(1);
             }
-            28% {
+            34% {
               transform: translate(-120px, -175px) scale(1.05);
             }
-            37% {
+            46% {
               transform: translate(-240px, -165px) scale(1.05);
             }
-            51% {
+            60% {
               transform: translate(-240px, -25px) scale(1.1);
             }
-            52% {
+            61% {
               transform: translate(-240px, -25px) scale(1.15);
             }
-            77% {
+            80% {
               transform: translate(-240px, -25px) scale(1.15);
             }
-            78% {
+            81% {
               transform: translate(-240px, -20px) scale(1.05);
             }
-            90% {
+            91% {
               transform: translate(-100px, 0px) scale(1);
             }
             100% {
@@ -585,11 +587,11 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
           }
         }
 
-        /* Numbers pouring DOWNWARDS directly out of dustbin mouth towards the floor and slowly erasing (4.5s) */
+        /* Numbers pouring DOWNWARDS quickly directly out of dustbin mouth (2.2s snappy dissolve) */
         @keyframes pourDownAndSlowErase {
           0% {
             opacity: 0;
-            transform: translate(0, 0) scale(0.7) rotate(0deg);
+            transform: translate(0, 0) scale(0.6) rotate(0deg);
             filter: blur(0px);
           }
           10% {
@@ -602,30 +604,66 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
             transform: translate(-10px, 60px) scale(0.95) rotate(35deg);
             filter: blur(0px);
           }
-          60% {
-            opacity: 0.75;
-            transform: translate(-18px, 120px) scale(0.8) rotate(75deg);
-            filter: blur(1px);
+          65% {
+            opacity: 0.65;
+            transform: translate(-18px, 120px) scale(0.75) rotate(75deg);
+            filter: blur(1.5px);
           }
-          80% {
-            opacity: 0.45;
-            transform: translate(-24px, 180px) scale(0.6) rotate(120deg);
-            filter: blur(3px);
-          }
-          92% {
-            opacity: 0.2;
-            transform: translate(-28px, 230px) scale(0.35) rotate(165deg);
-            filter: blur(5px);
+          85% {
+            opacity: 0.3;
+            transform: translate(-24px, 170px) scale(0.5) rotate(120deg);
+            filter: blur(4px);
           }
           100% {
             opacity: 0;
-            transform: translate(-30px, 270px) scale(0.1) rotate(200deg);
-            filter: blur(8px);
+            transform: translate(-28px, 210px) scale(0.2) rotate(160deg);
+            filter: blur(7px);
           }
         }
 
         /* ========================================================================= */
-        /* MULTIPLE DISTINCT TRAJECTORIES FOR KICKED SECONDS (1.3s CLEAR PACE) */
+        /* DYNAMIC MARTIAL ARTS KICK ANIMATION: LEG THRUSTS FORWARD & RECOILS */
+        /* ========================================================================= */
+
+        @keyframes karateLegWhip {
+          0% {
+            transform: translate(25px, 15px) scale(0.3) rotate(35deg);
+            opacity: 0.4;
+          }
+          35% {
+            /* Powerful snap extension! */
+            transform: translate(-10px, -4px) scale(1.2) rotate(-10deg);
+            opacity: 1;
+          }
+          65% {
+            /* Holds extension on strike */
+            transform: translate(-5px, -2px) scale(1.1) rotate(-6deg);
+            opacity: 1;
+          }
+          100% {
+            /* Pulls back */
+            transform: translate(15px, 10px) scale(0.6) rotate(20deg);
+            opacity: 0.7;
+          }
+        }
+
+        @keyframes karateTorsoRecoil {
+          0% {
+            transform: rotate(0deg);
+          }
+          30% {
+            transform: rotate(8deg) translate(3px, 2px);
+          }
+          70% {
+            transform: rotate(4deg) translate(2px, 1px);
+          }
+          100% {
+            transform: rotate(0deg);
+          }
+        }
+
+        /* ========================================================================= */
+        /* MULTIPLE DISTINCT TRAJECTORIES FOR KICKED SECONDS (1.0s FAST PACE) */
         /* ========================================================================= */
 
         /* Direction 1: High Top-Left Arc */
