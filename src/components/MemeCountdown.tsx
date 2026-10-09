@@ -144,24 +144,28 @@ export default function MemeCountdown() {
 
       {/* Developer Profile Header */}
       <div className="flex flex-col items-center mb-6">
-        <div className="relative mb-3 group cursor-pointer" onClick={() => setMemeGlasses(!memeGlasses)}>
-          <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden ring-4 ring-amber-500/50 shadow-2xl bg-slate-800 relative transition-transform duration-300 group-hover:scale-105">
+        <div
+          className="relative mb-3 group cursor-pointer"
+          onClick={() => {
+            soundEffects.playPop();
+            setMemeGlasses(!memeGlasses);
+          }}
+        >
+          <div className="w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden ring-4 ring-amber-500/60 shadow-2xl shadow-amber-500/20 bg-slate-800 relative transition-transform duration-300 group-hover:scale-105">
             <Image
-              src="/profile-5.1.jpg"
+              src={memeGlasses ? "/profile-meme.jpg" : "/profile-headshot.jpg"}
               alt="Ali Modasser Nayem"
               fill
+              sizes="(max-width: 640px) 144px, 176px"
+              quality={95}
               className="object-cover"
               priority
             />
-            {memeGlasses && (
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none drop-shadow-lg">
-                <span className="text-4xl filter drop-shadow">🕶️</span>
-              </div>
-            )}
           </div>
 
-          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-slate-900 border border-amber-500/40 text-[10px] text-amber-300 font-bold px-2 py-0.5 rounded-full whitespace-nowrap shadow-md">
-            {memeGlasses ? "Meme Mode 😎" : "Click for Thug Life 🕶️"}
+          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-slate-900 border border-amber-500/50 text-[11px] text-amber-300 font-bold px-3 py-0.5 rounded-full whitespace-nowrap shadow-md flex items-center gap-1.5 cursor-pointer hover:bg-slate-800 transition-colors">
+            <span>{memeGlasses ? "🕶️ Thug Life Mode" : "👔 Clean Mode"}</span>
+            <span className="text-[9px] text-slate-400">(Click to toggle)</span>
           </div>
         </div>
 
