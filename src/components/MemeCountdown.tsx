@@ -19,6 +19,82 @@ import {
 import { soundEffects } from "@/lib/audio";
 import CatCountdownOverlay from "./CatCountdownOverlay";
 
+// 🐱 Prying Cartoon Cat (পিন্টু ⛏️) trying to tear/pry the minute digits off the card!
+function PryingCatSvg() {
+  return (
+    <svg viewBox="0 0 100 110" className="w-full h-full drop-shadow-xl overflow-visible">
+      {/* Wagging/Straining Tail */}
+      <path
+        d="M78 85 Q95 75 90 60 Q85 50 78 58"
+        fill="none"
+        stroke="#f59e0b"
+        strokeWidth="6"
+        strokeLinecap="round"
+        className="animate-pulse"
+      />
+
+      {/* Body leaning backward in heavy strain */}
+      <ellipse cx="50" cy="72" rx="26" ry="22" fill="#fef3c7" stroke="#d97706" strokeWidth="2.5" />
+      <ellipse cx="48" cy="74" rx="16" ry="14" fill="#ffffff" />
+
+      {/* Construction Belt with mini tools */}
+      <rect x="26" y="70" width="46" height="6" rx="2" fill="#78350f" />
+      <rect x="44" y="69" width="8" height="8" rx="1" fill="#f59e0b" />
+
+      {/* Braced Back Foot */}
+      <ellipse cx="68" cy="92" rx="9" ry="6" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+      {/* Front Foot braced against card */}
+      <ellipse cx="34" cy="92" rx="9" ry="6" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+
+      {/* Head */}
+      <circle cx="45" cy="38" r="22" fill="#fef3c7" stroke="#d97706" strokeWidth="2.5" />
+
+      {/* Cat Ears */}
+      <polygon points="26,24 30,8 40,20" fill="#f59e0b" stroke="#d97706" strokeWidth="1.5" />
+      <polygon points="62,24 58,8 48,20" fill="#f59e0b" stroke="#d97706" strokeWidth="1.5" />
+
+      {/* Yellow Safety Hardhat / Construction Helmet */}
+      <ellipse cx="45" cy="22" rx="18" ry="10" fill="#eab308" stroke="#ca8a04" strokeWidth="2" />
+      <rect x="25" y="24" width="40" height="4" rx="2" fill="#ca8a04" />
+      <circle cx="45" cy="18" r="3" fill="#ffffff" />
+
+      {/* Strained Face: Scrunched Eyes > < */}
+      <path d="M33 36 L39 40 L33 44" stroke="#0f172a" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M57 36 L51 40 L57 44" stroke="#0f172a" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+
+      {/* Gritted Clenched Teeth in determination */}
+      <rect x="39" y="47" width="12" height="6" rx="1.5" fill="#ffffff" stroke="#78350f" strokeWidth="1.2" />
+      <line x1="45" y1="47" x2="45" y2="53" stroke="#78350f" strokeWidth="1" />
+      <line x1="42" y1="50" x2="48" y2="50" stroke="#78350f" strokeWidth="0.8" />
+
+      {/* Whiskers */}
+      <line x1="26" y1="44" x2="16" y2="42" stroke="#b45309" strokeWidth="1.2" />
+      <line x1="26" y1="48" x2="16" y2="50" stroke="#b45309" strokeWidth="1.2" />
+
+      {/* Animated Popping Sweat Drops */}
+      <g className="animate-bounce">
+        <path d="M22 28 Q18 22 22 18 Q26 22 22 28" fill="#38bdf8" />
+        <circle cx="16" cy="34" r="2" fill="#38bdf8" />
+      </g>
+
+      {/* Red Heavy-Duty Crowbar wedged under the digit */}
+      <path
+        d="M2 68 L18 56 L38 68"
+        stroke="#ef4444"
+        strokeWidth="5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* Prying Chisel Tip wedged right under the minute digit */}
+      <path d="M-2 72 L6 64" stroke="#991b1b" strokeWidth="6" strokeLinecap="round" />
+
+      {/* Paws gripping the crowbar with maximum effort */}
+      <ellipse cx="20" cy="56" rx="5.5" ry="5.5" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+      <ellipse cx="32" cy="65" rx="5.5" ry="5.5" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+    </svg>
+  );
+}
+
 interface TimeLeft {
   days: number;
   hours: number;
@@ -65,6 +141,7 @@ export default function MemeCountdown() {
   const isClient = useSyncExternalStore(subscribe, () => true, () => false);
   const [memeGlasses, setMemeGlasses] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [isPryTug, setIsPryTug] = useState(false);
   const [dialogContent, setDialogContent] = useState<{ title: string; text: string; sound: () => void } | null>(null);
 
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => calculateTimeLeft());
@@ -221,14 +298,52 @@ export default function MemeCountdown() {
             </span>
           </div>
 
-          {/* Mins */}
-          <div className="bg-slate-950/80 rounded-2xl p-4 sm:p-5 border border-slate-800 flex flex-col items-center justify-center min-h-[130px] sm:min-h-[150px] shadow-md">
-            <span className="text-4xl sm:text-6xl font-black font-mono text-cyan-400 tracking-tight my-auto">
-              {String(timeLeft.minutes).padStart(2, "0")}
-            </span>
-            <span className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mt-1">
-              Mins (মিনিট)
-            </span>
+          {/* Mins - Interactive Prying Scene with Pintu the Crowbar Cat */}
+          <div
+            onClick={() => {
+              soundEffects.playTrashDrop();
+              setIsPryTug(true);
+              setTimeout(() => setIsPryTug(false), 700);
+            }}
+            className="bg-slate-950/80 rounded-2xl p-4 sm:p-5 border border-slate-800 flex flex-col items-center justify-center min-h-[130px] sm:min-h-[150px] shadow-md relative overflow-visible cursor-pointer select-none group"
+            title="পিন্টু ক্র্যাম্বার দিয়ে মিনিট খুলে ফেলতে চাচ্ছে! ক্লিক করে জোরে টান দিন!"
+          >
+            {/* Cyan Minute Number with prying strain */}
+            <div className="relative flex items-center justify-center my-auto">
+              {/* Minute digits: Tilts & lifts when pried */}
+              <span
+                className={`text-4xl sm:text-6xl font-black font-mono text-cyan-400 tracking-tight transition-transform duration-300 ${
+                  isPryTug
+                    ? "-rotate-12 -translate-y-2 -translate-x-1"
+                    : "animate-[digitPryShake_3s_ease-in-out_infinite]"
+                }`}
+              >
+                {String(timeLeft.minutes).padStart(2, "0")}
+              </span>
+
+              {/* Loose Bolts rattling on the left edge */}
+              <span className="absolute -top-1 -left-2 text-[10px] animate-pulse opacity-60">🔩</span>
+              <span className="absolute -bottom-1 -left-2 text-[10px] animate-pulse opacity-60">🔩</span>
+
+              {/* Cartoon Cat (পিন্টু ⛏️) wedging crowbar under the right side of the minute */}
+              <div
+                className={`absolute -right-8 sm:-right-10 -bottom-3 sm:-bottom-4 w-16 sm:w-20 h-20 sm:h-24 pointer-events-none transition-transform duration-300 ${
+                  isPryTug ? "scale-115 -translate-x-1" : "animate-[catPryStrain_3s_ease-in-out_infinite]"
+                }`}
+              >
+                <PryingCatSvg />
+              </div>
+            </div>
+
+            {/* Label and Character Badge */}
+            <div className="flex items-center gap-1.5 mt-1">
+              <span className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider">
+                Mins (মিনিট)
+              </span>
+              <span className="text-[8px] font-black text-cyan-300 bg-cyan-950/90 px-1 py-0.2 rounded border border-cyan-500/30">
+                পিন্টু ⛏️
+              </span>
+            </div>
           </div>
 
           {/* Secs */}
@@ -367,6 +482,45 @@ export default function MemeCountdown() {
       <div className="mt-10 text-[11px] text-slate-500">
         Made with ☕ by Ali Modasser Nayem • SM Technology • Exit Code: 0
       </div>
+
+      {/* Keyframe animations for Minute Prying Cat & Shaking Digit */}
+      <style jsx>{`
+        @keyframes catPryStrain {
+          0%, 100% {
+            transform: translate(0, 0) rotate(0deg);
+          }
+          20% {
+            transform: translate(2px, 1px) rotate(2deg);
+          }
+          45% {
+            transform: translate(5px, 3px) rotate(8deg);
+          }
+          65% {
+            transform: translate(7px, 5px) rotate(12deg);
+          }
+          85% {
+            transform: translate(2px, 1px) rotate(3deg);
+          }
+        }
+
+        @keyframes digitPryShake {
+          0%, 100% {
+            transform: rotate(0deg) translate(0, 0);
+          }
+          20% {
+            transform: rotate(-2deg) translate(-1px, -1px);
+          }
+          45% {
+            transform: rotate(-5deg) translate(-2px, -3px);
+          }
+          65% {
+            transform: rotate(-9deg) translate(-4px, -5px);
+          }
+          85% {
+            transform: rotate(-2deg) translate(-1px, -1px);
+          }
+        }
+      `}</style>
     </div>
   );
 }
