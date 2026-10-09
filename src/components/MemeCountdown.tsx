@@ -14,7 +14,6 @@ import {
   AlertTriangle,
   Smile,
   Share2,
-  RotateCcw,
   Sparkles,
 } from "lucide-react";
 import { soundEffects } from "@/lib/audio";
@@ -34,7 +33,7 @@ interface TimeLeft {
 const TARGET_TIMESTAMP = new Date("2026-10-21T17:00:00+06:00").getTime();
 const START_TIMESTAMP = new Date("2026-09-21T09:00:00+06:00").getTime();
 
-function calculateTimeLeft(dragPercent: number, daysTorn: number): TimeLeft {
+function calculateTimeLeft(): TimeLeft {
   if (typeof window === "undefined") {
     return { days: 0, hours: 0, minutes: 0, seconds: 0, milliseconds: 0, isComplete: false, progress: 0 };
   }
@@ -45,24 +44,16 @@ function calculateTimeLeft(dragPercent: number, daysTorn: number): TimeLeft {
     return { days: 0, hours: 0, minutes: 0, seconds: 0, milliseconds: 0, isComplete: true, progress: 100 };
   }
 
-  const reductionFromDrag = rawDiff * (dragPercent / 100);
-  const reductionFromDays = daysTorn * 1000 * 60 * 60 * 24;
-  const diff = Math.max(0, rawDiff - reductionFromDrag - reductionFromDays);
-
-  if (diff <= 0) {
-    return { days: 0, hours: 0, minutes: 0, seconds: 0, milliseconds: 0, isComplete: true, progress: 100 };
-  }
-
   const total = TARGET_TIMESTAMP - START_TIMESTAMP;
-  const elapsed = Math.max(0, now - START_TIMESTAMP + reductionFromDrag + reductionFromDays);
+  const elapsed = Math.max(0, now - START_TIMESTAMP);
   const progress = Math.min(100, Math.round((elapsed / total) * 100));
 
   return {
-    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((diff / 1000 / 60) % 60),
-    seconds: Math.floor((diff / 1000) % 60),
-    milliseconds: Math.floor((diff % 1000) / 10),
+    days: Math.floor(rawDiff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((rawDiff / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((rawDiff / 1000 / 60) % 60),
+    seconds: Math.floor((rawDiff / 1000) % 60),
+    milliseconds: 0,
     isComplete: false,
     progress,
   };
@@ -76,57 +67,14 @@ export default function MemeCountdown() {
   const [copied, setCopied] = useState(false);
   const [dialogContent, setDialogContent] = useState<{ title: string; text: string; sound: () => void } | null>(null);
 
-  // DRAG / PULL TIME STATE (0 to 100 percent of remaining time dragged away!)
-  const [dragPercent, setDragPercent] = useState(0);
-  const [daysTorn, setDaysTorn] = useState(0);
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
-
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => calculateTimeLeft(0, 0));
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => calculateTimeLeft());
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft(dragPercent, daysTorn));
-    }, 50);
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
     return () => clearInterval(timer);
-  }, [dragPercent, daysTorn]);
-
-  const showToast = (msg: string) => {
-    setToastMessage(msg);
-    setTimeout(() => setToastMessage(null), 2500);
-  };
-
-  // Dragging slider handler
-  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = Number(e.target.value);
-    setDragPercent(val);
-    soundEffects.playPop();
-
-    if (val === 100) {
-      soundEffects.playFanfare();
-      confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
-      showToast("🎉 টেনে টেনে ১০০% সময় শেষ করে দিয়েছেন! আপনি এখন মুক্ত!");
-    } else if (val > 75) {
-      showToast("🎒 ল্যাপটপ ব্যাগে ঢুকিয়ে ফেলেছেন! আর একটু টানলেই মুক্তি!");
-    } else if (val > 40) {
-      showToast("🏃💨 অর্ধেক সময় টেনে কমিয়ে দিলেন! বস এখনও টের পায়নি!");
-    }
-  };
-
-  // Tear off 1 day button
-  const handleTearOneDay = () => {
-    soundEffects.playKaChing();
-    setDaysTorn((prev) => prev + 1);
-    confetti({ particleCount: 40, spread: 60, origin: { y: 0.7 } });
-    showToast(`💨 ১টি দিন টেনে ছিঁড়ে ফেললেন! (মোট ${daysTorn + 1} দিন গায়েব)`);
-  };
-
-  // Reset to reality
-  const handleReset = () => {
-    soundEffects.playSiren();
-    setDragPercent(0);
-    setDaysTorn(0);
-    showToast("🚨 বস দেখে ফেলেছে! আবার আসল টাইমে ফিরে এসেছেন!");
-  };
+  }, []);
 
   const triggerConfetti = () => {
     soundEffects.playFanfare();
@@ -189,28 +137,8 @@ export default function MemeCountdown() {
     );
   }
 
-  // Real-time dragged quote
-  let dragQuote = "ডেস্কে বসে কাজের ভান করতেছি... 🥱";
-  if (dragPercent === 100 || timeLeft.isComplete) {
-    dragQuote = "🎉 আলহামদুলিল্লাহ আমি সম্পূর্ণ মুক্ত! টাটা বাই বাই! 🏖️🍹";
-  } else if (dragPercent >= 75) {
-    dragQuote = "🎒 ল্যাপটপ ব্যাগে ভরে দরজার সামনে দাঁড়িয়ে আছি! 🚪🏃";
-  } else if (dragPercent >= 50) {
-    dragQuote = "🤫 অর্ধেক সময় টেনে কমিয়ে দিলাম, বস এখনও টের পায় নাই!";
-  } else if (dragPercent >= 25) {
-    dragQuote = "☕ হ্যান্ডওভার শেষ, এখন শুধু বনশ্রীর টংয়ে আড্ডা!";
-  } else if (dragPercent > 0) {
-    dragQuote = "🖐️ হাত দিয়ে টেনে সময় কমাচ্ছি! মজা পাইছেন?";
-  }
-
   return (
     <div className="w-full max-w-3xl mx-auto px-4 py-6 flex flex-col items-center text-center">
-      {/* Toast Notification */}
-      {toastMessage && (
-        <div className="fixed top-5 z-50 px-4 py-2 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black text-xs shadow-2xl animate-bounce border border-amber-300">
-          {toastMessage}
-        </div>
-      )}
 
       {/* Top Meme Badge */}
       <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs sm:text-sm font-bold mb-4 animate-pulse">
@@ -262,17 +190,17 @@ export default function MemeCountdown() {
       <div className="w-full bg-slate-900/90 border border-amber-500/40 rounded-3xl p-5 sm:p-7 shadow-2xl mb-5 relative overflow-hidden backdrop-blur-md">
         <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
 
-        <div className="text-base sm:text-lg font-extrabold text-amber-300 mb-3 tracking-wide">
+        <div className="text-base sm:text-lg font-extrabold text-amber-300 mb-2 tracking-wide">
           &ldquo;ভাই তুমি আর কয়দিন আছো?&rdquo; ➔ Live Freedom Ticker ⏳
         </div>
 
-        {/* Dynamic Reaction Speech Bubble */}
-        <div className="inline-block bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-2xl mb-4 animate-pulse">
-          {dragQuote}
+        {/* Humorous Status Speech Bubble */}
+        <div className="inline-block bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-2xl mb-5 animate-pulse">
+          ডেস্কে বসে কাজের ভান করতেছি... 🥱
         </div>
 
         {/* Core 4-Card Countdown Grid with Animated Action Seconds Card */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3.5 mb-5">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3.5">
           {/* Days */}
           <div className="bg-slate-950/80 rounded-2xl p-3 sm:p-4 border border-slate-800 flex flex-col items-center justify-between min-h-[140px] sm:min-h-[160px] shadow-md">
             <span className="text-[10px] font-bold text-amber-400/80 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
@@ -317,64 +245,6 @@ export default function MemeCountdown() {
             seconds={timeLeft.seconds}
             minutes={timeLeft.minutes}
           />
-        </div>
-
-        {/* ========================================================= */}
-        {/* 🔥 TENE TENE SOMOY KOMANOR SECTION (THE MAIN FUN FEATURE) */}
-        {/* ========================================================= */}
-        <div className="bg-slate-950/90 rounded-2xl p-4 sm:p-5 border border-amber-500/30 mb-4 text-left">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-            <span className="text-xs sm:text-sm font-extrabold text-amber-300 flex items-center gap-1.5">
-              <span>🖐️ হাত দিয়ে টেনে টেনে সময় কমান (Drag to Freedom):</span>
-            </span>
-            <span className="text-[11px] font-mono text-emerald-400 font-bold">
-              {dragPercent}% টেনে কমিয়ে ফেলা হয়েছে
-            </span>
-          </div>
-
-          <p className="text-[11px] text-slate-400 mb-3">
-            স্লাইডারটি ডানে টেনে নিয়ে যান—দেখবেন ঘড়ির দিন ও ঘণ্টা চোখের সামনে কমে যাচ্ছে!
-          </p>
-
-          {/* Interactive Drag Track */}
-          <div className="relative flex items-center mb-3">
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={dragPercent}
-              onChange={handleSliderChange}
-              className="w-full h-3 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
-            />
-          </div>
-
-          {/* Waypoints under slider */}
-          <div className="flex justify-between text-[10px] sm:text-[11px] text-slate-400 font-mono">
-            <span>💻 অফিস ডেস্ক</span>
-            <span>☕ বনশ্রীর টং</span>
-            <span>🚪 এক্সিট ডোর</span>
-            <span>🏖️ পূর্ণ মুক্তি!</span>
-          </div>
-
-          {/* Extra Buttons: Rip 1 Day / Reset */}
-          <div className="flex flex-wrap items-center justify-between gap-2 mt-4 pt-3 border-t border-slate-800 text-xs">
-            <button
-              onClick={handleTearOneDay}
-              className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold border border-slate-700 transition-all active:scale-95 cursor-pointer flex items-center gap-1.5"
-            >
-              <span>📄 টেনে ১টি দিন ছিঁড়ে ফেলুন (-১ দিন)</span>
-            </button>
-
-            {(dragPercent > 0 || daysTorn > 0) && (
-              <button
-                onClick={handleReset}
-                className="px-3 py-1.5 rounded-xl bg-red-950 hover:bg-red-900 text-red-200 font-bold border border-red-800 transition-all active:scale-95 cursor-pointer flex items-center gap-1"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-                <span>বাস্তবে ফিরুন (Reset)</span>
-              </button>
-            )}
-          </div>
         </div>
       </div>
 
