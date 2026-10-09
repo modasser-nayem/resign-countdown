@@ -17,7 +17,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { soundEffects } from "@/lib/audio";
-import AnimatedSecondCard from "./AnimatedSecondCard";
+import CatCountdownOverlay from "./CatCountdownOverlay";
 
 interface TimeLeft {
   days: number;
@@ -240,12 +240,22 @@ export default function MemeCountdown() {
             </span>
           </div>
 
-          {/* Secs: The Live Animated Meme Stage (Trash 🗑️ / Kick 👟 / Cannon 💣) */}
-          <AnimatedSecondCard
-            seconds={timeLeft.seconds}
-            minutes={timeLeft.minutes}
-          />
+          {/* Secs */}
+          <div className="bg-slate-950/80 rounded-2xl p-3 sm:p-4 border border-slate-800 flex flex-col items-center justify-between min-h-[140px] sm:min-h-[160px] shadow-md relative">
+            <span className="text-[10px] font-bold text-emerald-400/80 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+              ⚡ সেকেন্ড বাকি
+            </span>
+            <span className="text-4xl sm:text-6xl font-black font-mono text-emerald-400 tracking-tight my-auto">
+              {String(timeLeft.seconds).padStart(2, "0")}
+            </span>
+            <span className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider">
+              Secs (সেকেন্ড)
+            </span>
+          </div>
         </div>
+
+        {/* 🐱 LIVING OVERLAY: Big Cat, Dustbin, Ninja Cat & Walking Scene */}
+        <CatCountdownOverlay seconds={timeLeft.seconds} />
       </div>
 
       {/* Instant Colleague Response Buttons (Super Funny) */}
