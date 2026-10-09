@@ -108,38 +108,39 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
   const [erasingNumbers, setErasingNumbers] = useState<number[]>([]);
   const [ninjaKickNum, setNinjaKickNum] = useState<number | null>(null);
 
-  // 10-Second Grand Roam (4 sides) & Center Dump Routine
-  const start10SecRoamAndDump = () => {
+  // 14-Second Grand Roam (Expansive 4-side perimeter) & Center Dump Routine
+  const start14SecRoamAndDump = () => {
     if (isRoaming) return;
     setIsRoaming(true);
     setPhase("walking");
 
-    // Phase 1: Roams around the 4 sides to the center (0s - 6s)
+    // Phase 1: Roams around the 4 sides to the screen center (0s - 7.5s)
     setTimeout(() => {
-      // Phase 2: Arrives at Center Screen, turns bin upside down! (6s - 8s)
+      // Phase 2: Arrives at Exact Screen Center, tips bin upside down! (7.5s - 10.5s)
       setPhase("dumping");
       soundEffects.playCannon();
+      // Numbers that slowly cascade down and gradually erase
       setErasingNumbers([
-        (seconds + 25) % 60,
         (seconds + 18) % 60,
-        (seconds + 11) % 60,
-        (seconds + 4) % 60,
+        (seconds + 13) % 60,
+        (seconds + 8) % 60,
+        (seconds + 3) % 60,
         seconds,
       ]);
-    }, 6000);
+    }, 7500);
 
-    // Phase 3: Empty bin upright on head, waddles back (8s - 10s)
+    // Phase 3: Empty bin upright on head, waddles back along border (10.5s - 14s)
     setTimeout(() => {
       setPhase("returning");
       setBinCount(0);
-      setErasingNumbers([]);
-    }, 8000);
+    }, 10500);
 
-    // Phase 4: Back in place (10s)
+    // Phase 4: Back in place (14s)
     setTimeout(() => {
       setIsRoaming(false);
       setPhase("idle");
-    }, 10000);
+      setErasingNumbers([]);
+    }, 14000);
   };
 
   useEffect(() => {
@@ -148,13 +149,14 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
     prevSecRef.current = seconds;
     setActiveNum(oldSec);
 
-    // EXACT REQUIREMENT: Trigger every 30 seconds (at 30s and at 00s)!
-    if ((seconds === 30 || seconds === 0) && !isRoaming) {
-      start10SecRoamAndDump();
+    // EXACT USER SPECIFICATION: Collect for 20 seconds, then dump!
+    // Trigger every 20 seconds (e.g. at 40s, 20s, 00s)!
+    if (seconds % 20 === 0 && !isRoaming) {
+      start14SecRoamAndDump();
       return;
     }
 
-    // While Biltu is on his 10s journey:
+    // While Biltu is on his 14s roaming journey:
     // Ninja Cat kicks incoming seconds away
     if (isRoaming) {
       setNinjaKickNum(oldSec);
@@ -165,7 +167,7 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
       return () => clearTimeout(kickTimer);
     }
 
-    // EXACT REQUIREMENT: Every 3 seconds (seconds % 3 === 0)
+    // EXACT USER SPECIFICATION: Every 3 seconds (seconds % 3 === 0)
     // Biltu pulls the second from the top down into the dustbin!
     if (seconds % 3 === 0 && !isRoaming) {
       setPhase("grabbing");
@@ -188,9 +190,9 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
       {/* ========================================================================= */}
       {!isRoaming && (
         <div
-          onClick={start10SecRoamAndDump}
+          onClick={start14SecRoamAndDump}
           className="absolute -bottom-7 sm:-bottom-8 right-0 sm:right-2 flex items-end gap-2.5 pointer-events-auto cursor-pointer group select-none transition-transform duration-300 hover:scale-105"
-          title="বিল্টুতে ক্লিক করলেই মাথায় ডাস্টবিন নিয়ে ১০ সেকেন্ডের ওয়াক ও মাঝখানে ডাম্প শুরু হবে!"
+          title="বিল্টুতে ক্লিক করলেই মাথায় ডাস্টবিন নিয়ে ৪ দিকে ঘুরে মাঝখানে ডাম্প শুরু হবে!"
         >
           {/* Metallic Dustbin */}
           <MetallicDustbin binCount={binCount} isTipping={false} />
@@ -230,15 +232,14 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
       )}
 
       {/* ========================================================================= */}
-      {/* 🚶‍♂️🐱 10-SECOND ROAMING AROUND 4 SIDES WITH DUSTBIN ON HEAD */}
-      {/* DUMPS FROM THE CENTER OF THE SCREEN DOWNWARDS WITH SMOOTH ERASING! */}
-      {/* Uses the EXACT SAME SVG Biltu and EXACT SAME Metallic Dustbin on his head! */}
+      {/* 🚶‍♂️🐱 14-SECOND EXPANSIVE 4-SIDED ROAMING WITH DUSTBIN ON HEAD */}
+      {/* DUMPS FROM THE EXACT CENTER OF THE SCREEN DOWNWARDS WITH SLOW GRADUAL ERASING! */}
       {/* ========================================================================= */}
       {isRoaming && (
         <div className="absolute inset-0">
           
           {/* Walking Biltu carrying the Metallic Dustbin on his Head! */}
-          <div className="absolute -bottom-8 right-2 animate-[cat4SidesRoamToCenterDump_10s_ease-in-out_forwards] flex flex-col items-center z-40 select-none">
+          <div className="absolute -bottom-8 right-2 animate-[cat4SidesRoamToCenterDump_14s_ease-in-out_forwards] flex flex-col items-center z-40 select-none">
             {/* Dustbin sitting directly ON TOP of Biltu's head! */}
             <div className={`transition-transform duration-500 origin-bottom ${phase === "dumping" ? "rotate-180 -translate-y-3 scale-110" : ""}`}>
               <MetallicDustbin binCount={binCount} isTipping={phase === "dumping"} />
@@ -254,14 +255,14 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
             </span>
           </div>
 
-          {/* DUMPING FROM SCREEN CENTER DOWNWARDS WITH GRADUAL ERASING! */}
+          {/* DUMPING FROM SCREEN CENTER DOWNWARDS WITH SLOW GRADUAL ERASING! */}
           {phase === "dumping" && (
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 z-50 pointer-events-none">
+            <div className="absolute top-[45%] left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-50 pointer-events-none">
               {erasingNumbers.map((num, i) => (
                 <div
                   key={i}
-                  className="px-3 py-1 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-black font-mono text-sm shadow-2xl border-2 border-white animate-[centerCascadeDownAndErase_2.8s_ease-out_forwards]"
-                  style={{ animationDelay: `${i * 150}ms` }}
+                  className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 text-slate-950 font-black font-mono text-sm sm:text-base shadow-2xl border-2 border-white animate-[centerCascadeDownAndEraseSlow_4.5s_cubic-bezier(0.2,0.8,0.2,1)_forwards]"
+                  style={{ animationDelay: `${i * 220}ms` }}
                 >
                   {String(num).padStart(2, "0")}s 💨
                 </div>
@@ -340,35 +341,39 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
           }
         }
 
-        /* 10-second 4-side perimeter roam reaching Screen Center to dump */
+        /* 14-second expansive 4-side perimeter roam reaching Screen Center to dump */
         @keyframes cat4SidesRoamToCenterDump {
           0% {
             /* Start: Bottom-Right */
             transform: translate(0, 0) scale(1);
           }
           20% {
-            /* Side 1: Walks along bottom edge to Bottom-Left */
-            transform: translate(-320px, 0px) scale(1.05);
+            /* Side 1: Walks thoroughly along bottom border to Bottom-Left */
+            transform: translate(-380px, 12px) scale(1.05);
           }
-          40% {
-            /* Side 2: Walks up the left edge to Top-Left */
-            transform: translate(-350px, -150px) scale(1.1);
+          38% {
+            /* Side 2: Climbs up the entire left border to Top-Left */
+            transform: translate(-420px, -170px) scale(1.1);
           }
-          55% {
-            /* Side 3: Walks along top edge to SCREEN CENTER */
-            transform: translate(-180px, -150px) scale(1.15);
+          52% {
+            /* Side 3: Walks along the top border towards the right */
+            transform: translate(-120px, -170px) scale(1.1);
           }
-          65% {
-            /* At Screen Center: Tips bin upside down to dump */
-            transform: translate(-180px, -145px) scale(1.2);
+          62% {
+            /* Curves down into EXACT SCREEN CENTER */
+            transform: translate(-200px, -80px) scale(1.2);
           }
           75% {
-            /* Empty bin back upright on head */
-            transform: translate(-180px, -150px) scale(1.15);
+            /* At Screen Center: Tips bin upside down to dump */
+            transform: translate(-200px, -75px) scale(1.25);
           }
-          90% {
-            /* Side 4: Walks down right perimeter back towards base */
-            transform: translate(-50px, -40px) scale(1.05);
+          82% {
+            /* Bin back upright on head */
+            transform: translate(-200px, -80px) scale(1.15);
+          }
+          92% {
+            /* Side 4: Waddles along border path back towards base */
+            transform: translate(-70px, -10px) scale(1.05);
           }
           100% {
             /* Back home at Bottom-Right desk */
@@ -376,31 +381,36 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
           }
         }
 
-        /* Center cascade downwards with gradual dissolving/erasing */
-        @keyframes centerCascadeDownAndErase {
+        /* Slow, graceful, gradual downward tumbling and slow erasing */
+        @keyframes centerCascadeDownAndEraseSlow {
           0% {
             opacity: 1;
             transform: translateY(0px) scale(1) rotate(0deg);
             filter: blur(0px);
           }
-          30% {
+          20% {
             opacity: 0.95;
-            transform: translateY(40px) scale(0.95) rotate(25deg);
+            transform: translateY(45px) scale(0.95) rotate(20deg);
             filter: blur(0px);
           }
-          60% {
-            opacity: 0.6;
-            transform: translateY(90px) scale(0.7) rotate(90deg);
+          45% {
+            opacity: 0.8;
+            transform: translateY(115px) scale(0.85) rotate(70deg);
+            filter: blur(0.5px);
+          }
+          70% {
+            opacity: 0.5;
+            transform: translateY(195px) scale(0.65) rotate(150deg);
             filter: blur(1.5px);
           }
-          85% {
-            opacity: 0.25;
-            transform: translateY(150px) scale(0.4) rotate(180deg);
-            filter: blur(3px);
+          90% {
+            opacity: 0.2;
+            transform: translateY(275px) scale(0.4) rotate(240deg);
+            filter: blur(3.5px);
           }
           100% {
             opacity: 0;
-            transform: translateY(210px) scale(0.1) rotate(270deg);
+            transform: translateY(350px) scale(0.15) rotate(320deg);
             filter: blur(6px);
           }
         }
