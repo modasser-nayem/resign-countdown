@@ -8,12 +8,20 @@ interface CatCountdownOverlayProps {
 }
 
 // Reusable SVG Biltu component for 100% design consistency
-function BiltuCatSvg({ isGrabbing, isCarryingOnHead }: { isGrabbing?: boolean; isCarryingOnHead?: boolean }) {
+function BiltuCatSvg({
+  isGrabbing,
+  isCarryingOnHead,
+  isDumping,
+}: {
+  isGrabbing?: boolean;
+  isCarryingOnHead?: boolean;
+  isDumping?: boolean;
+}) {
   return (
     <svg viewBox="0 0 100 120" className="w-full h-full drop-shadow-2xl">
       {/* Wagging Tail */}
       <path
-        d="M75 100 Q95 85 92 65 Q88 55 80 68"
+        d={isDumping ? "M75 92 Q96 72 92 50 Q86 42 78 55" : "M75 100 Q95 85 92 65 Q88 55 80 68"}
         fill="none"
         stroke="#f59e0b"
         strokeWidth="8"
@@ -34,11 +42,22 @@ function BiltuCatSvg({ isGrabbing, isCarryingOnHead }: { isGrabbing?: boolean; i
       <polygon points="74,30 68,5 52,22" fill="#f59e0b" stroke="#d97706" strokeWidth="2" />
       <polygon points="70,27 66,12 56,22" fill="#f472b6" />
 
-      {/* Big Eyes with Sparkles */}
-      <ellipse cx="38" cy="42" rx="5" ry="6" fill="#0f172a" />
-      <circle cx="36" cy="40" r="2" fill="#ffffff" />
-      <ellipse cx="62" cy="42" rx="5" ry="6" fill="#0f172a" />
-      <circle cx="60" cy="40" r="2" fill="#ffffff" />
+      {/* Eyes: When dumping, eyes look downwards with focus at dustbin */}
+      {isDumping ? (
+        <>
+          <ellipse cx="38" cy="46" rx="5" ry="6" fill="#0f172a" />
+          <circle cx="37" cy="48" r="2" fill="#ffffff" />
+          <ellipse cx="62" cy="46" rx="5" ry="6" fill="#0f172a" />
+          <circle cx="61" cy="48" r="2" fill="#ffffff" />
+        </>
+      ) : (
+        <>
+          <ellipse cx="38" cy="42" rx="5" ry="6" fill="#0f172a" />
+          <circle cx="36" cy="40" r="2" fill="#ffffff" />
+          <ellipse cx="62" cy="42" rx="5" ry="6" fill="#0f172a" />
+          <circle cx="60" cy="40" r="2" fill="#ffffff" />
+        </>
+      )}
 
       {/* Nose & Smile */}
       <polygon points="48,50 52,50 50,53" fill="#f472b6" />
@@ -51,7 +70,13 @@ function BiltuCatSvg({ isGrabbing, isCarryingOnHead }: { isGrabbing?: boolean; i
       <line x1="78" y1="52" x2="92" y2="54" stroke="#b45309" strokeWidth="1.5" />
 
       {/* Paws */}
-      {isCarryingOnHead ? (
+      {isDumping ? (
+        // Paws extended downwards holding the dustbin below him!
+        <>
+          <ellipse cx="36" cy="98" rx="8" ry="7" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+          <ellipse cx="64" cy="98" rx="8" ry="7" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+        </>
+      ) : isCarryingOnHead ? (
         // Raised paws supporting the dustbin on top of head!
         <>
           <ellipse cx="32" cy="20" rx="7" ry="9" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
@@ -102,7 +127,7 @@ function NinjaCatSvg({ isKicking }: { isKicking: boolean }) {
 
       {/* Karate Kick Extended Leg or Fighting Stance */}
       {isKicking ? (
-        // Extended high side-kick leg!
+        // Extended high side-kick leg kicking towards left!
         <g className="animate-pulse">
           <path d="M40 85 Q15 75 2 65" stroke="#d97706" strokeWidth="14" strokeLinecap="round" />
           <ellipse cx="2" cy="65" rx="8" ry="6" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
@@ -148,11 +173,11 @@ function NinjaCatSvg({ isKicking }: { isKicking: boolean }) {
   );
 }
 
-// Reusable Metallic Dustbin Component for 100% design consistency
-function MetallicDustbin({ binCount, isTipping }: { binCount: number; isTipping?: boolean }) {
+// Reusable Metallic Dustbin Component
+function MetallicDustbin({ binCount }: { binCount: number }) {
   return (
-    <div className={`flex flex-col items-center transition-transform duration-500 ${isTipping ? "rotate-180 -translate-y-4 scale-115" : ""}`}>
-      {/* Dustbin Lid */}
+    <div className="flex flex-col items-center">
+      {/* Dustbin Lid (Mouth rim) */}
       <div className="w-13 sm:w-15 h-3 bg-gradient-to-r from-slate-400 via-slate-200 to-slate-400 rounded-t-md border border-slate-300 shadow">
         <div className="w-3 h-1 bg-slate-700 mx-auto -mt-1 rounded-t" />
       </div>
@@ -182,18 +207,19 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
   const [erasingNumbers, setErasingNumbers] = useState<number[]>([]);
   const [ninjaKickNum, setNinjaKickNum] = useState<number | null>(null);
 
-  // 15-Second Grand Roam (moves to Left Side to dump directly from mouth)
-  const start15SecRoamAndDump = () => {
+  // 16-Second Grand Roam:
+  // Goes UPWARDS first -> Circles across top -> Comes DOWNWARDS -> Dumps waste downwards from mouth!
+  const start16SecRoamAndDump = () => {
     if (isRoaming) return;
     setIsRoaming(true);
     setPhase("walking");
 
-    // Phase 1: Roams around 4 sides to the LEFT SIDE (0s - 7s)
+    // Phase 1: Walks UP along right edge, crosses top, comes DOWN to lower-left (0s - 8.8s)
     setTimeout(() => {
-      // Phase 2: At Left Side, tips dustbin upside down! (7s - 11.5s)
+      // Phase 2: At lower-left, holds dustbin BELOW him and dumps directly from mouth downwards! (8.8s - 12.6s)
       setPhase("dumping");
       soundEffects.playCannon();
-      // Numbers pouring out of dustbin mouth
+      // 5 collected seconds pour out of the dustbin mouth one by one
       setErasingNumbers([
         (seconds + 19) % 60,
         (seconds + 14) % 60,
@@ -201,20 +227,20 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
         (seconds + 4) % 60,
         seconds,
       ]);
-    }, 7000);
+    }, 8800);
 
-    // Phase 3: Empty bin upright on head, waddles back along border (11.5s - 15s)
+    // Phase 3: Empty bin upright on head, waddles along bottom border back home (12.6s - 16s)
     setTimeout(() => {
       setPhase("returning");
       setBinCount(0);
-    }, 11500);
+    }, 12600);
 
-    // Phase 4: Back at desk (15s)
+    // Phase 4: Back at desk (16s)
     setTimeout(() => {
       setIsRoaming(false);
       setPhase("idle");
       setErasingNumbers([]);
-    }, 15000);
+    }, 16000);
   };
 
   useEffect(() => {
@@ -223,15 +249,14 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
     prevSecRef.current = seconds;
     setActiveNum(oldSec);
 
-    // EXACT USER SPECIFICATION: Collect for 20 seconds, then dump!
-    // Trigger every 20 seconds (at 40s, 20s, 00s)!
+    // EXACT USER SPECIFICATION: Collect for 20 seconds, then roam & dump!
     if (seconds % 20 === 0 && !isRoaming) {
-      start15SecRoamAndDump();
+      start16SecRoamAndDump();
       return;
     }
 
-    // While Biltu is on his 15s roaming journey:
-    // Ninja Cat kicks incoming seconds visibly flying completely out of the website!
+    // While Biltu is on his roaming journey:
+    // Ninja Cat kicks incoming seconds visibly flying out of the website!
     if (isRoaming) {
       setNinjaKickNum(oldSec);
       soundEffects.playKick();
@@ -259,17 +284,16 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
     <div className="absolute inset-0 pointer-events-none overflow-visible z-20">
       
       {/* ========================================================================= */}
-      {/* 🐱 STATIONARY AT DESK: EXACT SAME SVG BILTU & METALLIC DUSTBIN */}
-      {/* Positioned at bottom-right outside the digits */}
+      {/* 🐱 STATIONARY AT DESK: BILTU & METALLIC DUSTBIN */}
       {/* ========================================================================= */}
       {!isRoaming && (
         <div
-          onClick={start15SecRoamAndDump}
+          onClick={start16SecRoamAndDump}
           className="absolute -bottom-7 sm:-bottom-8 right-0 sm:right-2 flex items-end gap-2.5 pointer-events-auto cursor-pointer group select-none transition-transform duration-300 hover:scale-105"
-          title="বিল্টুতে ক্লিক করলেই মাথায় ডাস্টবিন নিয়ে ৪ দিকে ঘুরে বামপাশে ডাম্প শুরু হবে!"
+          title="বিল্টুতে ক্লিক করলেই উপরে গিয়ে ঘুরে নিচে এসে ডাস্টবিনের মুখ দিয়ে ময়লা ফেলবে!"
         >
           {/* Metallic Dustbin */}
-          <MetallicDustbin binCount={binCount} isTipping={false} />
+          <MetallicDustbin binCount={binCount} />
 
           {/* Biltu Cat */}
           <div className="flex flex-col items-center">
@@ -290,7 +314,6 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
 
       {/* ========================================================================= */}
       {/* 🫲 [NUM] 🫱 TWO HANDS PULLING THE NUMBER DOWN FROM TOP INTO DUSTBIN */}
-      {/* Every 3 seconds, starts up at the SECS digit, pulls straight down into bin! */}
       {/* ========================================================================= */}
       {!isRoaming && phase === "grabbing" && (
         <div
@@ -306,58 +329,77 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
       )}
 
       {/* ========================================================================= */}
-      {/* 🚶‍♂️🐱 15-SECOND EXPANSIVE 4-SIDED ROAMING WITH DUSTBIN ON HEAD */}
-      {/* MOVES TO THE LEFT SIDE AND DUMPS DIRECTLY OUT OF THE TILTED DUSTBIN MOUTH! */}
+      {/* 🚶‍♂️🐱 16-SECOND GRAND ROAMING: */}
+      {/* GOES UPWARDS -> CIRCLES TOP -> COMES DOWNWARDS -> DUSTBIN BELOW CAT -> DUMPS FROM MOUTH! */}
       {/* ========================================================================= */}
       {isRoaming && (
         <div className="absolute inset-0">
           
-          {/* Walking Biltu carrying the Metallic Dustbin on his Head! */}
-          <div className="absolute -bottom-8 right-2 animate-[cat4SidesRoamToLeftDump_15s_ease-in-out_forwards] flex flex-col items-center z-40 select-none">
-            
-            {/* Dustbin sitting directly ON TOP of Biltu's head! */}
-            <div className="relative">
-              <MetallicDustbin binCount={binCount} isTipping={phase === "dumping"} />
-
-              {/* NUMBERS POURING DIRECTLY OUT FROM THE MOUTH OF THE TILTED DUSTBIN! */}
-              {phase === "dumping" && (
-                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 z-50 pointer-events-none">
-                  {erasingNumbers.map((num, i) => (
-                    <div
-                      key={i}
-                      className="px-3 py-1 rounded-xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 text-slate-950 font-black font-mono text-xs sm:text-sm shadow-2xl border-2 border-white whitespace-nowrap animate-[pourFromMouthAndSlowErase_4.5s_cubic-bezier(0.25,0.8,0.25,1)_forwards]"
-                      style={{ animationDelay: `${i * 240}ms` }}
-                    >
-                      {String(num).padStart(2, "0")}s 💨
-                    </div>
-                  ))}
+          <div className="absolute -bottom-8 right-2 roam-container flex flex-col items-center z-40 select-none">
+            {phase === "dumping" ? (
+              /* DUMPING VIEW: Cat on TOP, Dustbin BELOW cat, Borjo pouring DOWNWARDS from mouth! */
+              <div className="flex flex-col items-center">
+                {/* 1. Biltu looking down with paws extended downward */}
+                <div className="w-16 h-20 sm:w-20 sm:h-24">
+                  <BiltuCatSvg isGrabbing={false} isCarryingOnHead={false} isDumping={true} />
                 </div>
-              )}
-            </div>
 
-            {/* Same SVG Biltu with paws raised up holding the bin on head */}
-            <div className="w-16 h-20 sm:w-20 sm:h-24 -mt-3">
-              <BiltuCatSvg isGrabbing={false} isCarryingOnHead={true} />
-            </div>
+                <span className="text-[10px] font-black text-amber-300 bg-slate-950/95 px-2 py-0.5 rounded-full border border-slate-700 shadow -mt-1 mb-1">
+                  বিল্টু 🐱
+                </span>
 
-            <span className="text-[10px] font-black text-amber-300 bg-slate-950/95 px-2 py-0.5 rounded-full border border-slate-700 shadow -mt-1">
-              বিল্টু 🐱
-            </span>
+                {/* 2. Dustbin BELOW Biltu ('cat dasbinta cat er niser dike thakbe') */}
+                <div className="relative flex flex-col items-center">
+                  {/* Tilted dustbin upside-down so the open mouth points DOWNWARDS */}
+                  <div className="transform rotate-180 scale-110 drop-shadow-2xl">
+                    <MetallicDustbin binCount={0} />
+                  </div>
+
+                  {/* 3. Borjo (waste numbers) pouring DOWNWARDS directly from the mouth! */}
+                  <div className="absolute top-16 left-1/2 -translate-x-1/2 w-48 flex items-center justify-center pointer-events-none z-50">
+                    {erasingNumbers.map((num, i) => (
+                      <div
+                        key={i}
+                        className="absolute top-0 px-3 py-1 rounded-xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 text-slate-950 font-black font-mono text-xs sm:text-sm shadow-2xl border-2 border-white whitespace-nowrap opacity-0 animate-[pourDownAndSlowErase_3.6s_cubic-bezier(0.25,0.8,0.25,1)_forwards]"
+                        style={{ animationDelay: `${i * 260}ms` }}
+                      >
+                        {String(num).padStart(2, "0")}s 💨
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* WALKING / RETURNING VIEW: Dustbin ON HEAD */
+              <div className="flex flex-col items-center">
+                {/* Dustbin ON TOP of head */}
+                <div className="relative">
+                  <MetallicDustbin binCount={binCount} />
+                </div>
+
+                {/* Biltu with paws raised supporting bin on head */}
+                <div className="w-16 h-20 sm:w-20 sm:h-24 -mt-3">
+                  <BiltuCatSvg isGrabbing={false} isCarryingOnHead={true} isDumping={false} />
+                </div>
+
+                <span className="text-[10px] font-black text-amber-300 bg-slate-950/95 px-2 py-0.5 rounded-full border border-slate-700 shadow -mt-1">
+                  বিল্টু 🐱
+                </span>
+              </div>
+            )}
           </div>
         </div>
       )}
 
       {/* ========================================================================= */}
-      {/* 🥷 NINJA CAT (লাথি মারু): CUSTOM VECTOR SVG MARTIAL ARTIST KICKING SECONDS! */}
-      {/* The kicked second visibly flies spinning UP and COMPLETELY OUT OF THE SCREEN! */}
+      {/* 🥷 NINJA CAT (লাথি মারু): KICKING SECONDS VISIBLY OUT OF THE WEBSITE */}
       {/* ========================================================================= */}
       {isRoaming && (
         <div className="absolute -bottom-7 sm:-bottom-8 right-2 sm:right-6 flex flex-col items-center z-30 select-none">
-          {/* Custom Vector Ninja Cat */}
           <div className="w-20 h-24 sm:w-24 sm:h-28 relative">
             <NinjaCatSvg isKicking={ninjaKickNum !== null} />
 
-            {/* Big Comic Impact Burst */}
+            {/* Comic Impact Burst */}
             {ninjaKickNum !== null && (
               <div className="absolute top-4 -left-6 text-sm sm:text-base font-black text-amber-300 animate-ping z-40">
                 💥 POW!
@@ -407,77 +449,128 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
           }
         }
 
-        /* 15-second expansive 4-side perimeter roam moving to the LEFT SIDE to dump */
-        @keyframes cat4SidesRoamToLeftDump {
+        /* Responsive roaming animation container */
+        .roam-container {
+          animation: catRoamUpAcrossDownAndDump 16s ease-in-out forwards;
+        }
+
+        /* 16-second roaming:
+           Upwards first -> Roams across top -> Comes downwards -> Dumps downwards from mouth -> Returns */
+        @keyframes catRoamUpAcrossDownAndDump {
           0% {
-            /* Start: Bottom-Right */
+            /* Start: Bottom-Right desk */
             transform: translate(0, 0) scale(1);
           }
           18% {
-            /* Side 1: Walks along bottom border to Bottom-Left */
-            transform: translate(-380px, 12px) scale(1.05);
+            /* UPWARDS along right edge to Top-Right */
+            transform: translate(0, -185px) scale(1.05);
           }
-          35% {
-            /* Side 2: Climbs up the entire left border to Top-Left */
-            transform: translate(-430px, -170px) scale(1.1);
+          32% {
+            /* Roams across top edge to Top-Center */
+            transform: translate(-200px, -200px) scale(1.1);
           }
-          50% {
-            /* Side 3: Walks along the top border to Top-Center */
-            transform: translate(-220px, -170px) scale(1.1);
+          46% {
+            /* Roams across top edge to Top-Left */
+            transform: translate(-380px, -185px) scale(1.1);
           }
-          60% {
-            /* Curves down into the LEFT-CENTER SIDE (over Card 1 / Card 2 ledge) */
-            transform: translate(-360px, -90px) scale(1.2);
+          55% {
+            /* Comes DOWNWARDS to Lower-Left */
+            transform: translate(-380px, -35px) scale(1.2);
           }
-          72% {
-            /* At Left Side: Tipping dustbin upside down to dump directly from mouth */
-            transform: translate(-360px, -85px) scale(1.25);
+          58% {
+            /* DUMPING: Tilted dustbin held BELOW cat, mouth facing DOWN */
+            transform: translate(-380px, -35px) scale(1.25);
           }
-          80% {
-            /* Tipping complete, empty bin back upright on head */
-            transform: translate(-360px, -90px) scale(1.15);
+          76% {
+            /* Finishes dumping waste */
+            transform: translate(-380px, -35px) scale(1.25);
           }
-          90% {
-            /* Side 4: Waddles along border path back towards base */
-            transform: translate(-100px, -10px) scale(1.05);
+          82% {
+            /* Empty dustbin placed back upright on head */
+            transform: translate(-380px, -30px) scale(1.15);
+          }
+          92% {
+            /* Waddles along bottom edge back towards desk */
+            transform: translate(-160px, 0px) scale(1.05);
           }
           100% {
-            /* Back home at Bottom-Right desk */
+            /* Back home at desk */
             transform: translate(0, 0) scale(1);
           }
         }
 
-        /* Numbers pouring directly out from mouth of dustbin downwards and slowly erasing */
-        @keyframes pourFromMouthAndSlowErase {
+        /* Mobile adaptation for narrower screens */
+        @media (max-width: 639px) {
+          @keyframes catRoamUpAcrossDownAndDump {
+            0% {
+              transform: translate(0, 0) scale(0.95);
+            }
+            18% {
+              transform: translate(0, -165px) scale(1);
+            }
+            32% {
+              transform: translate(-120px, -175px) scale(1.05);
+            }
+            46% {
+              transform: translate(-240px, -165px) scale(1.05);
+            }
+            55% {
+              transform: translate(-240px, -25px) scale(1.1);
+            }
+            58% {
+              transform: translate(-240px, -25px) scale(1.15);
+            }
+            76% {
+              transform: translate(-240px, -25px) scale(1.15);
+            }
+            82% {
+              transform: translate(-240px, -20px) scale(1.05);
+            }
+            92% {
+              transform: translate(-100px, 0px) scale(1);
+            }
+            100% {
+              transform: translate(0, 0) scale(0.95);
+            }
+          }
+        }
+
+        /* Numbers pouring DOWNWARDS directly out of dustbin mouth towards the floor and slowly erasing */
+        @keyframes pourDownAndSlowErase {
           0% {
+            opacity: 0;
+            transform: translate(0, 0) scale(0.6) rotate(0deg);
+            filter: blur(0px);
+          }
+          8% {
             opacity: 1;
-            transform: translate(0, 0) scale(1) rotate(0deg);
+            transform: translate(0, 15px) scale(1) rotate(10deg);
             filter: blur(0px);
           }
-          25% {
+          35% {
             opacity: 0.95;
-            transform: translate(-10px, 50px) scale(0.95) rotate(25deg);
+            transform: translate(-10px, 60px) scale(0.95) rotate(35deg);
             filter: blur(0px);
           }
-          50% {
+          60% {
             opacity: 0.75;
-            transform: translate(-20px, 120px) scale(0.8) rotate(70deg);
-            filter: blur(0.5px);
+            transform: translate(-18px, 115px) scale(0.8) rotate(75deg);
+            filter: blur(1px);
           }
-          75% {
+          80% {
             opacity: 0.4;
-            transform: translate(-25px, 200px) scale(0.6) rotate(140deg);
-            filter: blur(2px);
+            transform: translate(-24px, 170px) scale(0.6) rotate(120deg);
+            filter: blur(3px);
           }
-          90% {
+          92% {
             opacity: 0.15;
-            transform: translate(-30px, 280px) scale(0.35) rotate(220deg);
-            filter: blur(4px);
+            transform: translate(-28px, 220px) scale(0.35) rotate(165deg);
+            filter: blur(5px);
           }
           100% {
             opacity: 0;
-            transform: translate(-35px, 340px) scale(0.1) rotate(300deg);
-            filter: blur(7px);
+            transform: translate(-30px, 260px) scale(0.1) rotate(200deg);
+            filter: blur(8px);
           }
         }
 
@@ -488,21 +581,17 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
             transform: translate(0, 0) scale(1) rotate(0deg);
           }
           20% {
-            /* Powerful impact impulse */
             transform: translate(-40px, -30px) scale(1.25) rotate(-45deg);
           }
           50% {
-            /* Shooting high into the sky */
             transform: translate(-160px, -120px) scale(1) rotate(-220deg);
           }
           80% {
-            /* Hurtling far past the screen border */
             transform: translate(-340px, -240px) scale(0.7) rotate(-520deg);
             opacity: 0.8;
           }
           100% {
-            /* Completely off-screen and gone! */
-            transform: translate(-500px, -340px) scale(0.2) rotate(-720deg);
+            transform: translate(-520px, -360px) scale(0.2) rotate(-720deg);
             opacity: 0;
           }
         }
