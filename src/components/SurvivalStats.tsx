@@ -11,13 +11,18 @@ import {
 } from "lucide-react";
 import { RESIGNATION_DETAILS } from "@/lib/constants";
 
+let currentNow = typeof window !== "undefined" ? Date.now() : 0;
+
 function subscribeNow(callback: () => void) {
-   const timer = setInterval(callback, 1000);
+   const timer = setInterval(() => {
+      currentNow = Date.now();
+      callback();
+   }, 1000);
    return () => clearInterval(timer);
 }
 
 function getNowSnapshot(): number {
-   return Date.now();
+   return currentNow;
 }
 
 function getServerNowSnapshot(): number {
