@@ -18,7 +18,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { soundEffects } from "@/lib/audio";
-import SecondDestroyer from "./SecondDestroyer";
+import AnimatedSecondCard from "./AnimatedSecondCard";
 
 interface TimeLeft {
   days: number;
@@ -272,61 +272,53 @@ export default function MemeCountdown() {
           {dragQuote}
         </div>
 
-        {/* Big Digital Numbers Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3 mb-5">
-          <div className="bg-slate-950/80 rounded-2xl p-3 border border-slate-800 flex flex-col items-center">
-            <span className="text-3xl sm:text-5xl font-black font-mono text-amber-400 tracking-tight">
+        {/* Core 4-Card Countdown Grid with Animated Action Seconds Card */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3.5 mb-5">
+          {/* Days */}
+          <div className="bg-slate-950/80 rounded-2xl p-3 sm:p-4 border border-slate-800 flex flex-col items-center justify-between min-h-[140px] sm:min-h-[160px] shadow-md">
+            <span className="text-[10px] font-bold text-amber-400/80 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+              📆 দিন বাকি
+            </span>
+            <span className="text-4xl sm:text-6xl font-black font-mono text-amber-400 tracking-tight my-auto">
               {String(timeLeft.days).padStart(2, "0")}
             </span>
-            <span className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase mt-1">
+            <span className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider">
               Days (দিন)
             </span>
           </div>
 
-          <div className="bg-slate-950/80 rounded-2xl p-3 border border-slate-800 flex flex-col items-center">
-            <span className="text-3xl sm:text-5xl font-black font-mono text-orange-400 tracking-tight">
+          {/* Hours */}
+          <div className="bg-slate-950/80 rounded-2xl p-3 sm:p-4 border border-slate-800 flex flex-col items-center justify-between min-h-[140px] sm:min-h-[160px] shadow-md">
+            <span className="text-[10px] font-bold text-orange-400/80 bg-orange-500/10 px-2 py-0.5 rounded border border-orange-500/20">
+              ⏰ ঘণ্টা বাকি
+            </span>
+            <span className="text-4xl sm:text-6xl font-black font-mono text-orange-400 tracking-tight my-auto">
               {String(timeLeft.hours).padStart(2, "0")}
             </span>
-            <span className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase mt-1">
+            <span className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider">
               Hours (ঘণ্টা)
             </span>
           </div>
 
-          <div className="bg-slate-950/80 rounded-2xl p-3 border border-slate-800 flex flex-col items-center">
-            <span className="text-3xl sm:text-5xl font-black font-mono text-cyan-400 tracking-tight">
+          {/* Mins */}
+          <div className="bg-slate-950/80 rounded-2xl p-3 sm:p-4 border border-slate-800 flex flex-col items-center justify-between min-h-[140px] sm:min-h-[160px] shadow-md">
+            <span className="text-[10px] font-bold text-cyan-400/80 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
+              ⏳ মিনিট বাকি
+            </span>
+            <span className="text-4xl sm:text-6xl font-black font-mono text-cyan-400 tracking-tight my-auto">
               {String(timeLeft.minutes).padStart(2, "0")}
             </span>
-            <span className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase mt-1">
+            <span className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider">
               Mins (মিনিট)
             </span>
           </div>
 
-          <div className="bg-slate-950/80 rounded-2xl p-3 border border-slate-800 flex flex-col items-center">
-            <span className="text-3xl sm:text-5xl font-black font-mono text-emerald-400 tracking-tight">
-              {String(timeLeft.seconds).padStart(2, "0")}
-            </span>
-            <span className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase mt-1">
-              Secs (সেকেন্ড)
-            </span>
-          </div>
-
-          <div className="col-span-2 sm:col-span-1 bg-slate-950/80 rounded-2xl p-3 border border-slate-800 flex flex-col items-center">
-            <span className="text-3xl sm:text-5xl font-black font-mono text-purple-400 tracking-tight">
-              {String(timeLeft.milliseconds).padStart(2, "0")}
-            </span>
-            <span className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase mt-1">
-              Millis (ধৈর্য্য)
-            </span>
-          </div>
+          {/* Secs: The Live Animated Meme Stage (Trash 🗑️ / Kick 👟 / Cannon 💣) */}
+          <AnimatedSecondCard
+            seconds={timeLeft.seconds}
+            minutes={timeLeft.minutes}
+          />
         </div>
-
-        {/* ========================================================= */}
-        {/* 🎬 ANIMATED SECOND DESTROYER (Trash 🗑️ / Kick 👟 / Cannon 💣) */}
-        {/* ========================================================= */}
-        <SecondDestroyer
-          seconds={timeLeft.seconds}
-          minutes={timeLeft.minutes}
-        />
 
         {/* ========================================================= */}
         {/* 🔥 TENE TENE SOMOY KOMANOR SECTION (THE MAIN FUN FEATURE) */}
