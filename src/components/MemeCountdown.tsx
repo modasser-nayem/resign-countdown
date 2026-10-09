@@ -107,6 +107,119 @@ function HammerCatSvg({ isHammering }: { isHammering: boolean }) {
   );
 }
 
+// 4 distinct trajectory directions for the kicked seconds
+const KICK_ANIMATIONS = [
+  "animate-[kickedFlyFarTopLeft_1s_cubic-bezier(0.15,0.85,0.25,1)_forwards]",
+  "animate-[kickedFlyFarStraightLeft_1s_cubic-bezier(0.15,0.85,0.25,1)_forwards]",
+  "animate-[kickedFlyFarHighSky_1s_cubic-bezier(0.15,0.85,0.25,1)_forwards]",
+  "animate-[kickedFlyFarTopRight_1s_cubic-bezier(0.15,0.85,0.25,1)_forwards]",
+];
+
+const COMIC_WORDS = ["💥 POW!", "💥 HII-YAH!", "💥 WHAM!", "💥 KICK!"];
+
+// Dedicated Vector SVG Ninja Cat (লাথি মারু 🥷)
+function NinjaCatSvg({ isKicking }: { isKicking: boolean }) {
+  return (
+    <svg viewBox="-45 0 170 125" className="w-full h-full drop-shadow-xl overflow-visible">
+      {/* Fluttering Headband Ribbon */}
+      <path
+        d="M20 40 Q8 32 4 45 Q12 48 22 46"
+        fill="#0f172a"
+        stroke="#dc2626"
+        strokeWidth="1.5"
+        className="animate-pulse"
+      />
+      <path
+        d="M18 45 Q6 42 2 55 Q10 56 20 50"
+        fill="#0f172a"
+        stroke="#dc2626"
+        strokeWidth="1.5"
+      />
+
+      {/* Body & Karate Belt - Recoils back when kicking */}
+      <g className={isKicking ? "animate-[karateTorsoRecoil_0.45s_ease-out]" : ""}>
+        <ellipse cx="60" cy="85" rx="30" ry="26" fill="#fef3c7" stroke="#d97706" strokeWidth="3" />
+        <ellipse cx="60" cy="88" rx="18" ry="16" fill="#ffffff" />
+        {/* Black Martial Arts Belt */}
+        <rect x="34" y="80" width="52" height="8" rx="2" fill="#0f172a" />
+        <path d="M56 88 L52 104 M62 88 L64 104" stroke="#0f172a" strokeWidth="4" strokeLinecap="round" />
+      </g>
+
+      {/* Karate Kick Dynamic Leg or Standing Stance */}
+      {isKicking ? (
+        // Dynamic Karate Whip-Thrust Leg: Starts folded at hip, WHIPS out violently, striking with foot!
+        <g className="animate-[karateLegWhip_0.45s_cubic-bezier(0.1,0.9,0.2,1)_forwards]">
+          {/* Whoosh / Wind Motion Arcs */}
+          <path d="M35 98 Q0 90 -28 75" fill="none" stroke="#38bdf8" strokeWidth="3.5" strokeLinecap="round" opacity="0.9" />
+          <path d="M40 106 Q10 98 -20 85" fill="none" stroke="#f1f5f9" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="4 4" opacity="0.9" />
+
+          {/* Extended Leg (Orange fur) */}
+          <path d="M45 88 Q15 76 -10 65" stroke="#f59e0b" strokeWidth="16" strokeLinecap="round" />
+          <path d="M45 88 Q15 76 -10 65" fill="none" stroke="#d97706" strokeWidth="2.5" />
+
+          {/* Black Ninja Ankle Wrap */}
+          <rect x="-14" y="55" width="9" height="19" rx="2" fill="#0f172a" stroke="#dc2626" strokeWidth="1.2" transform="rotate(22 -10 64)" />
+
+          {/* Main White Cat Foot / Paw */}
+          <ellipse cx="-24" cy="65" rx="15" ry="12" fill="#ffffff" stroke="#d97706" strokeWidth="2.5" transform="rotate(-15 -24 65)" />
+
+          {/* 4 Pink Paw Toe Beans */}
+          <circle cx="-33" cy="57" r="3.5" fill="#f472b6" stroke="#db2777" strokeWidth="1" />
+          <circle cx="-32" cy="68" r="3.5" fill="#f472b6" stroke="#db2777" strokeWidth="1" />
+          <circle cx="-24" cy="74" r="3.2" fill="#f472b6" stroke="#db2777" strokeWidth="1" />
+          <circle cx="-16" cy="74" r="3" fill="#f472b6" stroke="#db2777" strokeWidth="1" />
+          {/* Central large pad */}
+          <ellipse cx="-22" cy="64" rx="5.5" ry="4.5" fill="#f472b6" opacity="0.9" />
+
+          {/* Sharp White Claws protruding on kick impact! */}
+          <path d="M-36 55 L-43 52" stroke="#f8fafc" strokeWidth="3" strokeLinecap="round" />
+          <path d="M-36 67 L-43 68" stroke="#f8fafc" strokeWidth="3" strokeLinecap="round" />
+          <path d="M-26 77 L-29 84" stroke="#f8fafc" strokeWidth="3" strokeLinecap="round" />
+
+          {/* Ground supporting foot */}
+          <ellipse cx="66" cy="104" rx="9" ry="7" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+        </g>
+      ) : (
+        // Low crouching martial arts stance
+        <g>
+          <ellipse cx="44" cy="104" rx="8" ry="6" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+          <ellipse cx="76" cy="104" rx="8" ry="6" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+        </g>
+      )}
+
+      {/* Head */}
+      <circle cx="60" cy="45" r="28" fill="#fef3c7" stroke="#d97706" strokeWidth="3" />
+
+      {/* Ears */}
+      <polygon points="36,30 42,5 58,22" fill="#f59e0b" stroke="#d97706" strokeWidth="2" />
+      <polygon points="40,27 44,12 54,22" fill="#f472b6" />
+      <polygon points="84,30 78,5 62,22" fill="#f59e0b" stroke="#d97706" strokeWidth="2" />
+      <polygon points="80,27 76,12 66,22" fill="#f472b6" />
+
+      {/* Black Ninja Headband across forehead */}
+      <rect x="33" y="32" width="54" height="12" rx="3" fill="#0f172a" />
+      {/* Red circular ninja crest in center */}
+      <circle cx="60" cy="38" r="4" fill="#dc2626" />
+
+      {/* Determined Ninja Eyes */}
+      <ellipse cx="48" cy="46" rx="5" ry="4" fill="#0f172a" />
+      <circle cx="47" cy="45" r="1.5" fill="#ffffff" />
+      <ellipse cx="72" cy="46" rx="5" ry="4" fill="#0f172a" />
+      <circle cx="71" cy="45" r="1.5" fill="#ffffff" />
+
+      {/* Whiskers */}
+      <line x1="32" y1="50" x2="18" y2="48" stroke="#b45309" strokeWidth="1.5" />
+      <line x1="32" y1="54" x2="18" y2="56" stroke="#b45309" strokeWidth="1.5" />
+      <line x1="88" y1="50" x2="102" y2="48" stroke="#b45309" strokeWidth="1.5" />
+      <line x1="88" y1="54" x2="102" y2="56" stroke="#b45309" strokeWidth="1.5" />
+
+      {/* Guarding Front Paws */}
+      <ellipse cx={isKicking ? "78" : "48"} cy="72" rx="7" ry="8" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+      <ellipse cx={isKicking ? "92" : "74"} cy="72" rx="7" ry="8" fill="#ffffff" stroke="#d97706" strokeWidth="2" />
+    </svg>
+  );
+}
+
 interface TimeLeft {
   days: number;
   hours: number;
@@ -155,9 +268,13 @@ export default function MemeCountdown() {
   const [copied, setCopied] = useState(false);
   const [isHammering, setIsHammering] = useState(false);
   const [isCracked, setIsCracked] = useState(false);
+  const [isRoaming, setIsRoaming] = useState(false);
+  const [ninjaKickNum, setNinjaKickNum] = useState<number | null>(null);
+  const [kickDirIndex, setKickDirIndex] = useState(0);
   const [dialogContent, setDialogContent] = useState<{ title: string; text: string; sound: () => void } | null>(null);
 
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => calculateTimeLeft());
+  const prevSecRef = React.useRef(timeLeft.seconds);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -166,8 +283,7 @@ export default function MemeCountdown() {
     return () => clearInterval(timer);
   }, []);
 
-  // Periodic comic action on the minute card:
-  // Pokes (guta-guti) for a few seconds, then pulls out a hammer, smashes down, and cracks the minute!
+  // Quick alternating comic action on the minute card (2.4s cycle: guta-guti ➔ hammer smash ➔ repeat!)
   useEffect(() => {
     const hammerInterval = setInterval(() => {
       setIsHammering(true);
@@ -177,12 +293,44 @@ export default function MemeCountdown() {
         setTimeout(() => {
           setIsCracked(false);
           setIsHammering(false);
-        }, 1500);
-      }, 350);
-    }, 5500);
+        }, 850);
+      }, 250);
+    }, 2400);
 
     return () => clearInterval(hammerInterval);
   }, []);
+
+  // Trigger Ninja Cat Kick on the SECS card
+  const triggerNinjaKick = React.useCallback((secToKick?: number) => {
+    const num = secToKick ?? timeLeft.seconds;
+    setNinjaKickNum(num);
+    setKickDirIndex((prev) => (prev + 1) % 4);
+    soundEffects.playKick();
+    setTimeout(() => {
+      setNinjaKickNum(null);
+    }, 450);
+  }, [timeLeft.seconds]);
+
+  // While Biltu is roaming with dustbin, Ninja Cat kicks every single second!
+  useEffect(() => {
+    if (prevSecRef.current === timeLeft.seconds) return;
+    const oldSec = prevSecRef.current;
+    prevSecRef.current = timeLeft.seconds;
+
+    if (isRoaming) {
+      triggerNinjaKick(oldSec);
+    }
+  }, [timeLeft.seconds, isRoaming, triggerNinjaKick]);
+
+  // Periodic fun kicks every 3.5 seconds when watching
+  useEffect(() => {
+    const kickInterval = setInterval(() => {
+      if (!isRoaming) {
+        triggerNinjaKick(timeLeft.seconds);
+      }
+    }, 3500);
+    return () => clearInterval(kickInterval);
+  }, [timeLeft.seconds, isRoaming, triggerNinjaKick]);
 
   const triggerConfetti = () => {
     soundEffects.playFanfare();
@@ -427,19 +575,64 @@ export default function MemeCountdown() {
             </div>
           </div>
 
-          {/* Secs */}
-          <div className="bg-slate-950/80 rounded-2xl p-4 sm:p-5 border border-slate-800 flex flex-col items-center justify-center min-h-[130px] sm:min-h-[150px] shadow-md relative">
-            <span className="text-4xl sm:text-6xl font-black font-mono text-emerald-400 tracking-tight my-auto">
-              {String(timeLeft.seconds).padStart(2, "0")}
-            </span>
-            <span className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mt-1">
-              Secs (সেকেন্ড)
-            </span>
+          {/* Secs - Ninja Cat perched on the top-right ledge right beside the unobstructed number! */}
+          <div
+            onClick={() => triggerNinjaKick(timeLeft.seconds)}
+            className="bg-slate-950/80 rounded-2xl p-4 sm:p-5 border border-slate-800 flex flex-col items-center justify-center min-h-[130px] sm:min-h-[150px] shadow-md relative overflow-visible cursor-pointer select-none group"
+            title="লাথি মারু সেকেন্ডের পাশে বসে লাথি মারে! ক্লিক করুন লাথি মারতে!"
+          >
+            {/* Ninja Cat (লাথি মারু 🥷) perched on the TOP-RIGHT ledge - completely clear of the digits! */}
+            <div className="absolute -top-7 sm:-top-8 right-1 sm:right-2 w-16 sm:w-18 h-20 sm:h-22 pointer-events-none z-30">
+              <NinjaCatSvg isKicking={ninjaKickNum !== null} />
+
+              {/* Comic Impact Burst */}
+              {ninjaKickNum !== null && (
+                <div className="absolute top-1 -left-10 text-xs sm:text-sm font-black text-amber-300 animate-ping z-40 whitespace-nowrap drop-shadow-md">
+                  {COMIC_WORDS[kickDirIndex % COMIC_WORDS.length]}
+                </div>
+              )}
+            </div>
+
+            {/* Kicked Number Badge flying out in 4 directions */}
+            {ninjaKickNum !== null && (
+              <div
+                key={`ninja-kick-${ninjaKickNum}-${kickDirIndex}`}
+                className={`absolute top-2 -left-6 z-50 pointer-events-none ${
+                  KICK_ANIMATIONS[kickDirIndex % KICK_ANIMATIONS.length]
+                }`}
+              >
+                <div className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-red-600 via-orange-500 to-amber-400 text-white font-black font-mono text-sm sm:text-base shadow-2xl border-2 border-yellow-200 flex items-center gap-1.5 whitespace-nowrap">
+                  <span className="text-base sm:text-lg">🐾</span>
+                  <span>{String(ninjaKickNum).padStart(2, "0")}s</span>
+                  <span>💨</span>
+                </div>
+              </div>
+            )}
+
+            {/* Completely unobstructed, crystal-clear Emerald Seconds Digit */}
+            <div className="relative flex items-center justify-center my-auto w-full px-2">
+              <span className="text-4xl sm:text-6xl font-black font-mono text-emerald-400 tracking-tight my-auto select-none">
+                {String(timeLeft.seconds).padStart(2, "0")}
+              </span>
+            </div>
+
+            {/* Label and Character Badge */}
+            <div className="flex items-center gap-1.5 mt-1">
+              <span className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider">
+                Secs (সেকেন্ড)
+              </span>
+              <span className="text-[8px] font-black text-emerald-400 bg-emerald-950/90 px-1 py-0.2 rounded border border-emerald-500/30">
+                লাথি মারু 🥷
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* 🐱 LIVING OVERLAY: Big Cat, Dustbin, Ninja Cat & Walking Scene */}
-        <CatCountdownOverlay seconds={timeLeft.seconds} />
+        {/* 🐱 LIVING OVERLAY: Big Cat, Dustbin, and Walking Scene */}
+        <CatCountdownOverlay
+          seconds={timeLeft.seconds}
+          onRoamingChange={(roaming) => setIsRoaming(roaming)}
+        />
       </div>
 
       {/* Instant Colleague Response Buttons (Super Funny) */}
@@ -633,6 +826,125 @@ export default function MemeCountdown() {
           }
           100% {
             transform: scale(1) translate(0, 0) rotate(0deg);
+          }
+        }
+        /* Keyframe animations for Ninja Cat Karate Kick */
+        @keyframes karateLegWhip {
+          0% {
+            transform: translate(25px, 15px) scale(0.3) rotate(35deg);
+            opacity: 0.4;
+          }
+          35% {
+            transform: translate(-10px, -4px) scale(1.2) rotate(-10deg);
+            opacity: 1;
+          }
+          65% {
+            transform: translate(-5px, -2px) scale(1.1) rotate(-6deg);
+            opacity: 1;
+          }
+          100% {
+            transform: translate(15px, 10px) scale(0.6) rotate(20deg);
+            opacity: 0.7;
+          }
+        }
+
+        @keyframes karateTorsoRecoil {
+          0% {
+            transform: rotate(0deg);
+          }
+          30% {
+            transform: rotate(8deg) translate(3px, 2px);
+          }
+          70% {
+            transform: rotate(4deg) translate(2px, 1px);
+          }
+          100% {
+            transform: rotate(0deg);
+          }
+        }
+
+        /* Trajectories for kicked seconds */
+        @keyframes kickedFlyFarTopLeft {
+          0% {
+            opacity: 1;
+            transform: translate(0, 0) scale(1) rotate(0deg);
+          }
+          25% {
+            transform: translate(-70px, -50px) scale(1.25) rotate(-60deg);
+          }
+          55% {
+            transform: translate(-240px, -180px) scale(1.05) rotate(-280deg);
+          }
+          85% {
+            transform: translate(-420px, -320px) scale(0.7) rotate(-560deg);
+            opacity: 0.85;
+          }
+          100% {
+            transform: translate(-580px, -440px) scale(0.2) rotate(-780deg);
+            opacity: 0;
+          }
+        }
+
+        @keyframes kickedFlyFarStraightLeft {
+          0% {
+            opacity: 1;
+            transform: translate(0, 0) scale(1) rotate(0deg);
+          }
+          25% {
+            transform: translate(-90px, -15px) scale(1.25) rotate(-45deg);
+          }
+          55% {
+            transform: translate(-320px, -30px) scale(1.05) rotate(-360deg);
+          }
+          85% {
+            transform: translate(-560px, -50px) scale(0.7) rotate(-720deg);
+            opacity: 0.85;
+          }
+          100% {
+            transform: translate(-780px, -70px) scale(0.2) rotate(-1080deg);
+            opacity: 0;
+          }
+        }
+
+        @keyframes kickedFlyFarHighSky {
+          0% {
+            opacity: 1;
+            transform: translate(0, 0) scale(1) rotate(0deg);
+          }
+          25% {
+            transform: translate(-40px, -90px) scale(1.25) rotate(45deg);
+          }
+          55% {
+            transform: translate(-80px, -260px) scale(1.05) rotate(240deg);
+          }
+          85% {
+            transform: translate(-120px, -420px) scale(0.65) rotate(520deg);
+            opacity: 0.85;
+          }
+          100% {
+            transform: translate(-150px, -560px) scale(0.2) rotate(760deg);
+            opacity: 0;
+          }
+        }
+
+        @keyframes kickedFlyFarTopRight {
+          0% {
+            opacity: 1;
+            transform: translate(0, 0) scale(1) rotate(0deg);
+          }
+          25% {
+            transform: translate(40px, -60px) scale(1.25) rotate(60deg);
+          }
+          55% {
+            transform: translate(160px, -200px) scale(1.05) rotate(320deg);
+          }
+          85% {
+            transform: translate(300px, -340px) scale(0.7) rotate(620deg);
+            opacity: 0.85;
+          }
+          100% {
+            transform: translate(440px, -480px) scale(0.2) rotate(880deg);
+            opacity: 0;
           }
         }
       `}</style>

@@ -5,6 +5,7 @@ import { soundEffects } from "@/lib/audio";
 
 interface CatCountdownOverlayProps {
   seconds: number;
+  onRoamingChange?: (isRoaming: boolean) => void;
 }
 
 // Reusable SVG Biltu component for 100% design consistency
@@ -236,7 +237,7 @@ const KICK_ANIMATIONS = [
 
 const COMIC_WORDS = ["💥 POW!", "💥 HII-YAH!", "💥 WHAM!", "💥 KICK!"];
 
-export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProps) {
+export default function CatCountdownOverlay({ seconds, onRoamingChange }: CatCountdownOverlayProps) {
   const prevSecRef = useRef<number>(seconds);
   const [activeNum, setActiveNum] = useState<number>(seconds);
 
@@ -245,8 +246,6 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
   const [isRoaming, setIsRoaming] = useState<boolean>(false);
   const [binCount, setBinCount] = useState<number>(0);
   const [erasingNumbers, setErasingNumbers] = useState<number[]>([]);
-  const [ninjaKickNum, setNinjaKickNum] = useState<number | null>(null);
-  const [kickDirIndex, setKickDirIndex] = useState<number>(0);
 
   // 12.5-Second Snappy Grand Roam:
   // Walks UP (0s-2.8s) -> Strolls top (2.8s-5.5s) -> Descends (5.5s-7.5s) ->
@@ -254,6 +253,7 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
   const startSnappyRoamAndDump = () => {
     if (isRoaming) return;
     setIsRoaming(true);
+    onRoamingChange?.(true);
     setPhase("walking");
 
     // Phase 1: Walks UP, crosses top, comes DOWN to lower-left (0s - 7.5s)
@@ -280,6 +280,7 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
     // Phase 4: Back at desk (12.5s)
     setTimeout(() => {
       setIsRoaming(false);
+      onRoamingChange?.(false);
       setPhase("idle");
       setErasingNumbers([]);
     }, 12500);
@@ -295,18 +296,6 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
     if (seconds % 20 === 0 && !isRoaming) {
       startSnappyRoamAndDump();
       return;
-    }
-
-    // While Biltu is on his roaming journey:
-    // Ninja Cat KICKS with a clear 450ms leg thrust! Then leg retracts so user clearly sees the leg kick and move!
-    if (isRoaming) {
-      setNinjaKickNum(oldSec);
-      setKickDirIndex((prev) => (prev + 1) % 4);
-      soundEffects.playKick();
-      const kickTimer = setTimeout(() => {
-        setNinjaKickNum(null);
-      }, 450); // 450ms kick duration! Leg shoots forward and snaps back so user clearly sees leg moving!
-      return () => clearTimeout(kickTimer);
     }
 
     // Every 3 seconds (seconds % 3 === 0)
@@ -434,43 +423,7 @@ export default function CatCountdownOverlay({ seconds }: CatCountdownOverlayProp
         </div>
       )}
 
-      {/* ========================================================================= */}
-      {/* 🥷 NINJA CAT (লাথি মারু): DYNAMIC LEG KICK WITH REAL PUNCH & RETRACTION */}
-      {/* ========================================================================= */}
-      {isRoaming && (
-        <div className="absolute -bottom-7 sm:-bottom-8 right-2 sm:right-6 flex flex-col items-center z-30 select-none">
-          <div className="w-24 h-22 sm:w-28 sm:h-26 relative">
-            <NinjaCatSvg isKicking={ninjaKickNum !== null} />
 
-            {/* Comic Impact Burst right at foot impact point */}
-            {ninjaKickNum !== null && (
-              <div className="absolute top-1 -left-12 text-xs sm:text-sm font-black text-amber-300 animate-ping z-40 whitespace-nowrap drop-shadow-md">
-                {COMIC_WORDS[kickDirIndex % COMIC_WORDS.length]}
-              </div>
-            )}
-          </div>
-
-          {/* Kicked Number Badge: FLIES IN DIFFERENT DIRECTIONS AT A CRISP 1s PACE */}
-          {ninjaKickNum !== null && (
-            <div
-              key={`ninja-kick-${ninjaKickNum}-${seconds}-${kickDirIndex}`}
-              className={`absolute top-2 -left-8 z-50 pointer-events-none ${
-                KICK_ANIMATIONS[kickDirIndex % KICK_ANIMATIONS.length]
-              }`}
-            >
-              <div className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-red-600 via-orange-500 to-amber-400 text-white font-black font-mono text-sm sm:text-base shadow-2xl border-2 border-yellow-200 flex items-center gap-1.5 whitespace-nowrap">
-                <span className="text-base sm:text-lg">🐾</span>
-                <span>{String(ninjaKickNum).padStart(2, "0")}s</span>
-                <span>💨</span>
-              </div>
-            </div>
-          )}
-
-          <span className="text-[10px] font-extrabold text-emerald-400 mt-0.5 bg-slate-900/95 px-2 py-0.5 rounded-full border border-emerald-500/40 shadow">
-            লাথি মারু 🥷
-          </span>
-        </div>
-      )}
 
       {/* ========================================================================= */}
       {/* CSS KEYFRAMES */}
