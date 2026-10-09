@@ -28,7 +28,7 @@ export default function FreedomPassModal() {
           📜 বিদায়ী শুভেচ্ছা স্মারক ও প্রত্যয়নপত্র (Farewell Certificate)
         </h3>
         <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto mb-5 leading-relaxed">
-          এসএম টেকনোলজি পরিবারে আলী মোদাচ্ছের নায়েম ভাইয়ের সফল ব্যাকএন্ড ইঞ্জিনিয়ারিং অবদানের প্রীতি স্মারক দেখতে ক্লিক করুন।
+          এসএম টেকনোলজি পরিবারে আলী মোদাচ্ছের নায়েম ভাইয়ের সফল ব্যাকএন্ড ডেভেলপমেন্ট অবদানের প্রীতি স্মারক দেখতে ক্লিক করুন।
         </p>
 
         <button

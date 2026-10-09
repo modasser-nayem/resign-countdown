@@ -351,36 +351,48 @@ export default function MemeCountdown() {
     }
   };
 
-  // Funny excuses without any "standup" jargon
+  // Super funny notice period colleague excuses & dialogues
   const EXCUSES = [
     {
-      label: "ভাই এটা ফিক্স করে দেন 🐞",
-      title: "পরবর্তী ডেভেলপারের ওয়েলকাম গিফট!",
-      text: "এটা কোনো বাগ না ভাই, নতুন ব্যাকএন্ড ইঞ্জিনিয়ারের জন্য ওয়েলকাম গিফট! টিকিট পেন্ডিং থাকুক! 😂",
+      label: "ভাই প্রোডে বাগ ধরছে! 🐞",
+      title: "পরবর্তী ডেভেলপারের জন্য সারপ্রাইজ গিফট! 🎁",
+      text: "ভাই, নোটিশ পিরিয়ডে বাগ ফিক্স করা সম্পূর্ণ হারাম! যেটা চলছে চলুক, যেটা ভাঙছে ওটা নতুন ভাইয়ের জয়েনিং বোনাস! টিকিট পেন্ডিং থাকুক 😂",
       action: () => soundEffects.playSiren(),
     },
     {
-      label: "প্রোডাকশনে ডেপ্লয় দিব? 🚀",
-      title: "নোটিশ পিরিয়ডের ১ নম্বর নিয়ম:",
-      text: "নোটিশ পিরিয়ডে `git push origin main` দেওয়া সম্পূর্ণ হারাম! কিছু ক্র্যাশ করলে আমি 404 Not Found! 💀",
+      label: "প্রোডাকশনে পুশ দিছেন? 🚀",
+      title: "শুক্রবার ও নোটিশ পিরিয়ডে পুশ নিষিদ্ধ! 🛑",
+      text: "আমি তো জাস্ট `git push -f` মেরে পিসি বন্ধ করে দিছি! কিছু ক্র্যাশ করলে এসএমএস দিয়েন না, ফোন কিন্তু এয়ারপ্লেন মোডে! ✈️💀",
       action: () => soundEffects.playSiren(),
     },
     {
-      label: "ডকুমেন্টেশন কই? 📜",
-      title: "The Code IS the Documentation!",
-      text: "কোড লিখতে যখন এত কষ্ট হয়েছে, বুঝতেও একটু কষ্ট হোক! পোস্টম্যান কালেকশন দেখলেই বুঝে যাবেন 🫡",
+      label: "ডকুমেন্টেশন কোথায় পাব? 📜",
+      title: "The Code IS The Secret Code! 🕵️‍♂️",
+      text: "ভাই আমি নিজেই কোড লেখার পর ভুলে যাই কী লিখছি! যা আছে সব পোস্টম্যান আর মাথার নিউরনে! হ্যান্ডওভারের দিন দোয়া ইউনুস পড়ে নিয়েন 🤲🫡",
       action: () => soundEffects.playKaChing(),
     },
     {
-      label: "ট্রিট কবে দিবেন? 🍕",
-      title: "ট্রিট প্রোটোকল: 404 Not Found",
-      text: "২১ অক্টোবর বিকেল ৪:৫৯ মিনিটে বিকাশ চেক কইরেন! আর বনশ্রীর টংয়ের চা তো অলওয়েজ আনলিমিটেড! ☕",
+      label: "ভাই ট্রিট কবে দিচ্ছেন? 🍕",
+      title: "ট্রিট প্রোটোকল: সার্ভার এরর ৫০৩ 💸",
+      text: "২১ অক্টোবর বিকেল ৪:৫৯ মিনিটে বিকাশ চেক করবেন—১ টাকা টেস্ট ট্রানজেকশন পেতে পারেন! বাকিটা বনশ্রীর মোড়ের টং দোকানে বাকির খাতায় জমা! ☕😎",
       action: () => soundEffects.playFanfare(),
     },
     {
-      label: "মিটিংয়ে কী বলব? ☕",
-      title: "মিটিংয়ের সর্বজনীন স্ক্রিপ্ট:",
-      text: "মুখে একটাই কথা: 'ডকুমেন্টেশন আর হ্যান্ডওভার গোছাচ্ছি।' (এই একই ডায়লগ বলে পুরো ৩ সপ্তাহ পার!) 🤝",
+      label: "বস ডাকতেছে, কী বলব? 🥶",
+      title: "ইউনিভার্সাল কর্পোরেট জিকির 🧘‍♂️",
+      text: "মুখে একটাই জিকির: 'ভাই রিফ্যাক্টরিং আর নলেজ ট্রান্সফার ডক সাজাচ্ছি।' এই একটা ডায়লগ দিয়ে আমি গত তিন সপ্তাহ আরামসে পার করে দিলাম! 🤝🏖️",
+      action: () => soundEffects.playPop(),
+    },
+    {
+      label: "হ্যান্ডওভার কবে শেষ হবে? 💼",
+      title: "হ্যান্ডওভার স্ট্যাটাস: ৯৯% বাফারিং ⏳",
+      text: "ল্যাপটপ ফরম্যাট করার ৫ মিনিট আগে গুগল ড্রাইভ লিংক পাঠাব। পাসওয়ার্ড পাবেন আমার ফেয়ারওয়েল ডিনারের পর! 📦🔐",
+      action: () => soundEffects.playKaChing(),
+    },
+    {
+      label: "নতুন জব পাইলেন কোথায়? 🤫",
+      title: "এনডিএ সাইন করা ভাই, বলা যাবে না! 🤐",
+      text: "অফিসিয়াল বয়ান: 'উচ্চশিক্ষার জন্য প্রস্তুতি নিচ্ছি।' আসল বয়ান: ডাবল প্যাকেজে রিমোট ডলার হান্টিং! 💵🚀",
       action: () => soundEffects.playPop(),
     },
   ];
@@ -432,7 +444,7 @@ export default function MemeCountdown() {
           Ali Modasser Nayem
         </h1>
         <p className="text-amber-400 font-semibold text-xs sm:text-sm mt-0.5">
-          Executive, Backend Engineer @ SM Technology
+          Executive, Backend Developer @ SM Technology
         </p>
         <p className="text-slate-400 text-xs mt-1.5 flex items-center gap-1.5">
           <span>🔥 Status:</span>
@@ -638,10 +650,10 @@ export default function MemeCountdown() {
       {/* Instant Colleague Response Buttons (Super Funny) */}
       <div className="w-full bg-slate-900/60 border border-slate-800 rounded-3xl p-5 mb-5">
         <h3 className="text-sm font-bold text-white mb-1 flex items-center justify-center gap-1.5">
-          <Sparkles className="w-4 h-4 text-amber-400" /> ডেস্কে কলিগদের ইনস্ট্যান্ট জিজ্ঞাসা 💬
+          <Sparkles className="w-4 h-4 text-amber-400" /> ডেস্কে কলিগ বা বসের ইনস্ট্যান্ট প্যারা নিরসন 💬
         </h3>
         <p className="text-[11px] text-slate-400 mb-3.5">
-          ডেস্কে এসে কোনো কোলিগ বা বস কিছু জিজ্ঞেস করলে বোতামে চাপুন:
+          ডেস্কে এসে কেউ অপ্রাসঙ্গিক আবদার বা কাজের চাপ দিলে নিচের বাটনে ক্লিক করুন:
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-2">
@@ -652,7 +664,7 @@ export default function MemeCountdown() {
                 exc.action();
                 setDialogContent({ title: exc.title, text: exc.text, sound: exc.action });
               }}
-              className="px-3.5 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 border border-slate-700/80 text-xs font-semibold text-slate-200 hover:text-white transition-all transform active:scale-95 cursor-pointer"
+              className="px-3.5 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 hover:border-amber-500/50 border border-slate-700/80 text-xs font-semibold text-slate-200 hover:text-amber-200 transition-all transform active:scale-95 cursor-pointer shadow-sm hover:shadow-amber-500/10"
             >
               {exc.label}
             </button>
@@ -660,30 +672,58 @@ export default function MemeCountdown() {
         </div>
       </div>
 
-      {/* 4 Crisp Developer Meme Metrics */}
+      {/* 4 Super Funny Developer Meme Metrics */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 w-full mb-5">
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col items-center">
-          <Coffee className="w-4 h-4 text-amber-400 mb-1" />
-          <span className="text-xs text-slate-400">Tong er Cha</span>
-          <span className="text-base font-bold text-white font-mono">~36 Cups Left</span>
+        <div 
+          onClick={() => soundEffects.playPop()}
+          className="bg-slate-900/80 hover:bg-slate-800/90 border border-slate-800 hover:border-amber-500/40 rounded-2xl p-3 flex flex-col items-center cursor-pointer transition-all transform hover:-translate-y-0.5 shadow-md group select-none"
+          title="ক্লিক করুন!"
+        >
+          <Coffee className="w-5 h-5 text-amber-400 mb-1 group-hover:rotate-12 transition-transform" />
+          <span className="text-[11px] font-medium text-slate-400">টংয়ের মালাই চা ☕</span>
+          <span className="text-sm sm:text-base font-bold text-white font-mono mt-0.5">~৩৬ কাপ বাকি</span>
+          <span className="text-[10px] text-amber-300/90 mt-1 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20 text-center">
+            অফিসের টাকায় শেষ চুমুক
+          </span>
         </div>
 
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col items-center">
-          <Bug className="w-4 h-4 text-red-400 mb-1" />
-          <span className="text-xs text-slate-400">Pending Bugs</span>
-          <span className="text-base font-bold text-white font-mono">404 Won&apos;t Fix</span>
+        <div 
+          onClick={() => soundEffects.playSiren()}
+          className="bg-slate-900/80 hover:bg-slate-800/90 border border-slate-800 hover:border-red-500/40 rounded-2xl p-3 flex flex-col items-center cursor-pointer transition-all transform hover:-translate-y-0.5 shadow-md group select-none"
+          title="ক্লিক করুন!"
+        >
+          <Bug className="w-5 h-5 text-red-400 mb-1 group-hover:scale-125 transition-transform" />
+          <span className="text-[11px] font-medium text-slate-400">পেন্ডিং বাগস 🐛</span>
+          <span className="text-sm sm:text-base font-bold text-white font-mono mt-0.5">ফিচার বলে চালাইছি 🤷‍♂️</span>
+          <span className="text-[10px] text-red-300/90 mt-1 bg-red-500/10 px-2 py-0.5 rounded-full border border-red-500/20 text-center">
+            নতুন ডেভেলপার সামলাবে
+          </span>
         </div>
 
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col items-center">
-          <Flame className="w-4 h-4 text-orange-400 mb-1" />
-          <span className="text-xs text-slate-400">Git Commit</span>
-          <span className="text-base font-bold text-white font-mono">`push & inshallah`</span>
+        <div 
+          onClick={() => soundEffects.playFanfare()}
+          className="bg-slate-900/80 hover:bg-slate-800/90 border border-slate-800 hover:border-orange-500/40 rounded-2xl p-3 flex flex-col items-center cursor-pointer transition-all transform hover:-translate-y-0.5 shadow-md group select-none"
+          title="ক্লিক করুন!"
+        >
+          <Flame className="w-5 h-5 text-orange-400 mb-1 group-hover:animate-bounce transition-transform" />
+          <span className="text-[11px] font-medium text-slate-400">গিট পুশ পলিসি 🔥</span>
+          <span className="text-sm sm:text-base font-bold text-white font-mono mt-0.5">`push -f` & দোয়া 🤲</span>
+          <span className="text-[10px] text-orange-300/90 mt-1 bg-orange-500/10 px-2 py-0.5 rounded-full border border-orange-500/20 text-center">
+            প্রোড ফাটলে আমি কিন্তু নাই
+          </span>
         </div>
 
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col items-center">
-          <Volume2 className="w-4 h-4 text-cyan-400 mb-1" />
-          <span className="text-xs text-slate-400">Patience</span>
-          <span className="text-base font-bold text-white font-mono">1% (Battery Low)</span>
+        <div 
+          onClick={() => soundEffects.playKaChing()}
+          className="bg-slate-900/80 hover:bg-slate-800/90 border border-slate-800 hover:border-cyan-500/40 rounded-2xl p-3 flex flex-col items-center cursor-pointer transition-all transform hover:-translate-y-0.5 shadow-md group select-none"
+          title="ক্লিক করুন!"
+        >
+          <Volume2 className="w-5 h-5 text-cyan-400 mb-1 group-hover:rotate-180 transition-transform" />
+          <span className="text-[11px] font-medium text-slate-400">ধৈর্য্যের লেভেল 🔋</span>
+          <span className="text-sm sm:text-base font-bold text-white font-mono mt-0.5">০.১% (Low Batt)</span>
+          <span className="text-[10px] text-cyan-300/90 mt-1 bg-cyan-500/10 px-2 py-0.5 rounded-full border border-cyan-500/20 text-center">
+            শরীর ডেস্কে, মন সাগরে 🌊
+          </span>
         </div>
       </div>
 
